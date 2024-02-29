@@ -1,4 +1,5 @@
 import React from 'react';
+import {Image} from "@nextui-org/react";
 
 const GallerySection = () => {
   const galleryItems = [
@@ -25,7 +26,7 @@ const GallerySection = () => {
             <div key={index} className="md:w-1/2 lg:w-1/4 px-2 mb-4">
               <div className="gallery-item">
                 <a href={item.src} className="gallery-lightbox" data-gall="gallery-item">
-                  <img src={item.src} alt={item.alt} className="w-full h-auto" />
+                  <Image src={item.src} alt={item.alt} className="w-full h-auto" />
                 </a>
               </div>
             </div>

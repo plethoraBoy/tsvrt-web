@@ -2,6 +2,7 @@
 
 import React, { useRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
+import {Image} from "@nextui-org/react";
 
 import SwiperCore from "swiper";
 import { Navigation, Pagination } from "swiper/modules";
@@ -70,7 +71,7 @@ const EventsSection = () => {
             <SwiperSlide key={index}>
               <div className="flex flex-col items-center md:flex-row md:items-stretch lg:mx-4 xl:mx-8">
                 <div className="mb-4 md:w-1/2 md:mr-4">
-                  <img className="w-full md:h-full object-cover" src={event.imgSrc} alt={event.title} />
+                  <Image className="w-full md:h-full object-cover" src={event.imgSrc} alt={event.title} />
                 </div>
                 <div className="md:w-1/2 md:ml-4">
                   <h2 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl mb-2">{event.title}</h2>

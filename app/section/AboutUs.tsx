@@ -1,5 +1,6 @@
 // AboutUsSection.js
 import React from "react";
+import {Image} from "@nextui-org/react";
 
 const AboutUsSection = () => {
   return (
@@ -8,7 +9,7 @@ const AboutUsSection = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 mx-8">
           <div data-aos="fade-up">
             <div>
-              <img
+              <Image
                 className="w-auto"
                 src="assets/img/about/about.jpg"
                 alt="About Us"
