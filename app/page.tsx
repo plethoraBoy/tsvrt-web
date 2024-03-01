@@ -7,6 +7,7 @@ import GallerySection from "./section/Gallery";
 import ContactSection from "./section/ContactUs";
 import BookATableSection from "./section/BookaTable";
 import Footer from "./section/Footer";
+import MenuSection from "./section/Menu";
 
 export default function Home() {
   return (
@@ -15,6 +16,7 @@ export default function Home() {
       <AboutUsSection />
       <WhyUsSection />
       <EventsSection />
+      <MenuSection />
       <GallerySection />
       <BookATableSection />
       <ContactSection />

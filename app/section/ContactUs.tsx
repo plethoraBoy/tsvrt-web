@@ -2,9 +2,9 @@ import React from 'react';
 
 const ContactSection = () => {
   return (
-    <section id='contact-us' className="py-16">
+    <section id='contact-us' className="bg-neutral-950 py-16">
       <div className="container mx-auto" data-aos="fade-up">
-        <div className="section-title text-center lg:text-left mb-8">
+        <div className="Secondary-Font section-title text-center lg:text-left mb-8">
           <h2 className="text-3xl font-bold">Contact </h2>
           <p>Contact us</p>
         </div>

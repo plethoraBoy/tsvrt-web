@@ -14,9 +14,9 @@ const GallerySection = () => {
   ];
 
   return (
-    <section id='gallery-us' className="py-8 lg:py-12">
+    <section id='gallery-us' className="bg-neutral-950 py-8 lg:py-12">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8" data-aos="fade-up">
-        <div className="mb-6">
+        <div className="Secondary-Font mb-6">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold">Gallery</h2>
           <p className="text-base sm:text-lg lg:text-xl">Some photos from Our Restaurant</p>
         </div>

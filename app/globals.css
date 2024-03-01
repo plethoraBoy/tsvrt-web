@@ -1,5 +1,8 @@
 /* styles/globals.css */
 
+/* Import Google Fonts API */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap');
+
 /* Import Tailwind CSS */
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
@@ -7,11 +10,18 @@
 
 /* Import custom styles */
 @layer base {
- 
-
   @font-face {
     font-family: 'Primary';
     font-weight: 500;
     src: url('/assets/font/PrincesS_AND_THE_FROG.ttf') format('truetype');
+    /* Update the path to the correct location of your font file */
+  }
+
+  body {
+    font-family: 'Poppins', sans-serif;
+  }
+
+  .Secondary-Font {
+    font-family: 'Primary';
   }
 }

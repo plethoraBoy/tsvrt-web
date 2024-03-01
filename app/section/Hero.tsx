@@ -1,14 +1,14 @@
 "use client";
 import { Button } from "@nextui-org/react";
 import React from "react";
+import { Link } from "react-scroll";
 import { delay, m, motion } from "framer-motion";
+
 const HeroSection = () => {
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex items-center contrast-100
-
-      "
+      className="bg-neutral-950 relative min-h-screen flex items-center contrast-100"
       style={{
         backgroundImage: 'url("assets/restuarant-img/night_view.jpg")',
         backgroundSize: "cover",
@@ -31,38 +31,36 @@ const HeroSection = () => {
         className="container mx-auto text-center relative z-2 text-white"
       >
         <div className="max-w mx-auto">
-          <h1 className="text-2xl md:text-4xl lg:text-5xl font-bold mb-4">
+          <h1 className="Secondary-Font text-2xl md:text-4xl lg:text-5xl font-bold mb-4">
             Welcome to{" "}
             <span className="text-warning">
               SkyView RoofTop Multicuisine Restaurant
             </span>
           </h1>
-          {/* Uncomment the line below if needed */}
-          {/* <h2 className="text-xl mb-4">Delivering great food for more than 18 years!</h2> */}
           <div className="btns mt-4 flex flex-col md:flex-row justify-center items-center">
             <m.div
               whileHover={{ scale: 1.2 }}
               onHoverStart={(e) => {}}
               onHoverEnd={(e) => {}}
-            >              <Button
-                color="warning"
-                radius="full"
-                variant="ghost"
-                className="mb-2 md:mb-0 md:mr-2"
-              >
-                Our Menu
-              </Button>{" "}
+            >
+              <Link to="menu" smooth={true} duration={500}>
+                <Button
+                  color="warning"
+                  radius="full"
+                  variant="ghost"
+                  className="mb-2 md:mb-0 md:mr-2"
+                >
+                  Our Menu
+                </Button>
+              </Link>
             </m.div>
-
-            <Button color="warning" radius="full" variant="ghost">
-              Book a Table
-            </Button>
+            <Link to="reservation" smooth={true} duration={500}>
+              <Button color="warning" radius="full" variant="ghost">
+                Book a Table
+              </Button>
+            </Link>
           </div>
         </div>
-        {/* Uncomment the section below if needed */}
-        {/* <div className="mt-8">
-          <a href="https://www.youtube.com/watch?v=GlrxcuEDyF8" className="glightbox play-btn"></a>
-        </div> */}
       </motion.div>
     </section>
   );

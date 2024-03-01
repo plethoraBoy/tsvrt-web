@@ -52,16 +52,16 @@ const EventsSection = () => {
   const swiperRef = useRef(null);
 
   return (
-    <section id="events" className="py-8 lg:py-12">
+    <section id="events" className="bg-neutral-950 py-8 lg:py-12">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 lg:mx-48" data-aos="fade-up">
-        <div className="mb-6">
+        <div className="Secondary-Font mb-6">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold">Events</h2>
           <p className="text-base sm:text-lg lg:text-xl">Organize Your Events in our Restaurant</p>
         </div>
 
         <Swiper
           ref={swiperRef}
-          className="events-slider swiper-container"
+          className="events-slider  mt-12 lg:py-12 swiper-container"
           data-aos="fade-up"
           data-aos-delay="100"
           navigation

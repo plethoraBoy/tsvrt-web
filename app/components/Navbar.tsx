@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { useState, useEffect } from "react";
 import {
   Navbar,
@@ -22,12 +22,12 @@ export default function Header() {
     { label: "Home", url: "hero" },
     { label: "About", url: "about-us" },
     { label: "Events", url: "events" },
-    // { label: "Chefs", url: "chefs" },
+    { label: "Menu", url: "menu" },
     { label: "Gallery", url: "gallery-us" },
     { label: "Contact", url: "contact-us" },
   ];
 
-  const handleMenuItemClick = (url :any) => {
+  const handleMenuItemClick = (url: any) => {
     setIsMenuOpen(false);
     scroller.scrollTo(url, {
       duration: 800,
@@ -36,10 +36,8 @@ export default function Header() {
     });
   };
 
- 
-
   return (
-    <Navbar isBlurred isBordered onMenuOpenChange={setIsMenuOpen}>
+    <Navbar className="" isBlurred isBordered onMenuOpenChange={setIsMenuOpen}>
       <NavbarContent>
         <NavbarMenuToggle
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
@@ -74,7 +72,7 @@ export default function Header() {
           <Button
             as={Link}
             color="warning"
-            href="#book-now" // Replace with the actual ID of the book now section
+            href="#booka-table" // Replace with the actual ID of the book now section
             variant="ghost"
             radius="full"
           >

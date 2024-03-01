@@ -1,65 +1,63 @@
-"use client"
-import { Card, CardBody } from "@nextui-org/react";
-import { m } from "framer-motion";
+// Import necessary modules
+import React from "react";
+import { FiDroplet, FiMusic, FiSmile } from "react-icons/fi"; // Example different icons
+import Card from "../components/HoverCard";
+import { IoLeafOutline } from "react-icons/io5";
+import { SlMusicTone } from "react-icons/sl";
+import { FaRegFaceSmileBeam } from "react-icons/fa6";
 
-const WhyUsSection = () => {
+// Define the WhyUsSection component
+const WhyUsSection: React.FC = () => {
   const list = [
     {
       no: "01",
-      title: "Lorem Ipsum",
+      stitle: "Fresh Ingredients",
       paragraph:
-        "Ulamco laboris nisi ut aliquip ex ea commodo consequat. Et consectetur ducimus vero placeat",
+        "Savor the taste of our dishes made with the freshest and finest quality ingredients.",
+      icon: FiDroplet,
     },
     {
       no: "02",
-      title: "Repellat Nihil",
+      stitle: "Healthy Choices",
       paragraph:
-        "Dolorem est fugiat occaecati voluptate velit esse. Dicta veritatis dolor quod et vel dire leno para dest",
+        "Choose from a menu designed to offer delicious and health-conscious options.",
+      icon: IoLeafOutline,
     },
     {
       no: "03",
-      title: "Ad ad velit qui",
+      stitle: "Live Entertainment",
       paragraph:
-        "Molestiae officiis omnis illo asperiores. Aut doloribus vitae sunt debitis quo vel nam quis",
+        "Experience vibrant evenings with live music, creating a lively and enjoyable atmosphere.",
+      icon: SlMusicTone,
+    },
+    {
+      no: "04",
+      stitle: "Friendly Atmosphere",
+      paragraph:
+        "Enjoy a warm and welcoming ambiance where our friendly staff ensures a delightful experience.",
+      icon: FaRegFaceSmileBeam,
     },
   ];
 
   return (
-    <section id="why-us" className="py-8 md:py-12">
-      <div
-       
-        className="container mx-auto px-4 sm:px-6 lg:px-8"
-      >
-        <div className="mb-6">
+    <section id="why-us" className="bg-neutral-950 py-8 md:py-12">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="Secondary-Font mb-6">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold">Why Us</h2>
           <p className="text-base sm:text-lg lg:text-xl">
-            Why Choose Our Restaurant
+            Discover the Reasons to Choose Our Restaurant
           </p>
         </div>
 
-        <div className="flex flex-col gap-4 items-center md:flex-row md:items-stretch lg:mx-4 xl:mx-8">
+        <div className="poppins flex flex-col gap-4 items-center md:flex-row md:items-stretch lg:mx-4 xl:mx-8">
           {list.map((item) => (
-            <div
+            <Card
               key={item.no}
-              className="flex-shrink-0 w-full md:w-1/3 lg:w-4/12 mb-4 md:mb-8"
-            >
-              <Card
-                isHoverable
-                radius="lg"
-                data-aos="zoom-in"
-                data-aos-delay={item.no}
-              >
-                <CardBody>
-                  <span>{item.no}</span>
-                  <h4 className="text-lg md:text-xl lg:text-2xl xl:text-3xl">
-                    {item.title}
-                  </h4>
-                  <p className="text-sm md:text-base lg:text-lg xl:text-xl">
-                    {item.paragraph}
-                  </p>
-                </CardBody>
-              </Card>
-            </div>
+              title={item.stitle}
+              subtitle={item.paragraph}
+              Icon={item.icon}
+              href="#"
+            />
           ))}
         </div>
       </div>
@@ -67,4 +65,5 @@ const WhyUsSection = () => {
   );
 };
 
+// Export the WhyUsSection component
 export default WhyUsSection;
