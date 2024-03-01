@@ -25,3 +25,21 @@
     font-family: 'Primary';
   }
 }
+/* Replace these styles with your desired colors */
+.swiper-button-prev,
+.swiper-button-next {
+  color: #f5a524; /* Change to your preferred color */
+}
+.swiper-button-prev:after,
+.swiper-button-next:after{
+  color: #f5a524; /* Change to your preferred color */
+}
+
+/* Optional: Add hover styles for better interactivity */
+.swiper-button-prev:hover,
+.swiper-button-next:hover {
+  color: #ff9d00; /* Change to your preferred hover color */
+}
+.swiper-button{
+  color: #f5a524;
+}
