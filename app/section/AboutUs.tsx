@@ -46,6 +46,14 @@ const AboutUsSection = () => {
                 Immerse yourself in the chic ambiance, creating unforgettable
                 moments under the open sky.
               </li>
+              <li>
+                Explore our diverse menu, featuring a fusion of international
+                flavors, each dish telling a story of culinary mastery.
+              </li>
+              <li>
+                Elevate your evenings with live music, adding a symphony of
+                melodies to the breathtaking skyline.
+              </li>
             </ul>
             <p className="text-sm sm:text-base lg:text-lg">
               At SkyView Rooftop Restaurant, we provide more than just a meal;
@@ -53,6 +61,18 @@ const AboutUsSection = () => {
               stunning views. Discover the perfect blend of culinary excellence
               and an enchanting atmosphere that sets us apart. Elevate your
               dining experience with us!
+            </p>
+            <p className="text-sm sm:text-base lg:text-lg mt-4">
+              Join us for special events and themed nights, creating memorable
+              experiences that go beyond traditional dining. Our dedicated team
+              ensures impeccable service, making every visit a celebration of
+              flavors and sophistication.
+            </p>
+            <p className="text-sm sm:text-base lg:text-lg mt-4">
+              Whether it's a romantic dinner, a gathering of friends, or a
+              corporate event, SkyView Rooftop Restaurant is the perfect setting
+              for all occasions. Elevate your moments with us and let the sky be
+              the witness to your unforgettable stories.
             </p>
           </div>
         </div>
