@@ -5,7 +5,8 @@ import { Providers } from "./providers";
 import Header from "./components/Navbar";
 import FloatingButton from "./components/FloatingButton";
 // import "../public/assets/js/main"
-
+import { SpeedInsights } from '@vercel/speed-insights/next';
+ 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -30,6 +31,8 @@ export default function RootLayout({
         <Header />
 
         <Providers>{children}</Providers>
+        <SpeedInsights />
+
       </body>
     </html>
   );
