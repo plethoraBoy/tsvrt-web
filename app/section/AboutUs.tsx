@@ -12,9 +12,9 @@ const AboutUsSection = () => {
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold">
             About us
           </h2>
-          <p className="text-base sm:text-lg lg:text-xl">
+          <div className="text-base sm:text-lg lg:text-xl">
             Elevated Dining, Shared Memories.
-          </p>
+          </div>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 mx-8">
           <div data-aos="fade-up">
@@ -30,10 +30,10 @@ const AboutUsSection = () => {
             <h3 className="text-lg sm:text-xl lg:text-2xl font-bold mb-4">
               Elevate Your Experience at SkyView Rooftop Restaurant
             </h3>
-            <p className="italic text-sm sm:text-base lg:text-lg mb-4">
+            <div className="italic text-sm sm:text-base lg:text-lg mb-4">
               Indulge in breathtaking views while savoring exquisite dishes,
               offering a culinary journey above the ordinary.
-            </p>
+            </div>
             <ul className="list-disc list-inside mb-4">
               <li>
                 Enjoy a unique dining experience with panoramic cityscapes.
@@ -55,25 +55,25 @@ const AboutUsSection = () => {
                 melodies to the breathtaking skyline.
               </li>
             </ul>
-            <p className="text-sm sm:text-base lg:text-lg">
+            <div className="text-sm sm:text-base lg:text-lg">
               At SkyView Rooftop Restaurant, we provide more than just a meal;
               we offer an elevated journey where each bite is accompanied by
               stunning views. Discover the perfect blend of culinary excellence
               and an enchanting atmosphere that sets us apart. Elevate your
               dining experience with us!
-            </p>
-            <p className="text-sm sm:text-base lg:text-lg mt-4">
+            </div>
+            <div className="text-sm sm:text-base lg:text-lg mt-4">
               Join us for special events and themed nights, creating memorable
               experiences that go beyond traditional dining. Our dedicated team
               ensures impeccable service, making every visit a celebration of
               flavors and sophistication.
-            </p>
-            <p className="text-sm sm:text-base lg:text-lg mt-4">
+            </div>
+            <div className="text-sm sm:text-base lg:text-lg mt-4">
               Whether it's a romantic dinner, a gathering of friends, or a
               corporate event, SkyView Rooftop Restaurant is the perfect setting
               for all occasions. Elevate your moments with us and let the sky be
               the witness to your unforgettable stories.
-            </p>
+            </div>
           </div>
         </div>
       </div>

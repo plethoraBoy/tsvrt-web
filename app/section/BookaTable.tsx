@@ -7,7 +7,7 @@ const BookATableSection = () => {
       <div className="container mx-auto px-4" data-aos="fade-up">
         <div className="text-center lg:text-left mb-6">
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white">Reservation</h2>
-          <p className="text-gray-400">Book a Table</p>
+          <div className="text-gray-400">Book a Table</div>
         </div>
 
         <form className="mx-auto max-w-2xl" data-aos="fade-up" data-aos-delay="100">
@@ -96,8 +96,8 @@ const BookATableSection = () => {
 
           </div>
 
-          <div className="mt-4 text-center sm:text-left">
-            <Button type="submit" color="warning" className="px-6 py-2 rounded-md text-white">
+          <div className="mt-4 col-span-2 text-center ">
+            <Button type="submit" color="warning" className="text-center px-6 py-2 rounded-full text-white">
               Book a Table
             </Button>
           </div>

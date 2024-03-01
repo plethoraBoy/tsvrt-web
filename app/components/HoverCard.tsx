@@ -21,9 +21,9 @@ const Card: React.FC<CardType> = ({ title, subtitle, Icon, href }) => {
       <h3 className="font-medium text-lg text-slate-950 group-hover:text-white relative z-10 duration-300">
         {title}
       </h3>
-      <p className="text-slate-400 group-hover:text-violet-200 relative z-10 duration-300">
+      <div className="text-slate-400 group-hover:text-violet-200 relative z-10 duration-300">
         {subtitle}
-      </p>
+      </div>
     </a>
   );
 };

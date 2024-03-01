@@ -7,6 +7,8 @@ import FloatingButton from "./components/FloatingButton";
 // import "../public/assets/js/main"
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/react";
+import Example from "./components/Header";
+import Navbar from "./components/Navbar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -31,9 +33,8 @@ export default function RootLayout({
       <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
       <body>
         <FloatingButton />
-
-        <Header />
-
+        <Example />
+        <Navbar />
         <Providers>{children}</Providers>
         <SpeedInsights />
         <Analytics />

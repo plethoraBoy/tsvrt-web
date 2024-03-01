@@ -6,7 +6,7 @@ const ContactSection = () => {
       <div className="container mx-auto" data-aos="fade-up">
         <div className="Secondary-Font section-title text-center lg:text-left mb-8">
           <h2 className="text-3xl font-bold">Contact </h2>
-          <p>Contact us</p>
+          <div>Contact us</div>
         </div>
       </div>
 
@@ -30,6 +30,7 @@ const ContactSection = () => {
                   name="Your Name"
                   id="YourName"
                   placeholder="Your Name"
+                  required
                   className="w-full p-2 border rounded-md"
                 />
               </div>
@@ -67,7 +68,7 @@ const ContactSection = () => {
                 <div>Your message has been sent. Thank you!</div>
               </div>
               <div className="col-span-2">
-                <button type="submit" className="bg-yellow-500 text-white p-3 rounded-md w-full">
+                <button type="submit" className="bg-yellow-500 text-white p-3 rounded-full w-full">
                   Send Message
                 </button>
               </div>

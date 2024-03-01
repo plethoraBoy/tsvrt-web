@@ -4,31 +4,31 @@ const MenuSection = () => {
     {
       heading: "Continental",
       subheading: "Explore our exquisite Continental cuisine",
-      imgSrc: "/imgs/continental-menu.jpg",
+      imgSrc: "assets/img/menu/BUTTER GARLIC PRAWN SKEWER.png",
       href: "#",
     },
     {
       heading: "Chinese",
       subheading: "Indulge in the flavors of authentic Chinese dishes",
-      imgSrc: "/imgs/chinese-menu.jpg",
+      imgSrc: "assets/img/menu/CHICKEN STROGANOFF.png",
       href: "#",
     },
     {
       heading: "Italian",
       subheading: "Savor the taste of Italy with our Italian specialties",
-      imgSrc: "/imgs/italian-menu.jpg",
+      imgSrc: "assets/img/menu/SPICY MEXICAN PASTA _1.png",
       href: "#",
     },
     {
       heading: "Mexican",
       subheading: "Spice up your palate with our vibrant Mexican menu",
-      imgSrc: "/imgs/mexican-menu.jpg",
+      imgSrc: "assets/img/menu/MEXICAN CHICKEN SKEWER.png",
       href: "#",
     },
     {
       heading: "Vegetarian",
       subheading: "Delight in our diverse and delicious vegetarian options",
-      imgSrc: "/imgs/vegetarian-menu.jpg",
+      imgSrc: "assets/img/menu/ROASTED CHICKEN STEAK WITH MUSHROOM ONION SAUCE.png",
       href: "#",
     },
   ];
@@ -37,7 +37,7 @@ const MenuSection = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="Secondary-Font mb-6">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold">Menu</h2>
-          <p className="text-base sm:text-lg lg:text-xl">Choose YOur Taste</p>
+          <div className="text-base sm:text-lg lg:text-xl">Choose YOur Taste</div>
         </div>
       </div>
       <div className="mx-auto max-w-5xl">

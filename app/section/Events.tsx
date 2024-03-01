@@ -56,7 +56,7 @@ const EventsSection = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 lg:mx-48" data-aos="fade-up">
         <div className="Secondary-Font mb-6">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold">Events</h2>
-          <p className="text-base sm:text-lg lg:text-xl">Organize Your Events in our Restaurant</p>
+          <div className="text-base sm:text-lg lg:text-xl">Organize Your Events in our Restaurant</div>
         </div>
 
         <Swiper
@@ -76,11 +76,11 @@ const EventsSection = () => {
                 <div className="md:w-1/2 md:ml-4">
                   <h2 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl mb-2">{event.title}</h2>
                   <div className="price mb-2">
-                    <p>
+                    <div>
                       <span>{event.price}</span>
-                    </p>
+                    </div>
                   </div>
-                  <p className="text-sm sm:text-base lg:text-lg mb-4 fst-italic">{event.description}</p>
+                  <div className="text-sm sm:text-base lg:text-lg mb-4 fst-italic">{event.description}</div>
                   <ul className="text-sm sm:text-base lg:text-lg mb-4">
                     {event.features.map((feature, i) => (
                       <li key={i}>

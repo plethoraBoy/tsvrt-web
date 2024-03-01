@@ -43,32 +43,32 @@ const Footer = () => {
               <div className="address">
                 <i className="bi bi-geo-alt"></i>
                 <h4>Location:</h4>
-                <p>No.22, 3rd Floor, Ambattur Red Hills Rd, Ambattur, Chennai, Tamil Nadu 600053</p>
+                <div>No.22, 3rd Floor, Ambattur Red Hills Rd, Ambattur, Chennai, Tamil Nadu 600053</div>
               </div>
 
               <div className="open-hours">
                 <i className="bi bi-clock"></i>
                 <h4>Open Hours:</h4>
-                <p>Monday 06:30 PM - 12.00 AM</p>
-                <p>
+                <div>Monday 06:30 PM - 12.00 AM</div>
+                <div>
                   Tuesday-Sunday
                   <br />
                   12:00 PM - 03.00 PM
                   <br />
                   06:00 PM - 12.00 AM
-                </p>
+                </div>
               </div>
 
               <div className="email">
                 <i className="bi bi-envelope"></i>
                 <h4>Email:</h4>
-                <p>info@example.com</p>
+                <div>info@example.com</div>
               </div>
 
               <div className="phone">
                 <i className="bi bi-phone"></i>
                 <h4>Call:</h4>
-                <p>+91 9710715879</p>
+                <div>+91 9710715879</div>
               </div>
             </div>
           </div>
@@ -79,9 +79,9 @@ const Footer = () => {
       </div>
 
       <div className="container text-center mx-auto">
-        <p>
+        <div>
           &copy; Copyright <strong>SkyView RoofTop Restaurant</strong>. All Rights Reserved
-        </p>
+        </div>
       </div>
     </footer>
   );

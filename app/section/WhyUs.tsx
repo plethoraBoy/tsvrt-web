@@ -44,9 +44,9 @@ const WhyUsSection: React.FC = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="Secondary-Font mb-6">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold">Why Us</h2>
-          <p className="text-base sm:text-lg lg:text-xl">
+          <div className="text-base sm:text-lg lg:text-xl">
             Discover the Reasons to Choose Our Restaurant
-          </p>
+          </div>
         </div>
 
         <div className="poppins flex flex-col gap-4 items-center md:flex-row md:items-stretch lg:mx-4 xl:mx-8">
