@@ -1,9 +1,10 @@
-"use client"
+"use client";
 import React, { useState, useEffect } from "react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Dialog } from "@headlessui/react";
 import { scroller } from "react-scroll";
 import { SkyView } from "./SkyVeiwLogo";
+import { HiOutlineMenuAlt4 } from "react-icons/hi";
 
 // Define the menu items
 const menuItems = [
@@ -12,7 +13,7 @@ const menuItems = [
   { name: "Events", href: "events" },
   { name: "Menu", href: "menu" },
   { name: "Gallery", href: "gallery-us" },
-  { name: "Contact", href: "contact-us" },
+  // { name: "Contact", href: "contact-us" },
 ];
 
 // Navbar component
@@ -53,9 +54,14 @@ const Navbar = () => {
 
   // Return the JSX for the Navbar component
   return (
-    <div className={`bg-[#020617] ${isNavbarFixed ? 'fixed top-0 inset-x-0 z-50' : ''}`}>
-      <header className="absolute inset-x-0 top-0 z-50">
-        <nav className="flex items-center justify-between p-6 lg:px-8" aria-name="Global">
+    <div
+    className={`bg-[#020617]  ${isNavbarFixed ? "fixed top-0 inset-x-0 z-50" : ""}`}
+    >
+      <header className="absolute inset-x-0 top-0 z-50 " >
+        <nav
+          className="flex items-center justify-between lg:px-8 px-6  backdrop-filter backdrop-blur-lg "
+          aria-name="Global"
+        >
           <div className="flex lg:flex-1">
             <a href="#" className="-m-1.5 p-1.5">
               <span className="sr-only"></span>
@@ -69,25 +75,27 @@ const Navbar = () => {
               onClick={() => setMobileMenuOpen(true)}
             >
               <span className="sr-only">Open main menu</span>
-              <Bars3Icon className=" h-6 w-6" aria-hidden="true" />
+              <HiOutlineMenuAlt4  className=" h-6 w-6" aria-hidden="true" />
             </button>
           </div>
           <div className="hidden lg:flex lg:gap-x-12">
             {menuItems.map((item, index) => (
-              <a
-                key={`${item.name}-${index}`}
-                href={`#${item.href}`}
-                className={`text-sm font-semibold leading-6 ${isNavbarFixed ? 'text-white' : 'text-white-900'}`}
-                onClick={() => handleMenuItemClick(item.href)}
-              >
-                {item.name}
-              </a>
+             <a
+             key={`${item.name}-${index}`}
+             href={`#${item.href}`}
+             className={`text-sm transition-all duration-300 font-semibold hover:text-yellow-500   leading-6 ${isNavbarFixed ? "text-white" : "text-white-900"}`}
+             // Add hover styles for gradient and text color
+             onClick={() => handleMenuItemClick(item.href)}
+           >
+             {item.name}
+           </a>
+           
             ))}
           </div>
           <div className="hidden lg:flex lg:flex-1 lg:justify-end">
             <a
-              href="#"
-              className={`text-sm font-semibold leading-6 ${isNavbarFixed ? 'text-white' : 'text-white-900'}`}
+              href="#contact-us"
+              className={`text-sm font-semibold leading-6 ${isNavbarFixed ? "text-white" : "text-white-900"}`}
             >
               Contact us<span aria-hidden="true">&rarr;</span>
             </a>
@@ -100,12 +108,9 @@ const Navbar = () => {
           onClose={() => setMobileMenuOpen(false)}
         >
           <div className=" fixed inset-0 z-50" />
-          <Dialog.Panel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-neutral-950 px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+          <Dialog.Panel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-neutral-950 px-6  sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
             <div className="flex items-center justify-between">
-              <a
-                href="#"
-                className="-m-1.5 p-1.5  "
-              >
+              <a href="#hero" className="-m-1.5 p-1.5  ">
                 <SkyView />
               </a>
               <button
@@ -130,14 +135,14 @@ const Navbar = () => {
                   </a>
                 ))}
               </div>
-              {/* <div className="py-6">
+              <div className="py-6">
                 <a
-                  href="#"
-                  className="-mx-3 block rounded-full px-3 py-2.5 text-base font-semibold leading-7 text-gray-500 hover:text-yellow-500 hover:bg-gray-50"
-                >
+                  href="#booka-table"
+                  className="text-center block px-3 py-2.5 bg-gradient-to-tr from-amber-400 to-yellow-500 rounded-full text-base font-semibold leading-7 text-white hover:text-white hover:bg-gray-50 transition-all duration-300"
+                  >
                   Book Now
                 </a>
-              </div> */}
+              </div>
             </div>
           </Dialog.Panel>
         </Dialog>

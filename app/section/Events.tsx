@@ -1,8 +1,8 @@
-"use client"
+"use client";
 
 import React, { useRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import {Image} from "@nextui-org/react";
+import { Image } from "@nextui-org/react";
 
 import SwiperCore from "swiper";
 import { Navigation, Pagination } from "swiper/modules";
@@ -13,38 +13,38 @@ const EventsSection = () => {
   const events = [
     {
       title: "Birthday Parties",
-      price: "$189",
-      imgSrc: "assets/img/event-birthday.jpg",
+      price: "Rs 999",
+      imgSrc: "assets/img/events/event-birthday.jpg",
       description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        "Celebrate your special day with our unforgettable Birthday Parties! Our expert team will ensure every moment is filled with joy and excitement. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
       features: [
-        "Ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-        "Duis aute irure dolor in reprehenderit in voluptate velit.",
-        "Ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+        "Personalized party planning.",
+        "Delicious catering options.",
+        "Exciting entertainment for all ages.",
       ],
     },
     {
       title: "Private Parties",
-      price: "$290",
-      imgSrc: "assets/img/event-private.jpg",
+      price: "Rs 999",
+      imgSrc: "assets/img/events/event-private.jpg",
       description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        "Host exclusive Private Parties tailored to your preferences! Whether it's an intimate gathering or a grand affair, we'll create the perfect atmosphere for your event. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
       features: [
-        "Ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-        "Duis aute irure dolor in reprehenderit in voluptate velit.",
-        "Ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+        "Customized event spaces.",
+        "Premium catering and beverage services.",
+        "Dedicated event planning assistance.",
       ],
     },
     {
       title: "Custom Parties",
-      price: "$99",
-      imgSrc: "assets/img/event-custom.jpg",
+      price: "Rs 999",
+      imgSrc: "assets/img/events/event-custom.jpg",
       description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        "Design your dream event with our Custom Parties package! From themed decorations to unique entertainment options, we'll bring your vision to life. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
       features: [
-        "Ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-        "Duis aute irure dolor in reprehenderit in voluptate velit.",
-        "Ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+        "Tailored event packages.",
+        "Creative theme and decor choices.",
+        "Flexible customization options.",
       ],
     },
   ];
@@ -52,11 +52,16 @@ const EventsSection = () => {
   const swiperRef = useRef(null);
 
   return (
-    <section id="events" className="bg-neutral-950 py-8 lg:py-12">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 lg:mx-48" data-aos="fade-up">
+    <section id="events" className="bg-neutral-950 py-8 lg:py-12  pt-12">
+      <div
+        className="container mx-auto px-4 sm:px-6 lg:px-8 lg:mx-48"
+        data-aos="fade-up"
+      >
         <div className="Secondary-Font mb-6">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold">Events</h2>
-          <div className="text-base sm:text-lg lg:text-xl">Organize Your Events in our Restaurant</div>
+          <div className="text-base sm:text-lg lg:text-xl">
+            Organize Your Events in our Restaurant
+          </div>
         </div>
 
         <Swiper
@@ -71,16 +76,24 @@ const EventsSection = () => {
             <SwiperSlide key={index}>
               <div className="flex flex-col items-center md:flex-row md:items-stretch lg:mx-4 xl:mx-8">
                 <div className="mb-4 md:w-1/2 md:mr-4">
-                  <Image className="w-full md:h-full object-cover" src={event.imgSrc} alt={event.title} />
+                  <Image
+                    className="w-full md:h-full object-cover"
+                    src={event.imgSrc}
+                    alt={event.title}
+                  />
                 </div>
                 <div className="md:w-1/2 md:ml-4">
-                  <h2 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl mb-2">{event.title}</h2>
+                  <h2 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl mb-2">
+                    {event.title}
+                  </h2>
                   <div className="price mb-2">
                     <div>
                       <span>{event.price}</span>
                     </div>
                   </div>
-                  <div className="text-sm sm:text-base lg:text-lg mb-4 fst-italic">{event.description}</div>
+                  <div className="text-sm sm:text-base lg:text-lg mb-4 fst-italic">
+                    {event.description}
+                  </div>
                   <ul className="text-sm sm:text-base lg:text-lg mb-4">
                     {event.features.map((feature, i) => (
                       <li key={i}>

@@ -4,7 +4,7 @@ import { Image } from "@nextui-org/react";
 
 const AboutUsSection = () => {
   return (
-    <section id="about-us" className="bg-neutral-950  mt-4 pt-12">
+    <section id="about-us" className="bg-neutral-950  md:pt-28">
       {" "}
       {/* Add margin-top (mt-8) for spacing */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -68,12 +68,12 @@ const AboutUsSection = () => {
               ensures impeccable service, making every visit a celebration of
               flavors and sophistication.
             </div>
-            <div className="text-sm sm:text-base lg:text-lg mt-4">
+            {/* <div className="text-sm sm:text-base lg:text-lg mt-4">
               Whether it's a romantic dinner, a gathering of friends, or a
               corporate event, SkyView Rooftop Restaurant is the perfect setting
               for all occasions. Elevate your moments with us and let the sky be
               the witness to your unforgettable stories.
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

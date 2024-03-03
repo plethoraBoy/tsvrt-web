@@ -5,7 +5,7 @@ const ContactSection = () => {
     <section id='contact-us' className="bg-neutral-950 py-16">
       <div className="container mx-auto" data-aos="fade-up">
         <div className="Secondary-Font section-title text-center lg:text-left mb-8">
-          <h2 className="text-3xl font-bold">Contact </h2>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold Secondary-Font text-white">Contact </h2>
           <div>Contact us</div>
         </div>
       </div>
@@ -15,6 +15,7 @@ const ContactSection = () => {
           className="w-full h-64 md:h-96"
           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3885.52906325203!2d80.15367241482367!3d13.128993090752761!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a5263ce30c1aded%3A0xb73ad5e084920af!2sThe%20SkyView%20Rooftop%20Multicuisine%20Restaurant!5e0!3m2!1sen!2sin"
           frameBorder="0"
+          style={{ filter: "invert(90%)" }}          
           allowFullScreen
         ></iframe>
       </div>

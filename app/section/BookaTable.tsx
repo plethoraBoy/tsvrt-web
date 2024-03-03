@@ -6,7 +6,7 @@ const BookATableSection = () => {
     <section id="booka-table" className="bg-neutral-950 py-8 md:py-16">
       <div className="container mx-auto px-4" data-aos="fade-up">
         <div className="text-center lg:text-left mb-6">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white">Reservation</h2>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold Secondary-Font text-white">Reservation</h2>
           <div className="text-gray-400">Book a Table</div>
         </div>
 

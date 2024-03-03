@@ -23,7 +23,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en" className="dark" suppressHydrationWarning>
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
       <link
@@ -32,7 +32,7 @@ export default function RootLayout({
       />
       <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
       <body>
-        <FloatingButton />
+        {/* <FloatingButton /> */}
         <Example />
         <Navbar />
         <Providers>{children}</Providers>

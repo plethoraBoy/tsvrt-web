@@ -3,14 +3,14 @@ import {Image} from "@nextui-org/react";
 
 const GallerySection = () => {
   const galleryItems = [
-    { src: 'assets/img/gallery/gallery-1.jpg', alt: 'Gallery 1' },
-    { src: 'assets/img/gallery/gallery-2.jpg', alt: 'Gallery 2' },
-    { src: 'assets/img/gallery/gallery-3.jpg', alt: 'Gallery 3' },
-    { src: 'assets/img/gallery/gallery-4.jpg', alt: 'Gallery 4' },
-    { src: 'assets/img/gallery/gallery-5.jpg', alt: 'Gallery 5' },
-    { src: 'assets/img/gallery/gallery-6.jpg', alt: 'Gallery 6' },
-    { src: 'assets/img/gallery/gallery-7.jpg', alt: 'Gallery 7' },
-    { src: 'assets/img/gallery/gallery-8.jpg', alt: 'Gallery 8' },
+    { src: 'assets/img/gallery/gallery (1).jpg', alt: 'Gallery 1' },
+    { src: 'assets/img/gallery/gallery (2).jpg', alt: 'Gallery 2' },
+    { src: 'assets/img/gallery/gallery (3).jpg', alt: 'Gallery 3' },
+    { src: 'assets/img/gallery/gallery (4).jpg', alt: 'Gallery 4' },
+    { src: 'assets/img/gallery/gallery (5).jpg', alt: 'Gallery 5' },
+    { src: 'assets/img/gallery/gallery (6).jpg', alt: 'Gallery 6' },
+    { src: 'assets/img/gallery/gallery (7).jpg', alt: 'Gallery 7' },
+    { src: 'assets/img/gallery/gallery.jpg', alt: 'Gallery 8' },
   ];
 
   return (
@@ -23,7 +23,7 @@ const GallerySection = () => {
 
         <div className="flex flex-wrap -mx-2">
           {galleryItems.map((item, index) => (
-            <div key={index} className="md:w-1/2 lg:w-1/4 px-2 mb-4">
+            <div key={index} className="md:w-1/4 lg:w-1/4 px-2 mb-1">
               <div className="gallery-item">
                 <a href={item.src} className="gallery-lightbox" data-gall="gallery-item">
                   <Image src={item.src} alt={item.alt} className="w-full h-auto" />
