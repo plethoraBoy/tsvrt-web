@@ -1,10 +1,11 @@
-"use client";
-import React, { useState } from "react";
-import { Bars3Icon, XMarkIcon ,} from "@heroicons/react/24/outline";
+"use client"
+import React, { useState, useEffect } from "react";
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Dialog } from "@headlessui/react";
 import { scroller } from "react-scroll";
 import { SkyView } from "./SkyVeiwLogo";
 
+// Define the menu items
 const menuItems = [
   { name: "Home", href: "hero" },
   { name: "About", href: "about-us" },
@@ -14,27 +15,47 @@ const menuItems = [
   { name: "Contact", href: "contact-us" },
 ];
 
+// Navbar component
 const Navbar = () => {
+  // State variables
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [activeLink, setActiveLink] = useState("");
+  const [isNavbarFixed, setIsNavbarFixed] = useState(false);
 
-  const handleMenuItemClick = (url: any) => {
-    setIsMenuOpen(false);
-    scroller.scrollTo(url, {
+  // Function to handle menu item click
+  const handleMenuItemClick = (href: string) => {
+    setMobileMenuOpen(false);
+
+    // Use react-scroll to scroll to the target section
+    scroller.scrollTo(href, {
       duration: 900,
       smooth: "easeOut",
-      offset: -50, // You can adjust the offset as needed
+      offset: -50,
     });
   };
+
+  // Effect to handle scroll and toggle fixed navbar
+  useEffect(() => {
+    const handleScroll = () => {
+      // Check the scroll position and toggle the fixed state accordingly
+      const scrollPosition = window.scrollY;
+      setIsNavbarFixed(scrollPosition > 0);
+    };
+
+    // Add event listener for scroll
+    window.addEventListener("scroll", handleScroll);
+
+    // Remove the event listener when the component unmounts
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []); // Ensure the effect runs only once on mount
+
+  // Return the JSX for the Navbar component
   return (
-    
-    <div className="bg-[#020617]">
-      <header className="absolute inset-x-0 top-0 z-50 ">
-        <nav
-          className=" flex items-center justify-between p-6 lg:px-8"
-          aria-name="Global"
-        >
+    <div className={`bg-[#020617] ${isNavbarFixed ? 'fixed top-0 inset-x-0 z-50' : ''}`}>
+      <header className="absolute inset-x-0 top-0 z-50">
+        <nav className="flex items-center justify-between p-6 lg:px-8" aria-name="Global">
           <div className="flex lg:flex-1">
             <a href="#" className="-m-1.5 p-1.5">
               <span className="sr-only"></span>
@@ -56,7 +77,7 @@ const Navbar = () => {
               <a
                 key={`${item.name}-${index}`}
                 href={`#${item.href}`}
-                className="text-sm font-semibold leading-6 text-white-900"
+                className={`text-sm font-semibold leading-6 ${isNavbarFixed ? 'text-white' : 'text-white-900'}`}
                 onClick={() => handleMenuItemClick(item.href)}
               >
                 {item.name}
@@ -66,7 +87,7 @@ const Navbar = () => {
           <div className="hidden lg:flex lg:flex-1 lg:justify-end">
             <a
               href="#"
-              className="text-sm font-semibold leading-6 text-white-900"
+              className={`text-sm font-semibold leading-6 ${isNavbarFixed ? 'text-white' : 'text-white-900'}`}
             >
               Contact us<span aria-hidden="true">&rarr;</span>
             </a>
@@ -76,13 +97,15 @@ const Navbar = () => {
           as="div"
           className="bg-neutral-950 lg:hidden"
           open={mobileMenuOpen}
-          onClose={setMobileMenuOpen}
+          onClose={() => setMobileMenuOpen(false)}
         >
           <div className=" fixed inset-0 z-50" />
           <Dialog.Panel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-neutral-950 px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
             <div className="flex items-center justify-between">
-              <a href="#" className="-m-1.5 p-1.5  ">
-                {/* <span className="sr-only">The </span> */}
+              <a
+                href="#"
+                className="-m-1.5 p-1.5  "
+              >
                 <SkyView />
               </a>
               <button
@@ -94,33 +117,27 @@ const Navbar = () => {
                 <XMarkIcon className="th-6 w-6" aria-hidden="true" />
               </button>
             </div>
-            {/* <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
-  <divath d="M3.375 3C2.339 3 1.5 3.84 1.5 4.875v.75c0 1.036.84 1.875 1.875 1.875h17.25c1.035 0 1.875-.84 1.875-1.875v-.75C22.5 3.839 21.66 3 20.625 3H3.375Z" />
-  <divath fill-rule="evenodd" d="m3.087 9 .54 9.176A3 3 0 0 0 6.62 21h10.757a3 3 0 0 0 2.995-2.824L20.913 9H3.087ZM12 10.5a.75.75 0 0 1 .75.75v4.94l1.72-1.72a.75.75 0 1 1 1.06 1.06l-3 3a.75.75 0 0 1-1.06 0l-3-3a.75.75 0 1 1 1.06-1.06l1.72 1.72v-4.94a.75.75 0 0 1 .75-.75Z" clip-rule="evenodd" />
-</svg> */}
-
             <div className="mt-6 flow-root">
-              <div className="-my-6 divide-y divide-gray-500/10">
-                <div className="space-y-2 py-6">
-                  {menuItems.map((item, index) => (
-                    <a
-                      key={`${item.name}-${index}`}
-                      href={`#${item.href}`}
-                      className="-mx-3 block rounded-full px-3 py-2 text-base font-semibold leading-7 text-gray-500 hover:text-yellow-500 hover:bg-gray-50"
-                      onClick={() => handleMenuItemClick(item.href)}
-                    >
-                      {item.name}
-                    </a>
-                  ))}
-                </div>
-                <div className="py-6">
+              <div className="space-y-2 py-6">
+                {menuItems.map((item, index) => (
                   <a
-                    href="#"
-                    className="-mx-3 block rounded-full px-3 py-2.5 text-base font-semibold leading-7 text-gray-500 hover:text-yellow-500 hover:bg-gray-50"
+                    key={`${item.name}-${index}`}
+                    href={`#${item.href}`}
+                    className="-mx-3 block rounded-full px-3 py-2 text-base font-semibold leading-7 text-gray-500 hover:text-yellow-500 hover:bg-gray-50"
+                    onClick={() => handleMenuItemClick(item.href)}
                   >
-Book Now                  </a>
-                </div>
+                    {item.name}
+                  </a>
+                ))}
               </div>
+              {/* <div className="py-6">
+                <a
+                  href="#"
+                  className="-mx-3 block rounded-full px-3 py-2.5 text-base font-semibold leading-7 text-gray-500 hover:text-yellow-500 hover:bg-gray-50"
+                >
+                  Book Now
+                </a>
+              </div> */}
             </div>
           </Dialog.Panel>
         </Dialog>
@@ -129,4 +146,5 @@ Book Now                  </a>
   );
 };
 
+// Export the Navbar component
 export default Navbar;
