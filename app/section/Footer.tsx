@@ -26,6 +26,14 @@ const Footer = () => {
                   Tamil Nadu 600053
                 </div>
               </div>
+              <br />
+              <div className="Timings">
+                <i className="bi bi-geo-alt"></i>
+                <h4>Timings:</h4>
+                <div>
+               Evening 06:00 pm - 2:00pm
+                </div>
+              </div>
             </div>
           </div>
           <div className="flex items-center justify-center md:justify-end space-x-4 md:w-full">
@@ -75,7 +83,7 @@ const Footer = () => {
             <div className="phone text-center mt-4 md:mt-0">
               <i className="bi bi-phone"></i>
               <h4>Call:</h4>
-              <div>+91 9710715879</div>
+              <div>+91 9080226632</div>
             </div>
           </div>
         </div>

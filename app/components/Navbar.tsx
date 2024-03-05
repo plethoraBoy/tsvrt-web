@@ -95,7 +95,7 @@ const Navbar = () => {
           <div className="hidden lg:flex lg:flex-1 lg:justify-end">
             <a
               href="#contact-us"
-              className={`text-sm font-semibold leading-6 ${isNavbarFixed ? "text-white" : "text-white-900"}`}
+              className={`text-sm font-semibold leading-6 bg-gradient-to-r bg-white hover:text-yellow-400 bg-clip-text ${isNavbarFixed ? "text-white" : "text-white-900"}`}
             >
               Contact us<span aria-hidden="true">&rarr;</span>
             </a>

@@ -58,11 +58,12 @@ const HeroSection = () => {
                 Our Menu
               </a>
               <a
-                href="#booka-table"
-                className="text-sm font-semibold leading-6 text-white-900"
-              >
-                Book a Table<span aria-hidden="true">→</span>
-              </a>
+  href="#booka-table"
+  className="text-sm font-semibold leading-6 text-white-900 bg-gradient-to-r bg-white hover:text-yellow-400 bg-clip-text"
+>
+  Book a Table<span aria-hidden="true">→</span>
+</a>
+
             </div>
           </div>
         </div>
