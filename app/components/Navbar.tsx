@@ -55,17 +55,14 @@ const Navbar = () => {
   // Return the JSX for the Navbar component
   return (
     <div
-    className={`bg-[#020617]  ${isNavbarFixed ? "fixed top-0 inset-x-0 z-50" : ""}`}
+      className={`bg-[#020617]  ${isNavbarFixed ? "fixed top-0 inset-x-0 z-50" : ""}`}
     >
-      <header className="absolute inset-x-0 top-0 z-50 " >
-        <nav
-          className="flex items-center justify-between lg:px-8 px-6  backdrop-filter backdrop-blur-lg "
-          aria-name="Global"
-        >
+      <header className="absolute inset-x-0 top-0 z-50 ">
+        <nav className="flex items-center justify-between lg:px-8 px-6 p-6 backdrop-filter backdrop-blur-lg ">
           <div className="flex lg:flex-1">
             <a href="#" className="-m-1.5 p-1.5">
               <span className="sr-only"></span>
-              <SkyView />
+              {/* <SkyView /> */}
             </a>
           </div>
           <div className="flex lg:hidden">
@@ -75,21 +72,20 @@ const Navbar = () => {
               onClick={() => setMobileMenuOpen(true)}
             >
               <span className="sr-only">Open main menu</span>
-              <HiOutlineMenuAlt4  className=" h-6 w-6" aria-hidden="true" />
+              <HiOutlineMenuAlt4 className=" h-6 w-6" aria-hidden="true" />
             </button>
           </div>
           <div className="hidden lg:flex lg:gap-x-12">
             {menuItems.map((item, index) => (
-             <a
-             key={`${item.name}-${index}`}
-             href={`#${item.href}`}
-             className={`text-sm transition-all duration-300 font-semibold hover:text-yellow-500   leading-6 ${isNavbarFixed ? "text-white" : "text-white-900"}`}
-             // Add hover styles for gradient and text color
-             onClick={() => handleMenuItemClick(item.href)}
-           >
-             {item.name}
-           </a>
-           
+              <a
+                key={`${item.name}-${index}`}
+                href={`#${item.href}`}
+                className={`text-sm transition-all duration-300 font-semibold hover:text-yellow-500   leading-6 ${isNavbarFixed ? "text-white" : "text-white-900"}`}
+                // Add hover styles for gradient and text color
+                onClick={() => handleMenuItemClick(item.href)}
+              >
+                {item.name}
+              </a>
             ))}
           </div>
           <div className="hidden lg:flex lg:flex-1 lg:justify-end">
@@ -110,9 +106,9 @@ const Navbar = () => {
           <div className=" fixed inset-0 z-50" />
           <Dialog.Panel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-neutral-950 px-6  sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
             <div className="flex items-center justify-between">
-              <a href="#hero" className="-m-1.5 p-1.5  ">
+              {/* <a href="#hero" className="-m-1.5 p-1.5  ">
                 <SkyView />
-              </a>
+              </a> */}
               <button
                 type="button"
                 className="-m-2.5 rounded-md p-2.5 text-white-700"
@@ -139,7 +135,7 @@ const Navbar = () => {
                 <a
                   href="#booka-table"
                   className="text-center block px-3 py-2.5 bg-gradient-to-tr from-amber-400 to-yellow-500 rounded-full text-base font-semibold leading-7 text-white hover:text-white hover:bg-gray-50 transition-all duration-300"
-                  >
+                >
                   Book Now
                 </a>
               </div>
