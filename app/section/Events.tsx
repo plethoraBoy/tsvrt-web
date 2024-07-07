@@ -2,7 +2,7 @@
 
 import React, { useRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Image } from "@nextui-org/react";
+import Image from 'next/image';
 
 import SwiperCore from "swiper";
 import { Navigation, Pagination } from "swiper/modules";
@@ -14,7 +14,7 @@ const EventsSection = () => {
     {
       title: "Birthday Parties",
       price: "Rs 999",
-      imgSrc: "assets/img/events/event-birthday.jpg",
+      imgSrc: "/assets/img/events/event-birthday.jpg",
       description:
         "Celebrate your special day with our unforgettable Birthday Parties! Our expert team will ensure every moment is filled with joy and excitement. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
       features: [
@@ -26,7 +26,7 @@ const EventsSection = () => {
     {
       title: "Private Parties",
       price: "Rs 999",
-      imgSrc: "assets/img/events/event-private.jpg",
+      imgSrc: "/assets/img/events/event-private.jpg",
       description:
         "Host exclusive Private Parties tailored to your preferences! Whether it's an intimate gathering or a grand affair, we'll create the perfect atmosphere for your event. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
       features: [
@@ -38,7 +38,7 @@ const EventsSection = () => {
     {
       title: "Custom Parties",
       price: "Rs 999",
-      imgSrc: "assets/img/events/event-custom.jpg",
+      imgSrc: "/assets/img/events/event-custom.jpg",
       description:
         "Design your dream event with our Custom Parties package! From themed decorations to unique entertainment options, we'll bring your vision to life. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
       features: [
@@ -80,6 +80,8 @@ const EventsSection = () => {
                     className="w-full md:h-full object-cover"
                     src={event.imgSrc}
                     alt={event.title}
+                    width={200}
+                    height={200}
                   />
                 </div>
                 <div className="md:w-1/2 md:ml-4">

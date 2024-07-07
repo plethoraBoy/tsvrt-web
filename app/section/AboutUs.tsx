@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
-import { Image } from "@nextui-org/react";
-import { m } from "framer-motion";
+import Image from 'next/image';
 import { useInView } from "framer-motion";
 import { useRef } from "react";
 
@@ -10,10 +9,6 @@ const AboutUsSection = () => {
   const isInView = useInView(ref, { once: true });
   return (
     <section id="about-us" className="bg-neutral-950  md:pt-28">
-      <m.div
-        
-      
-      >
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="Secondary-Font mb-6">
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold">
@@ -24,13 +19,14 @@ const AboutUsSection = () => {
             </div>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 mx-8">
-            <div data-aos="fade-up">
+            <div >
               <div>
-                <Image
-                  className="w-auto"
-                  src="assets/img/about/about.jpg"
-                  alt="About Us"
-                />
+              <Image
+                src="/assets/img/about/about.jpg"
+                alt="About Us"
+                width={500} // Adjust width as needed
+                height={300} // Adjust height as needed
+              />
               </div>
             </div>
             <div>
@@ -84,7 +80,6 @@ const AboutUsSection = () => {
             </div>
           </div>
         </div>
-      </m.div>
     </section>
   );
 };
