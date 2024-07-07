@@ -9,7 +9,7 @@ import Footer from "./section/Footer";
 import MenuSection from "./section/Menu";
 import HeroSection from "./section/Hero2";
 import FeedbackMarquee from "./components/ui/Marquee-card";
-
+import Feedback from "./section/FeedBack";
 
 export default function Home() {
   return (
@@ -21,10 +21,9 @@ export default function Home() {
       <EventsSection />
       <MenuSection />
       <GallerySection />
-      <FeedbackMarquee />
+      <Feedback />
       <BookATableSection />
       <ContactSection />
-
       <Footer />
     </main>
   );

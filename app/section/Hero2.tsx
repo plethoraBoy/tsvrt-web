@@ -6,7 +6,12 @@ import { FlipWords } from "../components/ui/flip-words";
 
 const HeroSection: React.FC = () => {
   const [imageIndex, setImageIndex] = useState(0);
-  const restaurantWords = ["Exquisite dining", "Delicious cuisine", "Savor gourmet dishes", "Enjoy fine dining"];
+  const restaurantWords = [
+    "Exquisite dining",
+    "Delicious cuisine",
+    "Savor gourmet dishes",
+    "Enjoy fine dining",
+  ];
 
   const images = [
     "/assets/img/menu/SPICY MEXICAN PASTA _1.png",
@@ -68,12 +73,17 @@ const HeroSection: React.FC = () => {
                 websites with Aceternity UI
               </div>
             </div> */}
-            <p className={`${styles.paragraph} ${styles["primary"]} `}>
-            Experience
-                <FlipWords className="font-normal text-neutral-900 dark:text-neutral-800" words={restaurantWords} /> <br />
-                at new heights with breathtaking panoramic views
-              of the city skyline.
-            </p>
+            <div className={`${styles.paragraph} ${styles["primary"]} `}>
+              Experience
+              <FlipWords
+                className="font-semibold
+ text-neutral-900 dark:text-neutral-800"
+                words={restaurantWords}
+              />{" "}
+              <br />
+              at new heights with breathtaking panoramic views of the city
+              skyline.
+            </div>
           </div>
         </div>
       </div>

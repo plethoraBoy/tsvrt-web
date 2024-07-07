@@ -7,7 +7,6 @@ import FloatingButton from "./components/FloatingButton";
 // import "../public/assets/js/main"
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/react";
-import Example from "./components/Header";
 import Navbar from "./components/Navbar";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -25,18 +24,17 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <head>
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <meta
-        name="google-site-verification"
-        content="PIxKjWdmRYycH8lY3fYCsI68nNJw8kIm0czw4C9gnsQ"
-      />
-      <link rel="icon" href="/favicon.ico" sizes="any" />
-      <link
-        rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
-      />
-            <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta
+          name="google-site-verification"
+          content="PIxKjWdmRYycH8lY3fYCsI68nNJw8kIm0czw4C9gnsQ"
+        />
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+        />
+        <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
       </head>
       <body>
         {/* <FloatingButton /> */}
