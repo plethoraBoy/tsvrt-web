@@ -92,7 +92,9 @@ const HeroSection: React.FC = () => {
       </div>
       <div className={styles["slider-images"]}>
         {images.map((src, index) => (
-          <img
+          <Image
+            width={400}
+            height={300}
             key={index}
             className={`${styles["slider-image"]} ${getClassName(index)}`}
             src={src}
