@@ -13,5 +13,6 @@ module.exports = {
     domains: ["pbs.twimg.com"],
     domains: ["raw.githubusercontent.com"],
     domains: ["img.freepik.com"],
+    domains:['avatar.vercel.sh']
   },
 };
