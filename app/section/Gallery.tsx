@@ -3,22 +3,62 @@ import Image from "next/image";
 
 const GallerySection = () => {
   const galleryItems = [
-    { type: "image", src: "/assets/img/gallerysection/rootop.jpg", alt: "Gallery 1" },
-    { type: "image", src: "/assets/img/gallerysection/rootop2.jpg", alt: "Gallery 2" },
-    { type: "image", src: "/assets/img/gallerysection/rootop3.jpg", alt: "Gallery 3" },
-    { type: "video", src: "/assets/img/gallerysection/rootop4.mp4", alt: "Gallery 4" },
-    { type: "image", src: "/assets/img/gallerysection/rootop5.jpg", alt: "Gallery 5" },
-    { type: "image", src: "/assets/img/gallerysection/rootop5.jpg", alt: "Gallery 6" },
-    { type: "image", src: "/assets/img/gallerysection/rootop2.jpg", alt: "Gallery 7" },
-    { type: "video", src: "/assets/img/gallerysection/rootop.mp4", alt: "Video Gallery" },
+    {
+      type: "image",
+      src: "/assets/img/gallerysection/rootop.jpg",
+      alt: "Gallery 1",
+    },
+    {
+      type: "image",
+      src: "/assets/img/gallerysection/rootop2.jpg",
+      alt: "Gallery 2",
+    },
+    {
+      type: "image",
+      src: "/assets/img/gallerysection/rootop3.jpg",
+      alt: "Gallery 3",
+    },
+    {
+      type: "image",
+      src: "/assets/img/gallerysection/rootop5.jpg",
+      alt: "Gallery 6",
+    },
+    {
+      type: "image",
+      src: "/assets/img/gallerysection/rootop5.jpg",
+      alt: "Gallery 5",
+    },
+    {
+      type: "image",
+      src: "/assets/img/gallerysection/rootop5.jpg",
+      alt: "Gallery 6",
+    },
+    {
+      type: "image",
+      src: "/assets/img/gallerysection/rootop2.jpg",
+      alt: "Gallery 7",
+    },
+
+    {
+      type: "image",
+      src: "/assets/img/gallerysection/rootop2.jpg",
+      alt: "Gallery 7",
+    },
   ];
 
   return (
     <section id="gallery-us" className="bg-neutral-950 py-8 lg:py-12">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8" data-aos="fade-up">
+      <div
+        className="container mx-auto px-4 sm:px-6 lg:px-8"
+        data-aos="fade-up"
+      >
         <div className="Secondary-Font mb-6">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold">Gallery</h2>
-          <div className="text-base sm:text-lg lg:text-xl">Some photos and a video from Our Restaurant</div>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold">
+            Gallery
+          </h2>
+          <div className="text-base sm:text-lg lg:text-xl">
+            Some photos and a video from Our Restaurant
+          </div>
         </div>
 
         <div className="flex flex-wrap -mx-2">
@@ -39,7 +79,14 @@ const GallerySection = () => {
 
                 {item.type === "video" && (
                   <div className="relative">
-                    <video width="100%" height="100%" autoPlay controls preload="auto" className="rounded-lg">
+                    <video
+                      width="100%"
+                      height="100%"
+                      autoPlay
+                      controls
+                      preload="auto"
+                      className="rounded-lg"
+                    >
                       <source src={item.src} type="video/mp4" />
                       {/* Add <track> elements here for subtitles if needed */}
                     </video>
