@@ -46,7 +46,10 @@ const HeroSection: React.FC = () => {
   };
 
   return (
-    <section id={styles["slider-main"]} className="h-50rem relative overflow-hidden">
+    <section
+      id={styles["slider-main"]}
+      className="h-50rem relative overflow-hidden"
+    >
       <div className={`${styles.container} `}>
         <div className={styles.logo}>
           <a href="#">
