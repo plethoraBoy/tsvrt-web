@@ -12,7 +12,7 @@ const ContactSection = () => {
           <div>Contact us</div>
         </div>
       </div>
-      {/* 
+      
       <div className="mt-4">
         <iframe
           className="w-full h-64 md:h-96"
@@ -21,9 +21,9 @@ const ContactSection = () => {
           style={{ filter: "invert(90%)" }}
           allowFullScreen
         ></iframe>
-      </div> */}
+      </div>
 
-      <AnimatedPin />
+      {/* <AnimatedPin /> */}
 
       <div className="container mx-auto mt-4">
         <div className="flex flex-col lg:flex-row justify-center items-center lg:items-start space-y-5 lg:space-y-0 lg:space-x-5">

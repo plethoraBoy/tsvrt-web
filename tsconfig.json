@@ -27,6 +27,6 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "next.config.js"
-  ],
+, "app/section/frid"  ],
   "exclude": ["node_modules"]
 }

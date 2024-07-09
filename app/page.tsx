@@ -21,9 +21,11 @@ export default function Home() {
       <EventsSection />
       <MenuSection />
       <GallerySection />
+
       <Feedback />
       <BookATableSection />
       <ContactSection />
+
       <Footer />
     </main>
   );
