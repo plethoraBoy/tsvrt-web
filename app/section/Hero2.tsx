@@ -48,11 +48,11 @@ const HeroSection: React.FC = () => {
   return (
     <section
       id={styles["slider-main"]}
-      className="h-50rem relative overflow-hidden"
+      className="h-60rem relative overflow-hidden"
     >
       <div className={`${styles.container} `}>
         <div className={styles.logo}>
-          <a href="#">
+          <a>
             <Image
               src="/assets/images/logo-white.png"
               alt="logo"

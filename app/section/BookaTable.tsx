@@ -1,7 +1,69 @@
-import { Button } from "@nextui-org/react";
-import React from "react";
+"use client"
+import React, { useState, ChangeEvent, FormEvent } from "react";
 
-const BookATableSection = () => {
+interface FormData {
+  name: string;
+  email: string;
+  phone: string;
+  date: string;
+  time: string;
+  people: string;
+  message: string;
+}
+
+const BookATableSection: React.FC = () => {
+  const [formData, setFormData] = useState<FormData>({
+    name: "",
+    email: "",
+    phone: "",
+    date: "",
+    time: "",
+    people: "",
+    message: "",
+  });
+
+  const handleChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+  
+    try {
+      const res = await fetch("/api/send-email", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+  
+      if (res.ok) {
+        alert("Email sent successfully");
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
+          date: "",
+          time: "",
+          people: "",
+          message: "",
+        });
+      } else {
+        alert("Failed to send email");
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      alert("Failed to send email");
+    }
+  };
+  
+
   return (
     <section id="booka-table" className="bg-neutral-950 py-8 md:py-16">
       <div className="container mx-auto px-4" data-aos="fade-up">
@@ -16,98 +78,63 @@ const BookATableSection = () => {
           className="mx-auto max-w-2xl"
           data-aos="fade-up"
           data-aos-delay="100"
+          onSubmit={handleSubmit}
         >
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3">
-            <div className="mb-4">
-              <input
-                type="text"
-                name="name"
-                id="name"
-                placeholder="Your Name"
-                className="w-full rounded-md border py-2 px-3 text-gray-900"
-                data-rule="minlen:4"
-                data-msg="Please enter at least 4 chars"
-              />
-            </div>
+            {[
+              "name",
+              "email",
+              "phone",
+              "date",
+              "time",
+              "people",
+              "message",
+            ].map((field, index) => (
+              <div key={index} className="mb-4">
+                {field === "message" ? (
+                  <textarea
+                    className="w-full rounded-md border py-2 px-3 text-gray-900"
+                    name={field}
+                    rows={4}
+                    placeholder={field.charAt(0).toUpperCase() + field.slice(1)}
+                    value={formData[field as keyof FormData]}
+                    onChange={handleChange}
+                  />
+                ) : (
+                  <input
+                    type={
+                      field === "email"
+                        ? "email"
+                        : field === "people"
+                          ? "number"
+                          : field === "date"
+                            ? "date"
+                            : field === "time"
+                              ? "time"
+                              : "text"
+                    }
+                    name={field}
+                    id={field}
+                    placeholder={field.charAt(0).toUpperCase() + field.slice(1)}
+                    className="w-full rounded-md border py-2 px-3 text-gray-900"
+                    value={formData[field as keyof FormData]}
+                    onChange={handleChange}
+                  />
+                )}
+              </div>
+            ))}
 
-            <div className="mb-4">
-              <input
-                type="email"
-                name="email"
-                id="email"
-                placeholder="Your Email"
-                className="w-full rounded-md border py-2 px-3 text-gray-900"
-                data-rule="email"
-                data-msg="Please enter a valid email"
-              />
-            </div>
-
-            <div className="mb-4">
-              <input
-                type="text"
-                name="phone"
-                id="phone"
-                placeholder="Your Phone"
-                className="w-full rounded-md border py-2 px-3 text-gray-900"
-                data-rule="minlen:4"
-                data-msg="Please enter at least 4 chars"
-              />
-            </div>
-
-            <div className="mb-4">
-              <input
-                type="date"
-                name="date"
-                id="date"
-                placeholder="Date"
-                className="w-full rounded-md border py-2 px-3 text-gray-900"
-              />
-            </div>
-
-            <div className="mb-4">
-              <input
-                type="time"
-                name="time"
-                id="time"
-                placeholder="Time"
-                className="w-full rounded-md border py-2 px-3 text-gray-900"
-              />
-            </div>
-
-            <div className="mb-4">
-              <input
-                type="number"
-                name="people"
-                id="people"
-                placeholder="# of people"
-                className="w-full rounded-md border py-2 px-3 text-gray-900"
-                data-rule="minlen:1"
-                data-msg="Please enter at least 1 chars"
-              />
-            </div>
-
-            <div className="sm:col-span-3 mb-4">
-              <textarea
-                className="w-full rounded-md border py-2 px-3 text-gray-900"
-                name="message"
-                rows={4}
-                placeholder="Message"
-              />
-            </div>
-
-            <div className="sm:col-span-2">
+            {/* <div className="sm:col-span-2">
               <div className="loading">Loading</div>
-
-              <div className="error-message text-red-500"></div>
-
+              <div className="error-message text-red-500">Your booking request was not sent.</div>
               <div className="sent-message text-green-500">
                 Your booking request was sent. We will call back or send an
                 Email to confirm your reservation. Thank you!
               </div>
-            </div>
+            </div> */}
           </div>
 
-          <div className="mt-4 col-span-2 text-center ">
+          <div className="mt-4 col-span-2 text-center">
             <button
               type="submit"
               className="bg-yellow-500 text-white p-3 rounded-full w-full"

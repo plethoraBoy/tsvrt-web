@@ -22,7 +22,7 @@ export default function Home() {
       <MenuSection />
       <GallerySection />
 
-      <Feedback />
+      {/* <Feedback /> */}
       <BookATableSection />
       <ContactSection />
 
