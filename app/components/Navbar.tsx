@@ -80,7 +80,7 @@ const Navbar = () => {
               <a
                 key={`${item.name}-${index}`}
                 href={`#${item.href}`}
-                className={`text-sm transition-all duration-300 font-semibold hover:text-yellow-500   leading-6 ${isNavbarFixed ? "text-white" : "text-white-900"}`}
+                className={`text-sm transition-all duration-300 font-semibold hover:text-slate-950 hover:font-extrabold   leading-6 ${isNavbarFixed ? "text-white" : "text-white-900"}`}
                 // Add hover styles for gradient and text color
                 onClick={() => handleMenuItemClick(item.href)}
               >
@@ -91,7 +91,7 @@ const Navbar = () => {
           <div className="hidden lg:flex lg:flex-1 lg:justify-end">
             <a
               href="#contact-us"
-              className={`text-sm font-semibold leading-6 bg-gradient-to-r bg-white hover:text-yellow-400 bg-clip-text ${isNavbarFixed ? "text-white" : "text-white-900"}`}
+              className={`text-sm font-semibold leading-6 bg-gradient-to-r bg-white hover:text-slate-950 hover:font-extrabold bg-clip-text ${isNavbarFixed ? "text-white" : "text-white-900"}`}
             >
               Contact us<span aria-hidden="true">&rarr;</span>
             </a>
@@ -106,12 +106,12 @@ const Navbar = () => {
           <div className=" fixed inset-0 z-50" />
           <Dialog.Panel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-neutral-950 px-6  sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
             <div className="flex items-center justify-between">
-              {/* <a href="#hero" className="-m-1.5 p-1.5  ">
+              <div  className="-m-0.5 p-1.5  ">
                 <SkyView />
-              </a> */}
+              </div>
               <button
                 type="button"
-                className="-m-2.5 rounded-md p-2.5 text-white-700"
+                className="-m-2.5 rounded-md p-2.5 text-white-700 dark:text-white-800"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 <span className="sr-only">Close menu</span>

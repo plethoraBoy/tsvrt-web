@@ -79,11 +79,9 @@ const HeroSection: React.FC = () => {
             <div className={`${styles.paragraph} ${styles["primary"]} `}>
               Experience
               <FlipWords
-                className="font-semibold
- text-neutral-900 dark:text-neutral-800"
+                className="font-semibold text-neutral-900 dark:text-neutral-800"
                 words={restaurantWords}
-              />{" "}
-              <br />
+              />
               at new heights with breathtaking panoramic views of the city
               skyline.
             </div>

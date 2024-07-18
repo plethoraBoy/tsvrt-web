@@ -26,7 +26,7 @@
   height: auto;
 }
 #slider-main {
-  min-height: 700px;
+  min-height: 910px !important;
   background: radial-gradient(50% 50% at 50% 50%, #c7f6d0 0%, #7cb686 92.19%);
   display: flex;
   justify-content: space-between;
