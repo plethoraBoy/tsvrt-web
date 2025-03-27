@@ -21,14 +21,6 @@ const HeroSection: React.FC = () => {
     "/assets/img/menu/ROASTED CHICKEN STEAK WITH MUSHROOM ONION SAUCE.png",
   ];
 
-  const backgroundClasses = [
-    styles.bgGradient1,
-    styles.bgGradient2,
-    styles.bgGradient3,
-    styles.bgGradient4,
-    styles.bgGradient5,
-  ];
-
   useEffect(() => {
     const interval = setInterval(() => {
       setImageIndex((prevIndex) => (prevIndex + 1) % images.length);
@@ -46,10 +38,7 @@ const HeroSection: React.FC = () => {
   };
 
   return (
-    <section
-      id={styles["slider-main"]}
-      className="h-60rem relative overflow-hidden"
-    >
+    <section id={styles["slider-main"]} className="h-60rem relative overflow-hidden bg-black text-gold">
       <div className={`${styles.container} `}>
         <div className={styles.logo}>
           <a>
@@ -63,27 +52,14 @@ const HeroSection: React.FC = () => {
         </div>
         <div className={styles["slider-content-wrap"]}>
           <div className={styles["slider-content"]}>
-            <h2
-              className={`${styles["heading-style-2"]} 
-             `}
-            >
-              The SkyView Rooftop Multicuisine Restaurant{" "}
-            </h2>
-            {/* <div className="flex justify-center items-center px-4">
-              <div className="text-4xl mx-auto font-normal text-neutral-600 dark:text-neutral-400">
-                Build
-                <FlipWords words={words} /> <br />
-                websites with Aceternity UI
-              </div>
-            </div> */}
-            <div className={`${styles.paragraph} ${styles["primary"]} `}>
-              Experience
+            <h2 className={`${styles["heading-style-2"]}`}>The SkyView Rooftop Multicuisine Restaurant</h2>
+            <div className={`${styles.paragraph} ${styles["primary"]}`}> 
+              Experience 
               <FlipWords
-                className="font-semibold text-neutral-900 dark:text-neutral-800"
+                className="font-semibold text-gold"
                 words={restaurantWords}
-              />
-              at new heights with breathtaking panoramic views of the city
-              skyline.
+              /> 
+              at new heights with breathtaking panoramic views of the city skyline.
             </div>
           </div>
         </div>
@@ -100,11 +76,6 @@ const HeroSection: React.FC = () => {
           />
         ))}
       </div>
-      <div
-        id="backgrounds"
-        className={`${styles.slider} absolute inset-0 w-full h-full transition-all duration-1000 ease-in-out -z-10 
-`}
-      ></div>
     </section>
   );
 };
