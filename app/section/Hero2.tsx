@@ -102,7 +102,8 @@ const HeroSection: React.FC = () => {
       </div>
       <div
         id="backgrounds"
-        className={`${styles.slider} absolute inset-0 w-full h-full transition-all duration-1000 ease-in-out -z-10 ${backgroundClasses[imageIndex]}`}
+        className={`${styles.slider} absolute inset-0 w-full h-full transition-all duration-1000 ease-in-out -z-10 
+`}
       ></div>
     </section>
   );
