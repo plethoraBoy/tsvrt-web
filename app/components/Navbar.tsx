@@ -58,7 +58,7 @@ const Navbar = () => {
       className={`bg-[#020617]  ${isNavbarFixed ? "fixed top-0 inset-x-0 z-50" : ""}`}
     >
       <header className="absolute inset-x-0 top-0 z-50 ">
-        <nav className="flex items-center justify-between lg:px-8 px-6 p-6 backdrop-filter backdrop-blur-lg ">
+<nav className="flex items-center justify-between lg:px-8 px-6 p-6 bg-yellow-500">
           <div className="flex lg:flex-1">
             <a href="#" className="-m-1.5 p-1.5">
               <span className="sr-only"></span>
