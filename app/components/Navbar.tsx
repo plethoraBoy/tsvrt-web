@@ -80,7 +80,7 @@ const Navbar = () => {
               <a
                 key={`${item.name}-${index}`}
                 href={`#${item.href}`}
-                className={`text-sm transition-all duration-300 font-semibold hover:text-slate-950 hover:font-extrabold   leading-6 ${isNavbarFixed ? "text-white" : "text-white-900"}`}
+                className={`text-sm transition-all duration-300 font-semibold hover:text-yellow-950 hover:font-extrabold   leading-6 ${isNavbarFixed ? "text-white" : "text-white-900"}`}
                 // Add hover styles for gradient and text color
                 onClick={() => handleMenuItemClick(item.href)}
               >
