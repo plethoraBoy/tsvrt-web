@@ -1,4 +1,17 @@
+"use client";
+
+import { motion } from "framer-motion";
 import HoverImage from "../components/HoverImage";
+
+const revealVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: "easeOut" },
+  },
+};
+
 const MenuSection = () => {
   const imageList = [
     {
@@ -28,30 +41,45 @@ const MenuSection = () => {
     {
       heading: "Vegetarian",
       subheading: "Delight in our diverse and delicious vegetarian options",
-      imgSrc: "assets/img/menu/ROASTED CHICKEN STEAK WITH MUSHROOM ONION SAUCE.png",
+      imgSrc:
+        "assets/img/menu/ROASTED CHICKEN STEAK WITH MUSHROOM ONION SAUCE.png",
       href: "#",
     },
   ];
+
   return (
-    <section id="menu" className="bg-neutral-950 p-4 md:p-8 py-8 lg:py-12 pt-12">
+    <section
+      id="menu"
+      className="bg-neutral-950 p-4 md:p-8 py-8 lg:py-12 pt-12"
+    >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="Secondary-Font mb-6">
+        <div className="Secondary-Font mb-2">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold">Menu</h2>
-          <div className="text-base sm:text-lg lg:text-xl">Choose YOur Taste</div>
+          <div className="text-base sm:text-lg lg:text-xl">
+            Choose Your Taste
+          </div>
         </div>
       </div>
-      <div className="mx-auto max-w-5xl">
+      <div className="mx-auto max-w-5xl ">
         {imageList.map((item, index) => (
-          <HoverImage
+          <motion.div
             key={index}
-            heading={item.heading}
-            subheading={item.subheading}
-            imgSrc={item.imgSrc}
-            href={item.href}
-          />
+            variants={revealVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+          >
+            <HoverImage
+              heading={item.heading}
+              subheading={item.subheading}
+              imgSrc={item.imgSrc}
+              href={item.href}
+            />
+          </motion.div>
         ))}
       </div>
     </section>
   );
 };
+
 export default MenuSection;

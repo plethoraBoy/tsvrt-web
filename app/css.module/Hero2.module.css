@@ -1,14 +1,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;900&display=swap");
 
 .heading-style-2 {
-  color: gold;
+  color: rgb(0, 0, 0);
   font-size: 50px;
   font-weight: 900;
   line-height: 50px;
   margin-bottom: 40px;
 }
 .paragraph {
-  color: gold;
+  color: rgb(95, 95, 95);
   font-family: Montserrat;
   font-size: 18px;
   font-style: normal;
@@ -27,7 +27,7 @@
 }
 #slider-main {
   min-height: 910px !important;
-  background: black;
+  /* background: black; */
   display: flex;
   justify-content: space-between;
   align-items: center;

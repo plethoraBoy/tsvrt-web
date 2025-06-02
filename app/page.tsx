@@ -10,12 +10,16 @@ import MenuSection from "./section/Menu";
 import HeroSection from "./section/Hero2";
 import FeedbackMarquee from "./components/ui/Marquee-card";
 import Feedback from "./section/FeedBack";
+import SplitScreenMenu from "./components/Nav";
+import { BackgroundGradientAnimation } from "./components/ui/linear-gradient";
+import { ScrollToTop } from "./components/ui/ScrollToTop";
 
 export default function Home() {
   return (
     <main>
       {/* <HeroSection /> */}
       <HeroSection />
+       
       <AboutUsSection />
       <WhyUsSection />
       <EventsSection />
@@ -27,6 +31,8 @@ export default function Home() {
       <ContactSection />
 
       <Footer />
+      <ScrollToTop />
+
     </main>
   );
 }
