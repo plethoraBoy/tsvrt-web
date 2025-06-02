@@ -74,19 +74,7 @@ const HeroSection: React.FC = () => {
 
   return (
     <section className="relative w-full h-screen overflow-hidden">
-      {/* Background Video */}
-      <video
-        ref={videoRef}
-        src="/assets/video/TheSkyviewRooftop.mp4"
-        autoPlay
-        loop
-        muted
-        playsInline
-        className="absolute inset-0 w-full h-full object-cover"
-      />
-
-      {/* Mute toggle button */}
-      <button
+      {/* Background Video */} <button
         onClick={toggleMute}
         aria-label="Toggle Mute"
         className="
@@ -108,6 +96,18 @@ const HeroSection: React.FC = () => {
       >
         {isMuted ? <VolumeX size={24} /> : <Volume2 size={24} />}
       </button>
+      <video
+        ref={videoRef}
+        src="/assets/video/TheSkyviewRooftop.mp4"
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="absolute inset-0 w-full h-full object-cover"
+      />
+
+      {/* Mute toggle button */}
+     
 
       {/* Overlay */}
       <div className="absolute inset-0 z-10 bg-black/40 mix-blend-multiply pointer-events-none" />

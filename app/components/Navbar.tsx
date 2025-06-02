@@ -45,7 +45,7 @@ export default function Navbar() {
   };
 
   return (
-    <header className="fixed top-0 w-full z-50 bg-[radial-gradient(circle_at_center,#FFD133,#FBA61B,#ED8E1C)] px-6 py-4 flex justify-between items-center shadow-xl">
+    <header className="fixed  top-0 w-full z-50 bg-[radial-gradient(circle_at_center,#FFD133,#FBA61B,#ED8E1C)] px-6 py-4 flex justify-between items-center shadow-xl">
       {/* Logo */}
      <a href="#home" className="flex items-center gap-2">
      <Image
