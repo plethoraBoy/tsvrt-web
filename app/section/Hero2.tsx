@@ -1,14 +1,16 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { FlipWords } from "../components/ui/flip-words";
 import { motion, AnimatePresence } from "motion/react"
 import { BackgroundGradientAnimation } from "../components/ui/linear-gradient";
 import { Pointer } from "../components/magicui/pointer";
+import { Volume2, VolumeX } from "lucide-react"; // Optional: Lucide icons
 
 const HeroSection: React.FC = () => {
   const [isClient, setIsClient] = useState(false);
-
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [isMuted, setIsMuted] = useState(true);
   useEffect(() => {
     setIsClient(true);
   }, []);
@@ -36,6 +38,15 @@ const HeroSection: React.FC = () => {
       },
     },
   };
+
+
+
+  const toggleMute = () => {
+    if (videoRef.current) {
+      videoRef.current.muted = !isMuted;
+      setIsMuted(!isMuted);
+    }
+  }
 
   const logoVariants = {
     hidden: { scale: 0, opacity: 0 },
@@ -79,20 +90,27 @@ const HeroSection: React.FC = () => {
     },
   };
 
-  return (
-    <BackgroundGradientAnimation>
-      <section className="h-screen w-full absolute overflow-hidden">
-        {/* Background Video */}
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          className="absolute inset-0 w-full h-full object-cover z-0"
-        >
-          <source src="/assets/video/TheSkyviewRooftop.mp4" type="video/mp4" />
-        </video>
 
+  return (
+    // <BackgroundGradientAnimation>
+      <section className="h-screen w-full relative overflow-hidden">
+        {/* Background Video */}
+     <video
+        ref={videoRef}
+        src="/assets/video/TheSkyviewRooftop.mp4"
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="absolute inset-0 w-full h-full object-cover"
+      />
+<button
+        onClick={toggleMute}
+        className="absolute bottom-6 right-6 z-30 p-3 rounded-full bg-black/60 hover:bg-black/80 text-white transition"
+        aria-label="Toggle Mute"
+      >
+        {isMuted ? <VolumeX size={24} /> : <Volume2 size={24} />}
+      </button>
         {/* Overlay */}
         <div className="absolute inset-0 z-10 bg-black/40 mix-blend-multiply pointer-events-none" />
 
@@ -156,7 +174,7 @@ const HeroSection: React.FC = () => {
           <Pointer />
         </motion.div>
       </section>
-    </BackgroundGradientAnimation>
+    // </BackgroundGradientAnimation>
   );
 };
 
