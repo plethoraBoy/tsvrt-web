@@ -70,10 +70,10 @@ const HeroSection: React.FC = () => {
       opacity: 1,
       y: 0,
       transition: {
-        repeat: Infinity,
+        yoyo: Infinity,
         duration: 4,
         ease: "easeInOut",
-        repeatType: "reverse" as "reverse",
+        repeatType: "reverse",
         delay: 1,
       },
     },
@@ -143,11 +143,7 @@ const HeroSection: React.FC = () => {
           </motion.div>
 
           {/* Right half empty for split layout effect */}
-          <motion.div
-            variants={rightHalfVariants}
-            className="hidden lg:block w-1/2"
-            aria-hidden="true"
-          />
+         
         </motion.div>
 
         {/* Animated Pointer with subtle bob */}
