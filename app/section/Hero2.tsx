@@ -70,10 +70,10 @@ const HeroSection: React.FC = () => {
       opacity: 1,
       y: 0,
       transition: {
-        yoyo: Infinity,
+        repeat: Infinity,
         duration: 4,
         ease: "easeInOut",
-        repeatType: "reverse",
+        repeatType: "reverse" as "reverse",
         delay: 1,
       },
     },
