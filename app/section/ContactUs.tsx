@@ -68,7 +68,8 @@ const ContactSection: React.FC = () => {
             Contact
           </h2>
           <p className="text-white/80 text-lg">
-            Reach out to us with any questions or feedback. We're here to help!
+            Reach out to us with any questions or feedback. We&apos;re here to
+            help!
           </p>
         </motion.div>
 
@@ -81,7 +82,7 @@ const ContactSection: React.FC = () => {
         >
           <iframe
             className="w-full h-64 md:h-96"
-src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3885.5290633073746!2d80.1532915402157!3d13.128993087254305!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a5263ce30c1aded%3A0xb73ad5e084920af!2sThe%20SkyView%20Rooftop%20Multicuisine%20Restaurant!5e0!3m2!1sen!2sin!4v1748901270309!5m2!1sen!2sin"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3885.5290633073746!2d80.1532915402157!3d13.128993087254305!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a5263ce30c1aded%3A0xb73ad5e084920af!2sThe%20SkyView%20Rooftop%20Multicuisine%20Restaurant!5e0!3m2!1sen!2sin!4v1748901270309!5m2!1sen!2sin"
             // style={{ filter: "invert(90%)" }}
             allowFullScreen
             loading="lazy"
@@ -96,7 +97,10 @@ src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3885.5290633073746!2d
           whileInView="visible"
           viewport={{ once: true }}
         >
-          <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <form
+            onSubmit={handleSubmit}
+            className="grid grid-cols-1 md:grid-cols-2 gap-8"
+          >
             <input
               type="text"
               name="name"
