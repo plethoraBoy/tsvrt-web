@@ -131,11 +131,11 @@ const HeroSection: React.FC = () => {
             {/* Subheading with FlipWords inside */}
             <motion.p
               variants={subheadingVariants}
-              className="text-lg md:text-2xl text-white drop-shadow-md max-w-xl"
+              className="text-md md:text-lg text-white drop-shadow-md max-w-xl"
             >
               Experience{" "}
               <FlipWords
-                className="font-semibold text-white"
+                className="font-semibold text-yellow-400 drop-shadow-sm"
                 words={restaurantWords}
               />{" "}
               at new heights with breathtaking panoramic views of the city skyline.
