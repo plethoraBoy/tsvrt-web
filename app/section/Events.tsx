@@ -7,128 +7,76 @@ import Image from "next/image";
 import SwiperCore from "swiper";
 import { Navigation, Pagination } from "swiper/modules";
 import { motion } from "framer-motion";
+import { Card, Carousel } from "../components/ui/apple-cara";
 
 SwiperCore.use([Navigation, Pagination]);
 
-const events = [
+
+
+const DummyContent = ({ type }: { type: string }) => (
+  <div className="bg-[#F5F5F7] dark:bg-neutral-800 p-8 md:p-14 rounded-3xl mb-4">
+    <p className="text-neutral-600 dark:text-neutral-400 text-base md:text-2xl font-sans max-w-3xl mx-auto">
+      <span className="font-bold text-neutral-700 dark:text-neutral-200">
+        Celebrate with our exclusive {type} packages!
+      </span>{" "}
+      From themed decorations to delicious catering and fun entertainment,
+      we ensure every moment is unforgettable. Whether it’s an intimate
+      dinner or a grand celebration, we tailor it your way.
+    </p>
+    <Image
+      src="/assets/img/events/bd.jpg "
+      alt={`${type} celebration`}
+      height="500"
+      width="500"
+      className="md:w-1/2 md:h-1/2 h-full w-full mx-auto object-contain"
+    />
+  </div>
+);
+
+const data = [
   {
-    title: "Birthday Parties",
-    price: "Rs 999",
-    imgSrc: "/assets/img/events/event-birthday.jpg",
-    description:
-      "Celebrate your special day with our unforgettable Birthday Parties! Our expert team will ensure every moment is filled with joy and excitement. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    features: [
-      "Personalized party planning.",
-      "Delicious catering options.",
-      "Exciting entertainment for all ages.",
-    ],
+    category: "Events",
+    title: "Celebrate Your Birthday in Style",
+    src: "/assets/img/events/bd.jpg",
+    content: <DummyContent type="Birthday Party" />,
   },
   {
-    title: "Private Parties",
-    price: "Rs 999",
-    imgSrc: "/assets/img/events/event-private.jpg",
-    description:
-      "Host exclusive Private Parties tailored to your preferences! Whether it's an intimate gathering or a grand affair, we'll create the perfect atmosphere for your event. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    features: [
-      "Customized event spaces.",
-      "Premium catering and beverage services.",
-      "Dedicated event planning assistance.",
-    ],
+    category: "Private Event",
+    title: "Private Dinners",
+    src: "/assets/img/events/pe.jpg",
+    content: <DummyContent type="Private Party" />,
   },
   {
-    title: "Custom Parties",
-    price: "Rs 999",
-    imgSrc: "/assets/img/events/event-custom.jpg",
-    description:
-      "Design your dream event with our Custom Parties package! From themed decorations to unique entertainment options, we'll bring your vision to life. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    features: [
-      "Tailored event packages.",
-      "Creative theme and decor choices.",
-      "Flexible customization options.",
-    ],
+    category: "Custom",
+    title: "Design Your Dream Event",
+    src: "/assets/img/events/de.jpg",
+    content: <DummyContent type="Custom Party" />,
+  },
+  {
+    category: "Family Gathering",
+    title: "Make Memories With Loved Ones",
+    src: "/assets/img/events/fg.jpg",
+    content: <DummyContent type="Family Gathering" />,
+  },
+  {
+    category: "Romantic Dinner",
+    title: "Plan a Romantic Evening",
+    src: "/assets/img/events/rd.jpg",
+    content: <DummyContent type="Romantic Dinner" />,
   },
 ];
 
-const cardVariants = {
-  hidden: { opacity: 0, y: 40 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.7, ease: "easeOut" },
-  },
-  hover: {
-    scale: 1.03,
-    transition: { duration: 0.3, ease: "easeInOut" },
-  },
-};
-
-const EventsSection = () => {
-  const swiperRef = useRef(null);
+export function EventsSection() {
+  const cards = data.map((card, index) => (
+    <Card key={card.src} card={card} index={index} />
+  ));
 
   return (
-    <section id="events" className="bg-neutral-950 py-8 lg:py-12 pt-12">
-      <div
-        className="container mx-auto px-4 sm:px-6 lg:px-8 lg:mx-48"
-        data-aos="fade-up"
-      >
-        <div className="Secondary-Font mb-6">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold">Events</h2>
-          <div className="text-base sm:text-lg lg:text-xl">
-            Organize Your Events in our Restaurant
-          </div>
-        </div>
-
-        <Swiper
-          ref={swiperRef}
-          className="events-slider mt-12 lg:py-12 swiper-container"
-          data-aos="fade-up"
-          data-aos-delay="100"
-          navigation
-          pagination={{ clickable: true }}
-        >
-          {events.map((event, index) => (
-            <SwiperSlide key={index}>
-              <motion.div
-                className="flex flex-col items-center md:flex-row md:items-stretch lg:mx-4 xl:mx-8 cursor-pointer"
-                variants={cardVariants}
-                initial="hidden"
-                whileInView="visible"
-                whileHover="hover"
-                viewport={{ once: true, amount: 0.3 }}
-              >
-                <div className="mb-4 md:w-1/2 md:mr-4">
-                  <Image
-                    className="w-full md:h-full object-cover rounded-lg"
-                    src={event.imgSrc}
-                    alt={event.title}
-                    width={400}
-                    height={300}
-                    priority={index === 0} // prioritize first image load
-                  />
-                </div>
-                <div className="md:w-1/2 md:ml-4 text-white">
-                  <h2 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl mb-2">
-                    {event.title}
-                  </h2>
-                  <div className="price mb-2 text-lg font-semibold text-primary-400">
-                    {event.price}
-                  </div>
-                  <p className="text-sm sm:text-base lg:text-lg mb-4 italic leading-relaxed">
-                    {event.description}
-                  </p>
-                  <ul className="text-sm sm:text-base lg:text-lg list-disc list-inside space-y-1">
-                    {event.features.map((feature, i) => (
-                      <li key={i}>{feature}</li>
-                    ))}
-                  </ul>
-                </div>
-              </motion.div>
-            </SwiperSlide>
-          ))}
-        </Swiper>
-      </div>
-    </section>
+    <div className="w-full h-full py-20">
+      <h2 className="max-w-7xl pl-4 mx-auto text-xl md:text-5xl font-bold text-neutral-800 dark:text-neutral-200 font-sans">
+        Celebrate Your Special Moments
+      </h2>
+      <Carousel items={cards} />
+    </div>
   );
-};
-
-export default EventsSection;
+}

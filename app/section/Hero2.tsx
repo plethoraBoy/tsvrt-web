@@ -91,7 +91,7 @@ const HeroSection: React.FC = () => {
           pointer-events-auto
           shadow-lg
           backdrop-blur-sm
-          md:absolute md:bottom-6 md:right-6
+          md:absolute md:bottom-6 md:right-6 
         "
       >
         {isMuted ? <VolumeX size={24} /> : <Volume2 size={24} />}

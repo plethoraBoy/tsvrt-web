@@ -1,7 +1,6 @@
 import Image from "next/image";
 import AboutUsSection from "./section/AboutUs";
 import WhyUsSection from "./section/WhyUs";
-import EventsSection from "./section/Events";
 import GallerySection from "./section/Gallery";
 import ContactSection from "./section/ContactUs";
 import BookATableSection from "./section/BookaTable";
@@ -13,6 +12,7 @@ import Feedback from "./section/FeedBack";
 import SplitScreenMenu from "./components/Nav";
 import { BackgroundGradientAnimation } from "./components/ui/linear-gradient";
 import { ScrollToTop } from "./components/ui/ScrollToTop";
+import { EventsSection } from "./section/Events";
 
 export default function Home() {
   return (
@@ -23,6 +23,7 @@ export default function Home() {
       <AboutUsSection />
       <WhyUsSection />
       <EventsSection />
+      
       <MenuSection />
       <GallerySection />
 
