@@ -1,16 +1,14 @@
 "use client";
 import React, { useRef } from "react";
 import Image from "next/image";
-import { motion, AnimatePresence } from "motion/react"
-import { useInView } from "motion/react";
-import { Pointer } from "../components/magicui/pointer";
+import { motion, useInView, Variants } from "framer-motion";
 
 const AboutUsSection = () => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true });
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
 
-  // Variants for container fade and slide up
-  const containerVariants = {
+  // Animation variants with explicit typing
+  const containerVariants: Variants = {
     hidden: { opacity: 0, y: 50 },
     visible: {
       opacity: 1,
@@ -24,14 +22,16 @@ const AboutUsSection = () => {
     },
   };
 
-  // Variants for headings
-  const headingVariants = {
+  const headingVariants: Variants = {
     hidden: { opacity: 0, y: 30 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+    visible: { 
+      opacity: 1, 
+      y: 0, 
+      transition: { duration: 0.6, ease: "easeOut" } 
+    },
   };
 
-  // Variants for image
-  const imageVariants = {
+  const imageVariants: Variants = {
     hidden: { opacity: 0, scale: 0.95 },
     visible: {
       opacity: 1,
@@ -40,74 +40,149 @@ const AboutUsSection = () => {
     },
   };
 
-  // Variants for list items
-  const listItemVariants = {
+  const listItemVariants: Variants = {
     hidden: { opacity: 0, x: -20 },
-    visible: { opacity: 1, x: 0, transition: { duration: 0.4, ease: "easeOut" } },
+    visible: { 
+      opacity: 1, 
+      x: 0, 
+      transition: { duration: 0.4, ease: "easeOut" } 
+    },
   };
 
-  // Variants for paragraphs
-  const paragraphVariants = {
+  const paragraphVariants: Variants = {
     hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { duration: 1, ease: "easeOut" } },
+    visible: { 
+      opacity: 1, 
+      transition: { duration: 1, ease: "easeOut" } 
+    },
   };
+
+  // List items data
+  const features = [
+    "Enjoy a unique dining experience with panoramic cityscapes.",
+    "Delight in carefully crafted dishes that tantalize your taste buds.",
+    "Immerse yourself in the chic ambiance, creating unforgettable moments under the open sky.",
+    "Explore our diverse menu, featuring a fusion of international flavors, each dish telling a story of culinary mastery.",
+    "Elevate your evenings with live music, adding a symphony of melodies to the breathtaking skyline.",
+  ];
+
+  const tags = ["Fine Dining", "Panoramic Views", "Live Music", "Gourmet Cuisine"];
 
   return (
     <section
       id="about-us"
-      className="bg-neutral-950 md:pt-28"
+      className="relative py-16 md:py-24 overflow-hidden"
       ref={ref}
       aria-label="About us section"
+      style={{
+        backgroundImage: "url('/food-bg-4.jpg')",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
     >
+      {/* Background overlay */}
+      <div className="absolute inset-0 bg-black/70 z-0"></div>
+      
+      {/* Floating food elements */}
+      <motion.div 
+        className="absolute top-20 right-10 z-0"
+        animate={{ 
+          y: [0, -15, 0],
+          rotate: [0, 5, 0]
+        }}
+        transition={{ 
+          repeat: Infinity, 
+          duration: 8,
+          ease: "easeInOut" 
+        }}
+      >
+        <div className="w-16 h-16 rounded-full bg-[#ca8e24]/20 backdrop-blur-sm border border-white/10"></div>
+      </motion.div>
+      
+      <motion.div 
+        className="absolute bottom-40 left-12 z-0"
+        animate={{ 
+          y: [0, -10, 0],
+          rotate: [0, -5, 0]
+        }}
+        transition={{ 
+          repeat: Infinity, 
+          duration: 7,
+          ease: "easeInOut",
+          delay: 0.5
+        }}
+      >
+        <div className="w-12 h-12 rounded-full bg-[#d4a76a]/20 backdrop-blur-sm border border-white/10"></div>
+      </motion.div>
+
       <motion.div
-        className="container mx-auto px-4 sm:px-6 lg:px-8"
+        className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10"
         variants={containerVariants}
         initial="hidden"
         animate={isInView ? "visible" : "hidden"}
       >
-        <motion.div className="Secondary-Font mb-6">
-          <motion.h2
-            className="text-3xl sm:text-4xl lg:text-5xl font-bold"
+        <div className="text-center mb-16">
+          <motion.div
+            className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2 mb-6"
             variants={headingVariants}
           >
-            About us
+            <span className="text-[#d4a76a] text-sm font-medium">
+              Our Story
+            </span>
+          </motion.div>
+          <motion.h2
+            className="text-4xl sm:text-5xl font-bold text-white mb-4"
+            variants={headingVariants}
+          >
+            About Us
           </motion.h2>
           <motion.div
-            className="text-base sm:text-lg lg:text-xl"
+            className="text-xl text-[#d4a76a]"
             variants={headingVariants}
           >
-            Elevated Dining, Shared Memories.
+            Elevated Dining, Shared Memories
           </motion.div>
-        </motion.div>
+        </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 mx-8">
-          <motion.div variants={imageVariants}>
-            <Image
-              src="/assets/img/about/about.jpg"
-              alt="About Us"
-              width={500}
-              height={300}
-              className="rounded-md shadow-lg"
-            />
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <motion.div 
+            className="relative"
+            variants={imageVariants}
+          >
+            <div className="absolute -top-6 -left-6 w-16 h-16 md:w-24 md:h-24 bg-[#d4a76a]/10 backdrop-blur-sm rounded-3xl border border-white/20 z-0"></div>
+            <div className="absolute -bottom-6 -right-6 w-16 h-16 md:w-24 md:h-24 bg-[#ca8e24]/10 backdrop-blur-sm rounded-3xl border border-white/20 z-0"></div>
+            <div className="relative aspect-video lg:aspect-auto overflow-hidden rounded-3xl shadow-2xl border-4 border-white/20">
+              <Image
+                src="/assets/img/about/about.jpg"
+                alt="About Us"
+                width={600}
+                height={400}
+                className="w-full h-full object-cover"
+              />
+            </div>
           </motion.div>
 
-          <div>
+          <motion.div 
+            className="bg-white/10 backdrop-blur-lg border border-white/20 rounded-3xl p-6 md:p-8"
+            variants={containerVariants}
+          >
             <motion.h3
-              className="text-lg sm:text-xl lg:text-2xl font-bold mb-4"
+              className="text-2xl md:text-3xl font-bold text-white mb-6"
               variants={headingVariants}
             >
               Elevate Your Experience at SkyView Rooftop Restaurant
             </motion.h3>
+            
             <motion.div
-              className="italic text-sm sm:text-base lg:text-lg mb-4"
+              className="italic text-lg text-[#d4a76a] mb-6 border-l-4 border-[#ca8e24] pl-4"
               variants={paragraphVariants}
             >
-              Indulge in breathtaking views while savoring exquisite dishes,
-              offering a culinary journey above the ordinary.
+              "Indulge in breathtaking views while savoring exquisite dishes,
+              offering a culinary journey above the ordinary."
             </motion.div>
 
             <motion.ul
-              className="list-disc list-inside mb-4"
+              className="space-y-4 mb-8"
               initial="hidden"
               animate={isInView ? "visible" : "hidden"}
               variants={{
@@ -118,36 +193,32 @@ const AboutUsSection = () => {
                 },
               }}
             >
-              {[
-                "Enjoy a unique dining experience with panoramic cityscapes.",
-                "Delight in carefully crafted dishes that tantalize your taste buds.",
-                "Immerse yourself in the chic ambiance, creating unforgettable moments under the open sky.",
-                "Explore our diverse menu, featuring a fusion of international flavors, each dish telling a story of culinary mastery.",
-                "Elevate your evenings with live music, adding a symphony of melodies to the breathtaking skyline.",
-              ].map((item, idx) => (
+              {features.map((item, idx) => (
                 <motion.li
                   key={idx}
-                  className=""
+                  className="flex items-start"
                   variants={listItemVariants}
                 >
-                  {item}
+                  <div className="flex-shrink-0 mt-1.5 mr-3">
+                    <div className="w-2 h-2 rounded-full bg-[#d4a76a]"></div>
+                  </div>
+                  <span className="text-white/90">{item}</span>
                 </motion.li>
               ))}
             </motion.ul>
 
             <motion.div
-              className="text-sm sm:text-base lg:text-lg"
+              className="text-white/80 mb-6"
               variants={paragraphVariants}
             >
               At SkyView Rooftop Restaurant, we provide more than just a meal;
               we offer an elevated journey where each bite is accompanied by
               stunning views. Discover the perfect blend of culinary excellence
-              and an enchanting atmosphere that sets us apart. Elevate your
-              dining experience with us!
+              and an enchanting atmosphere that sets us apart.
             </motion.div>
 
             <motion.div
-              className="text-sm sm:text-base lg:text-lg mt-4"
+              className="text-white/80"
               variants={paragraphVariants}
             >
               Join us for special events and themed nights, creating memorable
@@ -155,33 +226,49 @@ const AboutUsSection = () => {
               ensures impeccable service, making every visit a celebration of
               flavors and sophistication.
             </motion.div>
-          </div>
+
+            <motion.div 
+              className="mt-8 flex flex-wrap gap-3"
+              variants={paragraphVariants}
+            >
+              {tags.map((tag, i) => (
+                <span 
+                  key={i} 
+                  className="px-3 py-1.5 text-sm md:px-4 md:py-2 bg-white/5 backdrop-blur-sm rounded-full text-white border border-white/20"
+                >
+                  {tag}
+                </span>
+              ))}
+            </motion.div>
+          </motion.div>
         </div>
       </motion.div>
 
-      {/* Animated Pointer */}
+      {/* Animated floating element */}
       <motion.div
         initial={{ y: 0 }}
         animate={{ y: [0, -15, 0] }}
         transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
-        className="relative z-20 flex justify-center mt-10"
+        className="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-20"
       >
-        <Pointer>
+        <div className="w-10 h-10 rounded-full bg-[#d4a76a]/20 backdrop-blur-sm border border-white/20 flex items-center justify-center">
           <svg
-            width="30"
-            height="30"
+            width="20"
+            height="20"
             viewBox="0 0 24 24"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
+            className="text-[#d4a76a]"
           >
             <path
-              d="M17.2607 12.4008C19.3774 11.2626 20.4357 10.6935 20.7035 10.0084C20.9359 9.41393 20.8705 8.74423 20.5276 8.20587C20.1324 7.58551 18.984 7.23176 16.6872 6.52425L8.00612 3.85014C6.06819 3.25318 5.09923 2.95471 4.45846 3.19669C3.90068 3.40733 3.46597 3.85584 3.27285 4.41993C3.051 5.06794 3.3796 6.02711 4.03681 7.94545L6.94793 16.4429C7.75632 18.8025 8.16052 19.9824 8.80519 20.3574C9.36428 20.6826 10.0461 20.7174 10.6354 20.4507C11.3149 20.1432 11.837 19.0106 12.8813 16.7454L13.6528 15.0719C13.819 14.7113 13.9021 14.531 14.0159 14.3736C14.1168 14.2338 14.2354 14.1078 14.3686 13.9984C14.5188 13.8752 14.6936 13.7812 15.0433 13.5932L17.2607 12.4008Z"
-              fill="#1E90FF"
+              d="M12 5V19M12 5L6 11M12 5L18 11"
+              stroke="currentColor"
+              strokeWidth="2"
               strokeLinecap="round"
               strokeLinejoin="round"
             />
           </svg>
-        </Pointer>
+        </div>
       </motion.div>
     </section>
   );

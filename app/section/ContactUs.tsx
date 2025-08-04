@@ -2,9 +2,6 @@
 import React, { useState, useEffect, FormEvent, ChangeEvent } from "react";
 import { motion } from "framer-motion";
 
-// Optional: Import custom font using Tailwind if configured
-// or add <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet"> in your HTML head
-
 const fadeUpVariant = {
   hidden: { opacity: 0, y: 40 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.8 } },
@@ -20,10 +17,6 @@ const ContactSection: React.FC = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSent, setIsSent] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
-
-  // useEffect(() => {
-  //   AOS.init({ duration: 800, once: true });
-  // }, []);
 
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -50,13 +43,36 @@ const ContactSection: React.FC = () => {
   return (
     <section
       id="contact-us"
-      className="bg-neutral-950 py-16 relative overflow-hidden font-inter"
+      className="py-16 relative overflow-hidden font-inter"
     >
-      {/* Yellow blurred circles */}
-      <div className="absolute top-0 right-0 w-72 h-72 bg-yellow-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse"></div>
-      <div className="absolute bottom-0 left-0 w-72 h-72 bg-yellow-400 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse"></div>
+      {/* Food-themed background elements */}
+      <div 
+        className="absolute inset-0 z-0"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 32c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23d4a76a' fill-opacity='0.03' fill-rule='evenodd'/%3E%3C/svg%3E")`,
+          backgroundSize: "300px 300px"
+        }}
+      />
+      
+      {/* Subtle food pattern */}
+      <div className="absolute inset-0 z-0 opacity-5">
+        <div 
+          className="absolute top-1/4 left-1/4 w-48 h-48 rounded-full border-2 border-[#d4a76a] blur-xl"
+          style={{ 
+            background: "radial-gradient(circle, #ca8e24 0%, transparent 70%)",
+            transform: "rotate(15deg)"
+          }} 
+        />
+        <div 
+          className="absolute bottom-1/4 right-1/4 w-64 h-64 rounded-full border-2 border-[#d4a76a] blur-xl"
+          style={{ 
+            background: "radial-gradient(circle, #d4a76a 0%, transparent 70%)",
+            transform: "rotate(-10deg)"
+          }} 
+        />
+      </div>
 
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
           className="mb-12 text-center lg:text-left max-w-3xl mx-auto lg:mx-0"
           variants={fadeUpVariant}
@@ -64,17 +80,16 @@ const ContactSection: React.FC = () => {
           whileInView="visible"
           viewport={{ once: true }}
         >
-          <h2 className="text-4xl font-bold bg-gradient-to-r from-yellow-300 via-yellow-500 to-yellow-300 bg-clip-text text-transparent mb-2">
-            Contact
+          <h2 className="text-4xl font-bold bg-gradient-to-r from-[#d4a76a] via-[#ca8e24] to-[#d4a76a] bg-clip-text text-transparent mb-2">
+            Get in Touch
           </h2>
-          <p className="text-white/80 text-lg">
-            Reach out to us with any questions or feedback. We&apos;re here to
-            help!
+          <p className="text-gray-300 text-lg">
+            Have a question about our menu or reservations? We'd love to hear from you!
           </p>
         </motion.div>
 
         <motion.div
-          className="mb-12 max-w-4xl mx-auto rounded-3xl overflow-hidden shadow-2xl border border-white/20"
+          className="mb-12 max-w-4xl mx-auto rounded-3xl overflow-hidden shadow-2xl border border-[#d4a76a]/20"
           variants={fadeUpVariant}
           initial="hidden"
           whileInView="visible"
@@ -83,15 +98,14 @@ const ContactSection: React.FC = () => {
           <iframe
             className="w-full h-64 md:h-96"
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3885.5290633073746!2d80.1532915402157!3d13.128993087254305!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a5263ce30c1aded%3A0xb73ad5e084920af!2sThe%20SkyView%20Rooftop%20Multicuisine%20Restaurant!5e0!3m2!1sen!2sin!4v1748901270309!5m2!1sen!2sin"
-            // style={{ filter: "invert(90%)" }}
             allowFullScreen
             loading="lazy"
-            title="Location Map"
+            title="Restaurant Location"
           />
         </motion.div>
 
         <motion.div
-          className="max-w-4xl mx-auto bg-white/10 backdrop-blur-lg rounded-3xl p-10 border border-white/20 shadow-2xl"
+          className="max-w-4xl mx-auto bg-white/5 backdrop-blur-xl rounded-3xl p-8 md:p-10 border border-[#d4a76a]/20 shadow-xl"
           variants={fadeUpVariant}
           initial="hidden"
           whileInView="visible"
@@ -99,7 +113,7 @@ const ContactSection: React.FC = () => {
         >
           <form
             onSubmit={handleSubmit}
-            className="grid grid-cols-1 md:grid-cols-2 gap-8"
+            className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8"
           >
             <input
               type="text"
@@ -108,7 +122,7 @@ const ContactSection: React.FC = () => {
               value={formData.name}
               onChange={handleChange}
               required
-              className="w-full p-4 bg-white/5 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-500/60 transition"
+              className="w-full p-4 bg-white/5 border border-[#d4a76a]/20 rounded-full text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#d4a76a]/40 transition"
             />
             <input
               type="email"
@@ -117,7 +131,7 @@ const ContactSection: React.FC = () => {
               value={formData.email}
               onChange={handleChange}
               required
-              className="w-full p-4 bg-white/5 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-500/60 transition"
+              className="w-full p-4 bg-white/5 border border-[#d4a76a]/20 rounded-full text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#d4a76a]/40 transition"
             />
             <input
               type="text"
@@ -126,28 +140,28 @@ const ContactSection: React.FC = () => {
               value={formData.subject}
               onChange={handleChange}
               required
-              className="md:col-span-2 w-full p-4 bg-white/5 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-500/60 transition"
+              className="md:col-span-2 w-full p-4 bg-white/5 border border-[#d4a76a]/20 rounded-full text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#d4a76a]/40 transition"
             />
             <textarea
               name="message"
-              placeholder="Message"
-              rows={5}
+              placeholder="Your message (e.g., reservation request, special dietary needs)"
+              rows={4}
               value={formData.message}
               onChange={handleChange}
               required
-              className="md:col-span-2 w-full p-4 bg-white/5 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-500/60 resize-none transition"
+              className="md:col-span-2 w-full p-4 bg-white/5 border border-[#d4a76a]/20 rounded-3xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#d4a76a]/40 resize-none transition min-h-[120px]"
             />
-            <div className="md:col-span-2 text-center text-yellow-400 min-h-[24px]">
-              {isSubmitting && <span>Sending...</span>}
-              {isSent && <span>Your message has been sent. Thank you!</span>}
-              {errorMsg && <span className="text-red-400">{errorMsg}</span>}
+            <div className="md:col-span-2 text-center text-[#d4a76a] min-h-[24px] text-sm md:text-base">
+              {isSubmitting && <span>Preparing your message...</span>}
+              {isSent && <span className="text-[#ca8e24]">Your message has been sent! We'll respond within 24 hours.</span>}
+              {errorMsg && <span className="text-rose-400">{errorMsg}</span>}
             </div>
             <button
               type="submit"
               disabled={isSubmitting}
-              className="md:col-span-2 bg-gradient-to-r from-yellow-300 via-yellow-500 to-yellow-300 hover:from-yellow-400 hover:via-yellow-600 hover:to-yellow-400 text-yellow-900 font-bold rounded-xl py-4 w-full transition"
+              className="md:col-span-2 bg-gradient-to-r from-[#d4a76a] to-[#ca8e24] hover:from-[#e0b88a] hover:to-[#c69a2b] text-white font-semibold rounded-full py-4 w-full transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
             >
-              Send Message
+              {isSubmitting ? "Sending..." : "Send Message"}
             </button>
           </form>
         </motion.div>

@@ -56,7 +56,7 @@ const GallerySection = () => {
       opacity: 1,
       scale: 1,
       y: 0,
-      transition: { duration: 0.5, ease: "easeOut" },
+      transition: { duration: 0.5, ease: "easeOut" } as any,
     },
   };
 
@@ -88,7 +88,7 @@ const GallerySection = () => {
                       alt={item.alt}
                       width={600}
                       height={400}
-                      className="w-full h-auto object-cover rounded-lg hover:scale-105 transition-transform duration-300"
+                      className="w-full h-auto object-cover rounded-3xl hover:scale-105 transition-transform duration-300"
                     />
                   </div>
                 )}
@@ -101,7 +101,7 @@ const GallerySection = () => {
                       autoPlay
                       controls
                       preload="auto"
-                      className="rounded-lg"
+                      className="rounded-3xl"
                     >
                       <source src={item.src} type="video/mp4" />
                     </video>
@@ -135,7 +135,7 @@ const GallerySection = () => {
                 alt="Zoomed Gallery"
                 width={1000}
                 height={800}
-                className="rounded-lg w-full h-auto"
+                className="rounded-3xl w-full h-auto"
               />
             </motion.div>
           </motion.div>

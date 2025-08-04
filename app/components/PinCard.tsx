@@ -17,7 +17,7 @@ export function AnimatedPin() {
           </div>
           <div className="mt-4">
             <iframe
-              className="flex flex-1 w-full rounded-lg h-[15rem]"
+              className="flex flex-1 w-full rounded-3xl h-[15rem]"
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3885.52906325203!2d80.15367241482367!3d13.128993090752761!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a5263ce30c1aded%3A0xb73ad5e084920af!2sThe%20SkyView%20Rooftop%20Multicuisine%20Restaurant!5e0!3m2!1sen!2sin"
               frameBorder="0"
               style={{ filter: "invert(90%)" }}

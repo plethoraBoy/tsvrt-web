@@ -8,7 +8,6 @@ import FloatingButton from "./components/FloatingButton";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/react";
 import Navbar from "./components/Navbar";
-import SplitScreenMenu from "./components/Nav";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -35,12 +34,15 @@ export default function RootLayout({
           rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
         />
-        <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" async></script>
+        <script
+          src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"
+          async
+        ></script>
       </head>
       <body>
         {/* <FloatingButton /> */}
         {/* <Example /> */}
-        <Navbar/>
+        <Navbar />
         <Providers>{children}</Providers>
         <SpeedInsights />
         <Analytics />

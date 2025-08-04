@@ -59,7 +59,7 @@ const ReviewCard = ({
     <section className="bg-[#020617]">
       <figure
         className={cn(
-          "bg-[#0a0a0a] relative w-64 cursor-pointer overflow-hidden rounded-xl border p-4",
+          "bg-[#0a0a0a] relative w-64 cursor-pointer overflow-hidden rounded-3xl border p-4",
           // light styles
           "border-gray-950/[.1] bg-gray-950/[.01] hover:bg-gray-950/[.05]",
           // dark styles
@@ -89,7 +89,7 @@ const ReviewCard = ({
 
 const FeedbackMarquee = () => {
   return (
-    <div className="relative flex h-full w-full flex-col items-center justify-center overflow-hidden rounded-lg border bg-background py-20 md:shadow-xl">
+    <div className="relative flex h-full w-full flex-col items-center justify-center overflow-hidden rounded-3xl border bg-background py-20 md:shadow-xl">
       <Marquee pauseOnHover className="[--duration:20s]">
         {firstRow.map((review) => (
           <ReviewCard key={review.username} {...review} />

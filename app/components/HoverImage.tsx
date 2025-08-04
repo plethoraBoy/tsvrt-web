@@ -47,17 +47,17 @@ const HoverImage = ({ heading, imgSrc, subheading, href }: LinkProps) => {
       onMouseMove={handleMouseMove}
       initial="initial"
       whileHover="whileHover"
-      className="group relative flex items-center justify-between border-b-2 border-neutral-700 py-4 transition-colors duration-500 hover:border-neutral-50 md:py-8"
+      className="group relative flex items-center justify-between border-b-2 border-neutral-700 py-4 mx-2 transition-colors duration-500 hover:border-neutral-50 md:py-8"
     >
       <div>
         <motion.span
           variants={{
             initial: { x: 0 },
-            whileHover: { x: -16 },
+            whileHover: { x: -12 },
           }}
           transition={{
             type: "spring",
-            staggerChildren: 0.075,
+            staggerChildren: 0.000075,
             delayChildren: 0.25,
           }}
           className="relative z-10 block text-4xl font-bold text-neutral-500 transition-colors duration-500 group-hover:text-neutral-50 md:text-6xl"
@@ -76,7 +76,7 @@ const HoverImage = ({ heading, imgSrc, subheading, href }: LinkProps) => {
             </motion.span>
           ))}
         </motion.span>
-        <span className="relative z-10 mt-2 block text-base text-neutral-500 transition-colors duration-500 group-hover:text-neutral-50">
+        <span className="relative z-10 mt-2 block text-sm text-neutral-500 transition-colors duration-500 group-hover:text-neutral-50">
           {subheading}
         </span>
       </div>
@@ -94,7 +94,7 @@ const HoverImage = ({ heading, imgSrc, subheading, href }: LinkProps) => {
         }}
         transition={{ type: "spring" }}
         src={imgSrc}
-        className="absolute z-0 h-24 w-32 rounded-lg object-cover md:h-48 md:w-64"
+        className="absolute z-0 h-24 w-32 rounded-3xl object-cover md:h-48 md:w-64"
         alt={`Image representing a link for ${heading}`}
       />
 

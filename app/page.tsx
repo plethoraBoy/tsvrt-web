@@ -6,24 +6,25 @@ import ContactSection from "./section/ContactUs";
 import BookATableSection from "./section/BookaTable";
 import Footer from "./section/Footer";
 import MenuSection from "./section/Menu";
-import HeroSection from "./section/Hero2";
+import HeroSection from "./section/Hero";
 import FeedbackMarquee from "./components/ui/Marquee-card";
 import Feedback from "./section/FeedBack";
-import SplitScreenMenu from "./components/Nav";
 import { BackgroundGradientAnimation } from "./components/ui/linear-gradient";
 import { ScrollToTop } from "./components/ui/ScrollToTop";
 import { EventsSection } from "./section/Events";
+import BanquetSection from "./section/Banquet";
 
 export default function Home() {
   return (
     <main>
       {/* <HeroSection /> */}
       <HeroSection />
-       
       <AboutUsSection />
+            <BanquetSection />
+
       <WhyUsSection />
       <EventsSection />
-      
+
       <MenuSection />
       <GallerySection />
 
@@ -33,7 +34,6 @@ export default function Home() {
 
       <Footer />
       <ScrollToTop />
-
     </main>
   );
 }
