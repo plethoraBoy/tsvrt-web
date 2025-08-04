@@ -4,7 +4,6 @@ import { FiSun, FiMoon } from "react-icons/fi";
 import { Button } from "@nextui-org/react";
 
 const FloatingButton: React.FC = () => {
-
   return (
     <Button
       className="fixed bottom-6 right-6 p-3 rounded-full"

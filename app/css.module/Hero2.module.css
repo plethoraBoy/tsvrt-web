@@ -60,7 +60,11 @@
   max-width: 525px;
   height: 100%;
 }
-.bgGradient1, .bgGradient2, .bgGradient3, .bgGradient4, .bgGradient5 {
+.bgGradient1,
+.bgGradient2,
+.bgGradient3,
+.bgGradient4,
+.bgGradient5 {
   background: black !important;
 }
 /* content */

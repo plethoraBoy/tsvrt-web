@@ -30,7 +30,7 @@ const BanquetSection = () => {
 
       const days = Math.floor(diff / (1000 * 60 * 60 * 24));
       const hours = Math.floor(
-        (diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+        (diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60),
       );
       const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
       const seconds = Math.floor((diff % (1000 * 60)) / 1000);
@@ -132,7 +132,7 @@ const BanquetSection = () => {
                 {/* Dark overlay for readability */}
                 <div className="absolute inset-0 bg-black/70 z-10"></div>
               </div>
-              
+
               {/* Content Card */}
               <div className="relative bg-white/5 backdrop-blur-lg border border-white/10 rounded-3xl p-8 shadow-xl z-20">
                 <div className="inline-block bg-[#d4a76a]/10 backdrop-blur-sm text-[#d4a76a] text-sm font-medium px-4 py-2 rounded-full mb-6">
@@ -140,12 +140,13 @@ const BanquetSection = () => {
                 </div>
 
                 <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
-                  The <span className="text-[#d4a76a]">SkyView Banquet Hall</span>
+                  The{" "}
+                  <span className="text-[#d4a76a]">SkyView Banquet Hall</span>
                 </h2>
 
                 <p className="text-white/80 mb-8 text-lg leading-relaxed">
-                  Elevate your special events in our luxurious new banquet space.
-                  Featuring panoramic city views, premium amenities, and
+                  Elevate your special events in our luxurious new banquet
+                  space. Featuring panoramic city views, premium amenities, and
                   customizable event packages designed for unforgettable
                   celebrations.
                 </p>

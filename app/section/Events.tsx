@@ -11,17 +11,15 @@ import { Card, Carousel } from "../components/ui/apple-cara";
 
 SwiperCore.use([Navigation, Pagination]);
 
-
-
 const DummyContent = ({ type }: { type: string }) => (
   <div className="bg-[#F5F5F7] dark:bg-neutral-800 p-8 md:p-14 rounded-3xl mb-4">
     <p className="text-neutral-600 dark:text-neutral-400 text-base md:text-2xl font-sans max-w-3xl mx-auto">
       <span className="font-bold text-neutral-700 dark:text-neutral-200">
         Celebrate with our exclusive {type} packages!
       </span>{" "}
-      From themed decorations to delicious catering and fun entertainment,
-      we ensure every moment is unforgettable. Whether it’s an intimate
-      dinner or a grand celebration, we tailor it your way.
+      From themed decorations to delicious catering and fun entertainment, we
+      ensure every moment is unforgettable. Whether it’s an intimate dinner or a
+      grand celebration, we tailor it your way.
     </p>
     <Image
       src="/assets/img/events/bd.jpg "

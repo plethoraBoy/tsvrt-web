@@ -64,7 +64,9 @@ const GallerySection = () => {
     <section id="gallery-us" className="bg-neutral-950 py-8 lg:py-12">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="Secondary-Font mb-6">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold">Gallery</h2>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold">
+            Gallery
+          </h2>
           <div className="text-base sm:text-lg lg:text-xl">
             Some photos and a video from Our Restaurant
           </div>
@@ -133,8 +135,8 @@ const GallerySection = () => {
               <Image
                 src={zoomedImage}
                 alt="Zoomed Gallery"
-                width={1000}
-                height={800}
+                width={600}
+                height={700}
                 className="rounded-3xl w-full h-auto"
               />
             </motion.div>

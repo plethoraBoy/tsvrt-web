@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React from "react";
 import { motion } from "motion/react";
 import { IoLeafOutline } from "react-icons/io5";
@@ -11,8 +11,8 @@ const fadeUpVariant = {
   visible: (i: number) => ({
     opacity: 1,
     y: 0,
-    transition: { delay: i * 0.1, duration: 0.5 }
-  })
+    transition: { delay: i * 0.1, duration: 0.5 },
+  }),
 };
 
 const WhyUsSection: React.FC = () => {
@@ -20,41 +20,42 @@ const WhyUsSection: React.FC = () => {
     {
       no: "01",
       title: "Fresh Ingredients",
-      description: "Savor dishes made with farm-fresh produce and premium ingredients sourced daily.",
+      description:
+        "Savor dishes made with farm-fresh produce and premium ingredients sourced daily.",
       icon: GiCoffeeCup,
-      gradient: "from-[#d4a76a] to-[#ca8e24]"
+      gradient: "from-[#d4a76a] to-[#ca8e24]",
     },
     {
       no: "02",
       title: "Healthy Choices",
-      description: "Nutritious options crafted with wholesome ingredients for balanced dining.",
+      description:
+        "Nutritious options crafted with wholesome ingredients for balanced dining.",
       icon: IoLeafOutline,
-      gradient: "from-emerald-500 to-teal-600"
+      gradient: "from-emerald-500 to-teal-600",
     },
     {
       no: "03",
       title: "Live Entertainment",
-      description: "Vibrant evenings with live music creating a lively, enjoyable atmosphere.",
+      description:
+        "Vibrant evenings with live music creating a lively, enjoyable atmosphere.",
       icon: SlMusicTone,
-      gradient: "from-rose-500 to-purple-600"
+      gradient: "from-rose-500 to-purple-600",
     },
     {
       no: "04",
       title: "Friendly Atmosphere",
-      description: "Warm hospitality in an inviting space where every guest feels special.",
+      description:
+        "Warm hospitality in an inviting space where every guest feels special.",
       icon: FaRegFaceSmileBeam,
-      gradient: "from-amber-400 to-#ca8e24"
-    }
+      gradient: "from-[#d4a76a] to-#ca8e24",
+    },
   ];
 
   return (
-    <section 
-      id="why-us" 
-      className="py-16 lg:py-24 relative overflow-hidden"
-    >
+    <section id="why-us" className="py-16 lg:py-24 relative overflow-hidden">
       {/* Food-themed liquid background */}
       <div className="absolute inset-0 z-0">
-        <div 
+        <div
           className="absolute w-full h-full"
           style={{
             background: `
@@ -65,23 +66,23 @@ const WhyUsSection: React.FC = () => {
             backgroundImage: `
               url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23d4a76a' fill-opacity='0.02'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2v-4h4v-2h-4z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")
             `,
-            backgroundSize: "300px 300px"
+            backgroundSize: "300px 300px",
           }}
         />
         {/* Coffee stain effect */}
-        <div 
+        <div
           className="absolute bottom-0 left-0 w-64 h-64 rounded-full blur-3xl opacity-5"
-          style={{ 
+          style={{
             background: "radial-gradient(circle, #d4a76a 0%, transparent 70%)",
-            transform: "rotate(15deg)"
-          }} 
+            transform: "rotate(15deg)",
+          }}
         />
-        <div 
+        <div
           className="absolute top-0 right-0 w-80 h-80 rounded-full blur-3xl opacity-5"
-          style={{ 
+          style={{
             background: "radial-gradient(circle, #ca8e24 0%, transparent 70%)",
-            transform: "rotate(-10deg)"
-          }} 
+            transform: "rotate(-10deg)",
+          }}
         />
       </div>
 
@@ -92,7 +93,7 @@ const WhyUsSection: React.FC = () => {
           viewport={{ once: true }}
           className="mb-12 text-center"
         >
-          <motion.h2 
+          <motion.h2
             variants={fadeUpVariant}
             custom={0}
             className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#d4a76a] to-[#ca8e24] mb-4"
@@ -104,7 +105,8 @@ const WhyUsSection: React.FC = () => {
             custom={0.1}
             className="text-xl text-gray-300 max-w-3xl mx-auto"
           >
-            Experience the perfect blend of exceptional cuisine, warm hospitality, and memorable moments
+            Experience the perfect blend of exceptional cuisine, warm
+            hospitality, and memorable moments
           </motion.p>
         </motion.div>
 
@@ -125,14 +127,16 @@ const WhyUsSection: React.FC = () => {
               <div className="relative h-full bg-white/5 backdrop-blur-xl rounded-3xl border border-[#d4a76a]/10 p-6 overflow-hidden transition-all duration-500 group-hover:border-[#d4a76a]/20 group-hover:shadow-[0_0_30px_rgba(212,167,106,0.15)]">
                 {/* Liquid wave effect */}
                 <div className="absolute -bottom-2 left-0 w-full h-2 bg-gradient-to-r from-transparent via-[#d4a76a]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                
+
                 {/* Number badge with liquid effect */}
                 <div className="absolute -top-3 -right-3 w-10 h-10 rounded-full flex items-center justify-center bg-gradient-to-br from-[#d4a76a] to-[#ca8e24] text-white font-bold text-sm transform transition-transform duration-300 group-hover:scale-110">
                   {feature.no}
                 </div>
-                
+
                 <div className="flex items-start">
-                  <div className={`p-3 rounded-3xl bg-gradient-to-br ${feature.gradient} bg-opacity-10 mb-4 transition-transform duration-300 group-hover:scale-110`}>
+                  <div
+                    className={`p-3 rounded-3xl bg-gradient-to-br ${feature.gradient} bg-opacity-10 mb-4 transition-transform duration-300 group-hover:scale-110`}
+                  >
                     <feature.icon className="w-6 h-6 text-[#d4a76a] group-hover:text-white transition-colors duration-300" />
                   </div>
                   <div className="ml-4">
@@ -144,16 +148,16 @@ const WhyUsSection: React.FC = () => {
                     </p>
                   </div>
                 </div>
-                
+
                 {/* Liquid highlight */}
                 <div className="absolute top-0 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-[#d4a76a] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </div>
             </motion.div>
           ))}
         </div>
-        
+
         {/* Liquid divider */}
-        <motion.div 
+        <motion.div
           initial={{ width: 0 }}
           whileInView={{ width: "60%" }}
           viewport={{ once: true }}

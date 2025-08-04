@@ -15,7 +15,7 @@ export async function POST(req: NextRequest) {
   const formData: FormData = await req.json();
 
   const transporter = nodemailer.createTransport({
-    service: 'gmail',
+    service: "gmail",
     host: "smtp.gmail.com",
     port: 465,
     secure: true, // Use TLS
@@ -51,7 +51,7 @@ export async function POST(req: NextRequest) {
           "Access-Control-Allow-Origin": "http://localhost:3000",
           "Access-Control-Allow-Methods": "POST",
         },
-      }
+      },
     );
   } catch (error: unknown) {
     console.error("Error sending email:", error);
@@ -69,7 +69,7 @@ export async function POST(req: NextRequest) {
           "Access-Control-Allow-Origin": "http://localhost:3000",
           "Access-Control-Allow-Methods": "POST",
         },
-      }
+      },
     );
   }
 }
@@ -84,6 +84,6 @@ export async function OPTIONS(req: NextRequest) {
         "Access-Control-Allow-Methods": "POST",
         "Access-Control-Allow-Headers": "Content-Type",
       },
-    }
+    },
   );
 }

@@ -28,7 +28,7 @@ export default function Marquee({
           "flex-row": !vertical,
           "flex-col": vertical,
         },
-        className="bg-[#020617]"
+        (className = "bg-[#020617]"),
       )}
     >
       {Array(repeat)

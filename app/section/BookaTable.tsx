@@ -1,17 +1,17 @@
-'use client';
+"use client";
 
-import { Dialog } from '@headlessui/react';
-import { Menu, X } from 'lucide-react';
-import { AnimatePresence, motion } from 'framer-motion';
-import { useState, useEffect } from 'react';
+import { Dialog } from "@headlessui/react";
+import { Menu, X } from "lucide-react";
+import { AnimatePresence, motion } from "framer-motion";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 
 const menuItems = [
-  { name: 'Home', href: '#home' },
-  { name: 'Menu', href: '#menu' },
-  { name: 'About', href: '#about' },
-  { name: 'Why Us', href: '#why-us' },
-  { name: 'Contact', href: '#contact' },
+  { name: "Home", href: "#home" },
+  { name: "Menu", href: "#menu" },
+  { name: "About", href: "#about" },
+  { name: "Why Us", href: "#why-us" },
+  { name: "Contact", href: "#contact" },
 ];
 
 export default function Navbar() {
@@ -23,8 +23,8 @@ export default function Navbar() {
       setScrolled(window.scrollY > 20);
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const closeMenu = () => setIsOpen(false);
@@ -33,39 +33,42 @@ export default function Navbar() {
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
-      element.scrollIntoView({ 
-        behavior: 'smooth',
-        block: 'start'
+      element.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
       });
     }
   };
 
-  const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+  const handleLinkClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    href: string,
+  ) => {
     e.preventDefault();
-    const id = href.replace('#', '');
+    const id = href.replace("#", "");
     scrollToSection(id);
     closeMenu();
   };
 
   const overlayVariants = {
     hidden: { opacity: 0 },
-    visible: { 
+    visible: {
       opacity: 1,
-      transition: { duration: 0.3 }
+      transition: { duration: 0.3 },
     },
-    exit: { 
+    exit: {
       opacity: 0,
-      transition: { duration: 0.3 }
-    }
+      transition: { duration: 0.3 },
+    },
   };
 
   const sidebarVariants = {
-    hidden: { y: '-100%', opacity: 0 },
+    hidden: { y: "-100%", opacity: 0 },
     visible: {
       y: 0,
       opacity: 1,
       transition: {
-        type: 'spring',
+        type: "spring",
         stiffness: 120,
         damping: 20,
         staggerChildren: 0.07,
@@ -73,7 +76,7 @@ export default function Navbar() {
       } as any,
     },
     exit: {
-      y: '-100%',
+      y: "-100%",
       opacity: 0,
       transition: { duration: 0.3 },
     },
@@ -85,18 +88,18 @@ export default function Navbar() {
   };
 
   return (
-    <header 
+    <header
       className={`fixed top-0 w-full z-50 px-6 py-4 transition-all duration-300 ${
-        scrolled 
-          ? 'bg-white/10 backdrop-blur-lg border-b border-white/20 shadow-lg' 
-          : 'bg-transparent'
+        scrolled
+          ? "bg-white/10 backdrop-blur-lg border-b border-white/20 shadow-lg"
+          : "bg-transparent"
       }`}
     >
       <div className="max-w-7xl mx-auto flex justify-between items-center">
         {/* Logo */}
-        <a 
-          href="#home" 
-          onClick={(e) => handleLinkClick(e, '#home')}
+        <a
+          href="#home"
+          onClick={(e) => handleLinkClick(e, "#home")}
           className="flex items-center gap-2"
         >
           <Image
@@ -106,7 +109,9 @@ export default function Navbar() {
             height={50}
             className="max-w-full h-auto"
           />
-          <span className="text-white font-bold text-xl hidden sm:block">SkyView</span>
+          <span className="text-white font-bold text-xl hidden sm:block">
+            SkyView
+          </span>
         </a>
 
         {/* Desktop Menu */}
@@ -123,7 +128,7 @@ export default function Navbar() {
           ))}
           <a
             href="#book"
-            onClick={(e) => handleLinkClick(e, '#book')}
+            onClick={(e) => handleLinkClick(e, "#book")}
             className="ml-4 px-4 py-2 rounded-full bg-[#ca8e24] text-white font-semibold hover:bg-[#d4a76a] transition"
           >
             Book Now
@@ -131,8 +136,8 @@ export default function Navbar() {
         </nav>
 
         {/* Mobile Menu Button */}
-        <button 
-          onClick={() => setIsOpen(true)} 
+        <button
+          onClick={() => setIsOpen(true)}
           className="lg:hidden p-2 rounded-3xl bg-white/10 backdrop-blur-sm border border-white/20"
         >
           <Menu className="h-6 w-6 text-white" />
@@ -141,7 +146,12 @@ export default function Navbar() {
         {/* Full-screen Mobile Sidebar */}
         <AnimatePresence>
           {isOpen && (
-            <Dialog as="div" open={isOpen} onClose={closeMenu} className="relative z-50 lg:hidden">
+            <Dialog
+              as="div"
+              open={isOpen}
+              onClose={closeMenu}
+              className="relative z-50 lg:hidden"
+            >
               {/* Backdrop */}
               <motion.div
                 className="fixed inset-0 bg-black/70 backdrop-blur-md"
@@ -162,7 +172,7 @@ export default function Navbar() {
               >
                 {/* Close Button */}
                 <div className="flex justify-end">
-                  <button 
+                  <button
                     onClick={closeMenu}
                     className="p-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20"
                   >
@@ -179,12 +189,14 @@ export default function Navbar() {
                     height={80}
                     className="mb-4"
                   />
-                  <h1 className="text-3xl font-bold text-white">SkyView Restaurant</h1>
+                  <h1 className="text-3xl font-bold text-white">
+                    SkyView Restaurant
+                  </h1>
                   <p className="text-[#ca8e24] mt-2">Fine Dining Experience</p>
                 </div>
 
                 {/* Animated Menu Items */}
-                <motion.div 
+                <motion.div
                   className="flex flex-col items-center gap-8 flex-grow"
                   initial="hidden"
                   animate="visible"
@@ -212,7 +224,7 @@ export default function Navbar() {
                 {/* CTA Button */}
                 <motion.a
                   href="#book"
-                  onClick={(e) => handleLinkClick(e, '#book')}
+                  onClick={(e) => handleLinkClick(e, "#book")}
                   className="mt-auto w-full max-w-md mx-auto px-6 py-4 rounded-full bg-[#ca8e24] text-white font-bold text-xl hover:bg-[#d4a76a] transition shadow-lg flex items-center justify-center"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}

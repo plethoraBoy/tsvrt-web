@@ -25,10 +25,10 @@ const AboutUsSection = () => {
 
   const headingVariants: Variants = {
     hidden: { opacity: 0, y: 30 },
-    visible: { 
-      opacity: 1, 
-      y: 0, 
-      transition: { duration: 0.6, ease: "easeOut" } 
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6, ease: "easeOut" },
     },
   };
 
@@ -43,18 +43,18 @@ const AboutUsSection = () => {
 
   const listItemVariants: Variants = {
     hidden: { opacity: 0, x: -20 },
-    visible: { 
-      opacity: 1, 
-      x: 0, 
-      transition: { duration: 0.4, ease: "easeOut" } 
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: { duration: 0.4, ease: "easeOut" },
     },
   };
 
   const paragraphVariants: Variants = {
     hidden: { opacity: 0 },
-    visible: { 
-      opacity: 1, 
-      transition: { duration: 1, ease: "easeOut" } 
+    visible: {
+      opacity: 1,
+      transition: { duration: 1, ease: "easeOut" },
     },
   };
 
@@ -67,7 +67,12 @@ const AboutUsSection = () => {
     "Elevate your evenings with live music, adding a symphony of melodies to the breathtaking skyline.",
   ];
 
-  const tags = ["Fine Dining", "Panoramic Views", "Live Music", "Gourmet Cuisine"];
+  const tags = [
+    "Fine Dining",
+    "Panoramic Views",
+    "Live Music",
+    "Gourmet Cuisine",
+  ];
 
   return (
     <section
@@ -83,34 +88,34 @@ const AboutUsSection = () => {
     >
       {/* Background overlay */}
       <div className="absolute inset-0 bg-black/70 z-0"></div>
-      
+
       {/* Floating food elements */}
-      <motion.div 
+      <motion.div
         className="absolute top-20 right-10 z-0"
-        animate={{ 
+        animate={{
           y: [0, -15, 0],
-          rotate: [0, 5, 0]
+          rotate: [0, 5, 0],
         }}
-        transition={{ 
-          repeat: Infinity, 
+        transition={{
+          repeat: Infinity,
           duration: 8,
-          ease: "easeInOut" 
+          ease: "easeInOut",
         }}
       >
         <div className="w-16 h-16 rounded-full bg-[#ca8e24]/20 backdrop-blur-sm border border-white/10"></div>
       </motion.div>
-      
-      <motion.div 
+
+      <motion.div
         className="absolute bottom-40 left-12 z-0"
-        animate={{ 
+        animate={{
           y: [0, -10, 0],
-          rotate: [0, -5, 0]
+          rotate: [0, -5, 0],
         }}
-        transition={{ 
-          repeat: Infinity, 
+        transition={{
+          repeat: Infinity,
           duration: 7,
           ease: "easeInOut",
-          delay: 0.5
+          delay: 0.5,
         }}
       >
         <div className="w-12 h-12 rounded-full bg-[#d4a76a]/20 backdrop-blur-sm border border-white/10"></div>
@@ -146,10 +151,7 @@ const AboutUsSection = () => {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <motion.div 
-            className="relative"
-            variants={imageVariants}
-          >
+          <motion.div className="relative" variants={imageVariants}>
             <div className="absolute -top-6 -left-6 w-16 h-16 md:w-24 md:h-24 bg-[#d4a76a]/10 backdrop-blur-sm rounded-3xl border border-white/20 z-0"></div>
             <div className="absolute -bottom-6 -right-6 w-16 h-16 md:w-24 md:h-24 bg-[#ca8e24]/10 backdrop-blur-sm rounded-3xl border border-white/20 z-0"></div>
             <div className="relative aspect-video lg:aspect-auto overflow-hidden rounded-3xl shadow-2xl border-4 border-white/20">
@@ -163,7 +165,7 @@ const AboutUsSection = () => {
             </div>
           </motion.div>
 
-          <motion.div 
+          <motion.div
             className="bg-white/10 backdrop-blur-lg border border-white/20 rounded-3xl p-6 md:p-8"
             variants={containerVariants}
           >
@@ -173,7 +175,7 @@ const AboutUsSection = () => {
             >
               Elevate Your Experience at SkyView Rooftop Restaurant
             </motion.h3>
-            
+
             <motion.div
               className="italic text-lg text-[#d4a76a] mb-6 border-l-4 border-[#ca8e24] pl-4"
               variants={paragraphVariants}
@@ -218,23 +220,20 @@ const AboutUsSection = () => {
               and an enchanting atmosphere that sets us apart.
             </motion.div>
 
-            <motion.div
-              className="text-white/80"
-              variants={paragraphVariants}
-            >
+            <motion.div className="text-white/80" variants={paragraphVariants}>
               Join us for special events and themed nights, creating memorable
               experiences that go beyond traditional dining. Our dedicated team
               ensures impeccable service, making every visit a celebration of
               flavors and sophistication.
             </motion.div>
 
-            <motion.div 
+            <motion.div
               className="mt-8 flex flex-wrap gap-3"
               variants={paragraphVariants}
             >
               {tags.map((tag, i) => (
-                <span 
-                  key={i} 
+                <span
+                  key={i}
                   className="px-3 py-1.5 text-sm md:px-4 md:py-2 bg-white/5 backdrop-blur-sm rounded-full text-white border border-white/20"
                 >
                   {tag}

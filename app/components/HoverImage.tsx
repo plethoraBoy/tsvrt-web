@@ -23,7 +23,7 @@ const HoverImage = ({ heading, imgSrc, subheading, href }: LinkProps) => {
   const left = useTransform(mouseXSpring, [0.5, -0.5], ["60%", "70%"]);
 
   const handleMouseMove = (
-    e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
+    e: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
   ) => {
     const rect = ref.current!.getBoundingClientRect();
 

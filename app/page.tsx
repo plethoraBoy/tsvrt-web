@@ -20,7 +20,7 @@ export default function Home() {
       {/* <HeroSection /> */}
       <HeroSection />
       <AboutUsSection />
-            <BanquetSection />
+      <BanquetSection />
 
       <WhyUsSection />
       <EventsSection />

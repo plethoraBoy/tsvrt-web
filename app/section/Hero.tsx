@@ -14,10 +14,10 @@ const HeroSection: React.FC = () => {
   useEffect(() => {
     setIsClient(true);
 
-    // Set up the video reference after component mounts
-    if (videoRef.current) {
-      videoRef.current.muted = isMuted;
-    }
+    // Remove this video mute setting since it's handled by the other effect
+    // if (videoRef.current) {
+    //   videoRef.current.muted = isMuted;
+    // }
 
     // Hide pointer after initial animation
     const timer = setTimeout(() => {
@@ -25,8 +25,7 @@ const HeroSection: React.FC = () => {
     }, 5000);
 
     return () => clearTimeout(timer);
-  }, []);
-
+  }, []); // Empty dependency array is now safe
   useEffect(() => {
     // Ensure the video's mute state matches our state
     if (videoRef.current) {

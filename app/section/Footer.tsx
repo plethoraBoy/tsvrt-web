@@ -86,7 +86,7 @@ const Footer = () => {
                 custom={0}
                 className="mb-4 md:mb-0"
               >
-                <h3 className="text-3xl font-bold bg-gradient-to-r from-amber-300 via-#ca8e24 to-amber-300 bg-clip-text text-transparent">
+                <h3 className="text-3xl font-bold bg-gradient-to-r from-[#d4a76a] via-#ca8e24 to-[#d4a76a] bg-clip-text text-transparent">
                   The SkyView Rooftop Restaurant
                 </h3>
                 <p className="text-white/80 mt-4 max-w-md text-lg">
@@ -127,7 +127,7 @@ const Footer = () => {
           {/* Middle section - Contact info */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 p-8">
             <motion.div variants={itemVariants} custom={2}>
-              <h4 className="text-xl font-bold text-amber-400 mb-4 flex items-center">
+              <h4 className="text-xl font-bold text-[#d4a76a] mb-4 flex items-center">
                 <span className="mr-3">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -154,7 +154,7 @@ const Footer = () => {
             </motion.div>
 
             <motion.div variants={itemVariants} custom={3}>
-              <h4 className="text-xl font-bold text-amber-400 mb-4 flex items-center">
+              <h4 className="text-xl font-bold text-[#d4a76a] mb-4 flex items-center">
                 <span className="mr-3">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -174,13 +174,13 @@ const Footer = () => {
               <div className="text-white/80">
                 <div className="mb-2">
                   <span className="block">Monday - Thursday</span>
-                  <span className="font-medium text-amber-300">
+                  <span className="font-medium text-[#d4a76a]">
                     6:00 PM - 12:00 AM
                   </span>
                 </div>
                 <div>
                   <span className="block">Friday - Sunday</span>
-                  <span className="font-medium text-amber-300">
+                  <span className="font-medium text-[#d4a76a]">
                     6:00 PM - 2:00 AM
                   </span>
                 </div>
@@ -188,7 +188,7 @@ const Footer = () => {
             </motion.div>
 
             <motion.div variants={itemVariants} custom={4}>
-              <h4 className="text-xl font-bold text-amber-400 mb-4 flex items-center">
+              <h4 className="text-xl font-bold text-[#d4a76a] mb-4 flex items-center">
                 <span className="mr-3">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -205,7 +205,7 @@ const Footer = () => {
               <div className="space-y-3">
                 <a
                   href="mailto:info@skyviewrestaurant.com"
-                  className="flex items-start text-white/80 hover:text-amber-300 transition-colors duration-300"
+                  className="flex items-start text-white/80 hover:text-[#d4a76a] transition-colors duration-300"
                 >
                   <span className="mt-1 mr-3">
                     <svg
@@ -227,7 +227,7 @@ const Footer = () => {
                 </a>
                 <a
                   href="tel:+919080226632"
-                  className="flex items-start text-white/80 hover:text-amber-300 transition-colors duration-300"
+                  className="flex items-start text-white/80 hover:text-[#d4a76a] transition-colors duration-300"
                 >
                   <span className="mt-1 mr-3">
                     <svg
@@ -265,19 +265,19 @@ const Footer = () => {
               <div className="flex flex-wrap justify-center md:justify-end gap-4">
                 <a
                   href="#"
-                  className="text-white/60 hover:text-amber-400 transition-colors duration-300"
+                  className="text-white/60 hover:text-[#d4a76a] transition-colors duration-300"
                 >
                   Privacy Policy
                 </a>
                 <a
                   href="#"
-                  className="text-white/60 hover:text-amber-400 transition-colors duration-300"
+                  className="text-white/60 hover:text-[#d4a76a] transition-colors duration-300"
                 >
                   Terms of Service
                 </a>
                 <a
                   href="#"
-                  className="text-white/60 hover:text-amber-400 transition-colors duration-300"
+                  className="text-white/60 hover:text-[#d4a76a] transition-colors duration-300"
                 >
                   Cookie Policy
                 </a>
@@ -291,7 +291,7 @@ const Footer = () => {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.8 }}
         >
-          <p className="text-amber-400 text-sm font-light">DnD by Rocky</p>
+          <p className="text-[#d4a76a] text-sm font-light">DnD by Rocky</p>
         </motion.div>
         {/* Restaurant tagline */}
         <motion.div
@@ -300,7 +300,7 @@ const Footer = () => {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.6 }}
         >
-          <p className="text-amber-400 font-medium text-lg">
+          <p className="text-[#d4a76a] font-medium text-lg">
             Elevating dining experiences above the ordinary
           </p>
         </motion.div>
@@ -324,7 +324,7 @@ const SocialIcon = ({
     aria-label={label}
     whileHover={{ y: -5, scale: 1.1 }}
     whileTap={{ scale: 0.95 }}
-    className="text-white/80 hover:text-amber-400 transition-colors duration-300"
+    className="text-white/80 hover:text-[#d4a76a] transition-colors duration-300"
   >
     {React.cloneElement(icon as React.ReactElement, {
       className: "text-3xl transition-transform duration-300",
