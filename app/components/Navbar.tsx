@@ -135,7 +135,7 @@ export default function Navbar() {
 
               {/* Full-screen Sidebar */}
               <motion.div
-                className="fixed inset-0 flex flex-col bg-black/80 backdrop-blur-xl p-8"
+                className="fixed inset-0 flex flex-col bg-black/80 backdrop-blur-xl p-6"
                 variants={sidebarVariants}
                 initial="hidden"
                 animate="visible"
@@ -152,7 +152,7 @@ export default function Navbar() {
                 </div>
 
                 {/* Logo and Title */}
-                <div className="flex flex-col items-center justify-center mt-8 mb-16">
+                <div className="flex flex-col items-center justify-center mt-6 mb-16">
                   <Image
                     src="/assets/images/logo-white.png"
                     alt="logo"
@@ -168,7 +168,7 @@ export default function Navbar() {
 
                 {/* Animated Menu Items */}
                 <motion.div
-                  className="flex flex-col items-center gap-8 flex-grow"
+                  className="flex flex-col items-center gap-6 flex-grow"
                   initial="hidden"
                   animate="visible"
                   variants={{
@@ -184,7 +184,7 @@ export default function Navbar() {
                       key={item.name}
                       href={item.href}
                       onClick={closeMenu}
-                      className="text-2xl font-semibold text-white hover:text-#ca8e24 transition-all py-2"
+                      className="text-2xl font-semibold text-white hover:text-#ca8e24 transition-all py-1"
                       variants={itemVariants}
                     >
                       {item.name}
