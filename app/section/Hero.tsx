@@ -13,19 +13,15 @@ const HeroSection: React.FC = () => {
 
   useEffect(() => {
     setIsClient(true);
-
-    // Remove this video mute setting since it's handled by the other effect
-    // if (videoRef.current) {
-    //   videoRef.current.muted = isMuted;
-    // }
-
+    
     // Hide pointer after initial animation
     const timer = setTimeout(() => {
       setShowPointer(false);
     }, 5000);
 
     return () => clearTimeout(timer);
-  }, []); // Empty dependency array is now safe
+  }, []);
+
   useEffect(() => {
     // Ensure the video's mute state matches our state
     if (videoRef.current) {
@@ -41,56 +37,38 @@ const HeroSection: React.FC = () => {
     "Taste culinary artistry",
   ];
 
-  const leftBlockVariants: Variants = {
-    hidden: { opacity: 0, x: -80 },
-    visible: {
-      opacity: 1,
-      x: 0,
-      transition: {
-        type: "spring",
-        stiffness: 80,
-        damping: 20,
-        staggerChildren: 0.3,
-      },
-    },
-  };
-
   const toggleMute = (): void => {
     setIsMuted(!isMuted);
   };
 
-  const logoVariants: Variants = {
-    hidden: { scale: 0, opacity: 0 },
+  // Framer Motion variants
+  const containerVariants: Variants = {
+    hidden: { opacity: 0 },
     visible: {
-      scale: [1.2, 0.9, 1],
       opacity: 1,
-      transition: { duration: 1, ease: "easeOut" },
-    },
+      transition: {
+        staggerChildren: 0.2
+      }
+    }
   };
 
-  const headingVariants: Variants = {
-    hidden: { opacity: 0, scale: 0.95 },
+  const itemVariants: Variants = {
+    hidden: { y: 20, opacity: 0 },
     visible: {
+      y: 0,
       opacity: 1,
-      scale: 1,
-      transition: { duration: 0.8, ease: "easeOut" },
-    },
-  };
-
-  const subheadingVariants: Variants = {
-    hidden: { opacity: 0, letterSpacing: "0.05em" },
-    visible: {
-      opacity: 1,
-      letterSpacing: "0.1em",
-      transition: { duration: 1.2, ease: "easeInOut" },
-    },
+      transition: {
+        duration: 0.6,
+        ease: "easeOut"
+      }
+    }
   };
 
   if (!isClient) return null;
 
   return (
-    <section className="relative w-full h-screen overflow-hidden">
-      {/* Background Video */}
+    <section className="relative w-full min-h-screen md:h-screen overflow-hidden">
+      {/* Background Video - Added playsinline for mobile */}
       <video
         ref={videoRef}
         src="/assets/video/TheSkyviewRooftop.mp4"
@@ -101,62 +79,23 @@ const HeroSection: React.FC = () => {
         className="absolute inset-0 w-full h-full object-cover"
       />
 
-      {/* Glassmorphism overlay */}
-      <div className="absolute inset-0 z-10 bg-gradient-to-b from-black/70 via-black/40 to-black/70 pointer-events-none" />
+      {/* Gradient overlay - Enhanced for mobile visibility */}
+      <div className="absolute inset-0 z-10 bg-gradient-to-b from-black/80 via-black/40 to-black/80 pointer-events-none" />
 
-      {/* Floating food elements */}
-      <motion.div
-        className="absolute top-1/4 left-1/4 z-0"
-        animate={{
-          y: [0, -20, 0],
-          rotate: [0, 10, 0],
-        }}
-        transition={{
-          repeat: Infinity,
-          duration: 8,
-          ease: "easeInOut",
-        }}
-      >
-        <div className="w-16 h-16 rounded-full bg-[#ca8e24]/20 backdrop-blur-sm border border-white/10"></div>
-      </motion.div>
-
-      <motion.div
-        className="absolute bottom-1/3 right-1/4 z-0"
-        animate={{
-          y: [0, -15, 0],
-          rotate: [0, -8, 0],
-        }}
-        transition={{
-          repeat: Infinity,
-          duration: 7,
-          ease: "easeInOut",
-          delay: 0.5,
-        }}
-      >
-        <div className="w-14 h-14 rounded-full bg-[#d4a76a]/20 backdrop-blur-sm border border-white/10"></div>
-      </motion.div>
-
-      {/* Content Container */}
-      <motion.div
-        initial="hidden"
-        animate="visible"
-        variants={leftBlockVariants}
-        className="relative z-20 flex flex-col items-center justify-center h-full px-6 md:px-12 max-w-6xl mx-auto"
-      >
-        {/* Glassmorphism content card */}
+      {/* Content Container - Responsive layout */}
+      <div className="relative z-20 flex flex-col items-center justify-center min-h-screen px-4 py-16 md:px-8 md:py-0 max-w-6xl mx-auto">
+        {/* Glassmorphism content card - Responsive sizing */}
         <motion.div
-          className="w-full max-w-3xl backdrop-blur-sm rounded-3xl p-8 md:p-12 border border-[#d4a76a]/20 shadow-2xl"
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3, duration: 0.8 }}
+          initial="hidden"
+          animate="visible"
+          variants={containerVariants}
+          className="w-full max-w-2xl md:max-w-3xl backdrop-blur-sm rounded-2xl md:rounded-3xl p-6 md:p-8 lg:p-10 border border-[#d4a76a]/30 shadow-2xl"
         >
-          <div className="flex flex-col items-center gap-8">
-            {/* Logo */}
+          <div className="flex flex-col items-center gap-6 md:gap-8">
+            {/* Logo - Responsive sizing */}
             <motion.div
-              variants={logoVariants}
-              className="w-40 md:w-52 lg:w-60"
-              whileHover={{ rotate: 5, scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+              variants={itemVariants}
+              className="w-32 md:w-40 lg:w-48"
             >
               <Image
                 src="/assets/images/logo-white.png"
@@ -168,26 +107,26 @@ const HeroSection: React.FC = () => {
               />
             </motion.div>
 
-            {/* Heading */}
+            {/* Heading - Responsive text sizing */}
             <motion.h2
-              variants={headingVariants}
-              className="text-3xl md:text-5xl lg:text-6xl font-extrabold text-center text-white drop-shadow-xl"
+              variants={itemVariants}
+              className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-center text-white drop-shadow-xl"
             >
-              The SkyView Rooftop <br />
+              The SkyView Rooftop <br className="hidden sm:block" />
               <span className="bg-gradient-to-r from-[#d4a76a] via-[#ca8e24] to-[#ca8e24] bg-clip-text text-transparent">
                 Multicuisine Restaurant
               </span>
             </motion.h2>
 
-            {/* Subheading with FlipWords */}
+            {/* Subheading - Responsive text and spacing */}
             <motion.div
-              variants={subheadingVariants}
-              className="text-lg md:text-xl text-white text-center max-w-2xl leading-relaxed"
+              variants={itemVariants}
+              className="text-base md:text-lg text-white text-center max-w-md md:max-w-2xl leading-relaxed"
             >
-              <p className="mb-4">
+              <p className="mb-3 md:mb-4">
                 Experience{" "}
                 <FlipWords
-                  className="font-semibold text-[#d4a76a]"
+                  className="font-semibold text-[#d4a76a] inline-block min-w-[150px] sm:min-w-[180px]"
                   words={restaurantWords}
                 />{" "}
                 at new heights
@@ -195,10 +134,11 @@ const HeroSection: React.FC = () => {
               <p>with breathtaking panoramic views of the city skyline.</p>
             </motion.div>
 
-            {/* CTA Button */}
+            {/* CTA Button - Responsive sizing */}
             <motion.a
+              variants={itemVariants}
               href="#book"
-              className="mt-4 px-8 py-4 rounded-full bg-gradient-to-r from-[#d4a76a] to-[#ca8e24] text-white font-bold text-lg hover:from-[#e0b88a] hover:to-[#c69a2b] transition-all shadow-xl"
+              className="mt-2 md:mt-4 px-6 py-3 md:px-8 md:py-3.5 rounded-full bg-gradient-to-r from-[#d4a76a] to-[#ca8e24] text-white font-bold text-base md:text-lg hover:from-[#e0b88a] hover:to-[#c69a2b] transition-all shadow-xl"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -206,18 +146,21 @@ const HeroSection: React.FC = () => {
             </motion.a>
           </div>
         </motion.div>
-      </motion.div>
+      </div>
 
-      {/* Mute toggle button */}
+      {/* Mute toggle button - Mobile positioning */}
       <motion.button
         onClick={toggleMute}
         aria-label={isMuted ? "Unmute video" : "Mute video"}
         className="
           absolute 
-          bottom-6
-          right-6 
+          bottom-4
+          right-4
+          md:bottom-6
+          md:right-6 
           z-50
-          p-3 
+          p-2.5
+          md:p-3 
           rounded-full 
           bg-[#d4a76a]
           border border-[#d4a76a]/50
@@ -228,21 +171,25 @@ const HeroSection: React.FC = () => {
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
       >
-        {isMuted ? <VolumeX size={24} /> : <Volume2 size={24} />}
+        {isMuted ? (
+          <VolumeX className="w-5 h-5 md:w-6 md:h-6" />
+        ) : (
+          <Volume2 className="w-5 h-5 md:w-6 md:h-6" />
+        )}
       </motion.button>
 
-      {/* Animated Pointer */}
+      {/* Animated Pointer - Mobile adjustments */}
       {showPointer && (
         <motion.div
           initial={{ y: 0 }}
-          animate={{ y: [0, -20, 0] }}
-          transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
-          className="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-30"
+          animate={{ y: [0, -15, 0] }}
+          transition={{ repeat: Infinity, duration: 1.8, ease: "easeInOut" }}
+          className="absolute bottom-16 md:bottom-10 left-1/2 transform -translate-x-1/2 z-30"
         >
-          <div className="w-12 h-12 rounded-full bg-[#ca8e24]/20 backdrop-blur-sm border border-white/10 flex items-center justify-center">
+          <div className="w-10 h-10 rounded-full bg-[#ca8e24]/20 backdrop-blur-sm border border-white/10 flex items-center justify-center">
             <svg
-              width="24"
-              height="24"
+              width="20"
+              height="20"
               viewBox="0 0 24 24"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"

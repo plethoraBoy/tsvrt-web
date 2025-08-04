@@ -93,14 +93,14 @@ export default function Navbar() {
             <a
               key={item.name}
               href={item.href}
-              className="text-white text-sm font-medium hover:text-#ca8e24 transition-all duration-200"
+              className="text-white text-sm font-medium hover:text-[#ca8e24] transition-all duration-200"
             >
               {item.name}
             </a>
           ))}
           <a
             href="#book"
-            className="ml-4 px-4 py-2 rounded-full bg-[#ca8e24] text-white font-semibold hover:bg-[#ca8e24] transition"
+            className="ml-4 px-4 py-2 rounded-full bg-[#ca8e24] text-white font-semibold hover:bg-[#ca8e24]/90 transition"
           >
             Book Now
           </a>
@@ -118,11 +118,12 @@ export default function Navbar() {
         <AnimatePresence>
           {isOpen && (
             <Dialog
-              as="div"
-              open={isOpen}
-              onClose={closeMenu}
-              className="relative z-50 lg:hidden"
-            >
+  as="div"
+  open={isOpen}
+  onClose={closeMenu}
+  className="relative z-50 lg:hidden overflow-hidden"
+>
+
               {/* Backdrop */}
               <motion.div
                 className="fixed inset-0 bg-black/70 backdrop-blur-md"
@@ -134,13 +135,14 @@ export default function Navbar() {
               />
 
               {/* Full-screen Sidebar */}
-              <motion.div
-                className="fixed inset-0 flex flex-col bg-black/80 backdrop-blur-xl p-6"
-                variants={sidebarVariants}
-                initial="hidden"
-                animate="visible"
-                exit="exit"
-              >
+             <motion.div
+  className="fixed inset-0 flex flex-col bg-black/80 backdrop-blur-xl p-6 h-screen overflow-y-auto"
+  variants={sidebarVariants}
+  initial="hidden"
+  animate="visible"
+  exit="exit"
+>
+
                 {/* Close Button */}
                 <div className="flex justify-end">
                   <button
@@ -151,7 +153,7 @@ export default function Navbar() {
                   </button>
                 </div>
 
-                {/* Logo and Title */}
+                {/* Logo and Title - FIXED HERE */}
                 <div className="flex flex-col items-center justify-center mt-6 mb-16">
                   <Image
                     src="/assets/images/logo-white.png"
@@ -160,10 +162,11 @@ export default function Navbar() {
                     height={80}
                     className="mb-4"
                   />
-                  <h1 className="text-3xl font-bold text-white">
-                    SkyView Restaurant
+                  {/* Fixed restaurant name display */}
+                  <h1 className="text-2xl sm:text-3xl font-bold text-white text-center break-words leading-tight">
+                    The SkyView Restaurant<br />Multicuisine Restaurant
                   </h1>
-                  <p className="text-#ca8e24 mt-2">Fine Dining Experience</p>
+                  <p className="text-[#ca8e24] mt-1 text-center">Fine Dining Experience</p>
                 </div>
 
                 {/* Animated Menu Items */}
@@ -184,7 +187,7 @@ export default function Navbar() {
                       key={item.name}
                       href={item.href}
                       onClick={closeMenu}
-                      className="text-2xl font-semibold text-white hover:text-#ca8e24 transition-all py-1"
+                      className="text-2xl font-semibold text-white hover:text-[#ca8e24] transition-all py-1 text-center"
                       variants={itemVariants}
                     >
                       {item.name}
@@ -196,7 +199,7 @@ export default function Navbar() {
                 <motion.a
                   href="#book"
                   onClick={closeMenu}
-                  className="mt-auto w-full max-w-md mx-auto px-6 py-4 rounded-full bg-[#ca8e24] text-white font-bold text-xl hover:[#ca8e24] transition shadow-lg flex items-center justify-center"
+                  className="mt-auto w-full max-w-md mx-auto px-6 py-4 rounded-full bg-[#ca8e24] text-white font-bold text-xl hover:bg-[#ca8e24]/90 transition shadow-lg flex items-center justify-center"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.4 }}
