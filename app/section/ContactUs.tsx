@@ -20,7 +20,7 @@ const ContactSection: React.FC = () => {
   const [errorMsg, setErrorMsg] = useState("");
 
   const handleChange = (
-    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -165,7 +165,13 @@ const ContactSection: React.FC = () => {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="md:col-span-2 bg-gradient-to-r from-[#d4a76a] to-[#ca8e24] hover:from-[#e0b88a] hover:to-[#c69a2b] text-white font-semibold rounded-full py-4 w-full transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
+              className={`md:col-span-2 w-full py-4 rounded-full font-semibold 
+    border-2 border-amber-500 text-amber-500 
+     
+    bg-transparent 
+    hover:text-white hover:bg-gradient-to-r hover:from-amber-400 hover:via-yellow-500 hover:to-amber-600
+    shadow-md hover:shadow-xl hover:-translate-y-0.5
+    disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none`}
             >
               {isSubmitting ? "Sending..." : "Send Message"}
             </button>

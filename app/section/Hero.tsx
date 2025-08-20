@@ -2,28 +2,130 @@
 import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { FlipWords } from "../components/ui/flip-words";
-import { motion, Variants } from "framer-motion";
-import { Volume2, VolumeX } from "lucide-react";
+import { Volume2, VolumeX, ChevronDown } from "lucide-react";
+import { gsap } from "gsap";
 
 const HeroSection: React.FC = () => {
   const [isClient, setIsClient] = useState<boolean>(false);
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isMuted, setIsMuted] = useState<boolean>(true);
-  const [showPointer, setShowPointer] = useState<boolean>(true);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const logoRef = useRef<HTMLDivElement>(null);
+  const headingRef = useRef<HTMLHeadingElement>(null);
+  const subheadingRef = useRef<HTMLDivElement>(null);
+  const buttonRef = useRef<HTMLAnchorElement>(null);
+  const scrollIndicatorRef = useRef<HTMLDivElement>(null);
+  const muteButtonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     setIsClient(true);
-    
-    // Hide pointer after initial animation
-    const timer = setTimeout(() => {
-      setShowPointer(false);
-    }, 5000);
-
-    return () => clearTimeout(timer);
   }, []);
 
   useEffect(() => {
-    // Ensure the video's mute state matches our state
+    if (isClient && containerRef.current) {
+      // Set initial states
+      gsap.set(
+        [
+          logoRef.current,
+          headingRef.current,
+          subheadingRef.current,
+          buttonRef.current,
+        ],
+        {
+          opacity: 0,
+          y: 50,
+        }
+      );
+
+      gsap.set(scrollIndicatorRef.current, {
+        opacity: 0,
+      });
+
+      gsap.set(muteButtonRef.current, {
+        opacity: 0,
+        scale: 0.5,
+      });
+
+      // Create main timeline
+      const tl = gsap.timeline({ delay: 0.5 });
+
+      // Animate elements in sequence
+      tl.to(logoRef.current, {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        ease: "power3.out",
+      })
+        .to(
+          headingRef.current,
+          {
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            ease: "power3.out",
+          },
+          "-=0.7"
+        )
+        .to(
+          subheadingRef.current,
+          {
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            ease: "power3.out",
+          },
+          "-=0.7"
+        )
+        .to(
+          buttonRef.current,
+          {
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            ease: "power3.out",
+          },
+          "-=0.7"
+        )
+        .to(
+          scrollIndicatorRef.current,
+          {
+            opacity: 1,
+            duration: 0.8,
+            ease: "power2.out",
+          },
+          "-=0.5"
+        )
+        .to(
+          muteButtonRef.current,
+          {
+            opacity: 1,
+            scale: 1,
+            duration: 0.6,
+            ease: "back.out(1.7)",
+          },
+          "-=0.3"
+        );
+
+      // Floating animation for scroll indicator
+      gsap.to(scrollIndicatorRef.current, {
+        y: -10,
+        duration: 1.5,
+        ease: "power2.inOut",
+        yoyo: true,
+        repeat: -1,
+        delay: 2,
+      });
+
+      // Auto-hide scroll indicator after 6 seconds
+      gsap.to(scrollIndicatorRef.current, {
+        opacity: 0,
+        duration: 0.5,
+        delay: 6,
+      });
+    }
+  }, [isClient]);
+
+  useEffect(() => {
     if (videoRef.current) {
       videoRef.current.muted = isMuted;
     }
@@ -32,43 +134,48 @@ const HeroSection: React.FC = () => {
   const restaurantWords: string[] = [
     "Exquisite dining",
     "Delicious cuisine",
-    "Savor gourmet dishes",
-    "Enjoy fine dining",
-    "Taste culinary artistry",
+    "Gourmet dishes",
+    "Fine dining",
+    "Culinary artistry",
   ];
 
   const toggleMute = (): void => {
     setIsMuted(!isMuted);
+
+    // Animate mute button
+    gsap.to(muteButtonRef.current, {
+      scale: 0.9,
+      duration: 0.1,
+      yoyo: true,
+      repeat: 1,
+      ease: "power2.inOut",
+    });
   };
 
-  // Framer Motion variants
-  const containerVariants: Variants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2
-      }
-    }
+  const handleButtonHover = (isHovering: boolean) => {
+    gsap.to(buttonRef.current, {
+      scale: isHovering ? 1.05 : 1,
+      duration: 0.3,
+      ease: "power2.out",
+    });
   };
 
-  const itemVariants: Variants = {
-    hidden: { y: 20, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        duration: 0.6,
-        ease: "easeOut"
-      }
-    }
+  const handleMuteButtonHover = (isHovering: boolean) => {
+    gsap.to(muteButtonRef.current, {
+      scale: isHovering ? 1.1 : 1,
+      duration: 0.3,
+      ease: "power2.out",
+    });
   };
 
   if (!isClient) return null;
 
   return (
-    <section className="relative w-full min-h-screen md:h-screen overflow-hidden">
-      {/* Background Video - Added playsinline for mobile */}
+    <section
+      ref={containerRef}
+      className="relative w-full h-screen overflow-hidden"
+    >
+      {/* Background Video */}
       <video
         ref={videoRef}
         src="/assets/video/TheSkyviewRooftop.mp4"
@@ -79,133 +186,99 @@ const HeroSection: React.FC = () => {
         className="absolute inset-0 w-full h-full object-cover"
       />
 
-      {/* Gradient overlay - Enhanced for mobile visibility */}
-      <div className="absolute inset-0 z-10 bg-gradient-to-b from-black/80 via-black/40 to-black/80 pointer-events-none" />
+      {/* Enhanced Gradient Overlay */}
+      <div className="absolute inset-0 z-10 bg-gradient-to-b from-black/70 via-black/30 to-black/80" />
+      <div className="absolute inset-0 z-10 bg-gradient-to-r from-black/40 via-transparent to-black/40" />
 
-      {/* Content Container - Responsive layout */}
-      <div className="relative z-20 flex flex-col items-center justify-center min-h-screen px-4 py-16 md:px-8 md:py-0 max-w-6xl mx-auto">
-        {/* Glassmorphism content card - Responsive sizing */}
-        <motion.div
-          initial="hidden"
-          animate="visible"
-          variants={containerVariants}
-          className="w-full max-w-2xl md:max-w-3xl backdrop-blur-sm rounded-2xl md:rounded-3xl p-6 md:p-8 lg:p-10 border border-[#d4a76a]/30 shadow-2xl"
-        >
-          <div className="flex flex-col items-center gap-6 md:gap-8">
-            {/* Logo - Responsive sizing */}
-            <motion.div
-              variants={itemVariants}
-              className="w-32 md:w-40 lg:w-48"
-            >
-              <Image
-                src="/assets/images/logo-white.png"
-                alt="SkyView Logo"
-                width={240}
-                height={240}
-                className="w-full h-auto drop-shadow-xl"
-                priority
-              />
-            </motion.div>
-
-            {/* Heading - Responsive text sizing */}
-            <motion.h2
-              variants={itemVariants}
-              className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-center text-white drop-shadow-xl"
-            >
-              The SkyView Rooftop <br className="hidden sm:block" />
-              <span className="bg-gradient-to-r from-[#d4a76a] via-[#ca8e24] to-[#ca8e24] bg-clip-text text-transparent">
-                Multicuisine Restaurant
-              </span>
-            </motion.h2>
-
-            {/* Subheading - Responsive text and spacing */}
-            <motion.div
-              variants={itemVariants}
-              className="text-base md:text-lg text-white text-center max-w-md md:max-w-2xl leading-relaxed"
-            >
-              <p className="mb-3 md:mb-4">
-                Experience{" "}
-                <FlipWords
-                  className="font-semibold text-[#d4a76a] inline-block min-w-[150px] sm:min-w-[180px]"
-                  words={restaurantWords}
-                />{" "}
-                at new heights
-              </p>
-              <p>with breathtaking panoramic views of the city skyline.</p>
-            </motion.div>
-
-            {/* CTA Button - Responsive sizing */}
-            <motion.a
-              variants={itemVariants}
-              href="#book"
-              className="mt-2 md:mt-4 px-6 py-3 md:px-8 md:py-3.5 rounded-full bg-gradient-to-r from-[#d4a76a] to-[#ca8e24] text-white font-bold text-base md:text-lg hover:from-[#e0b88a] hover:to-[#c69a2b] transition-all shadow-xl"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              Reserve Your Table
-            </motion.a>
+      {/* Main Content */}
+      <div className="relative z-20 flex flex-col items-center justify-center h-full px-6 md:px-8 max-w-7xl mx-auto">
+        {/* Content Card with Enhanced Glassmorphism */}
+        <div className="text-center max-w-4xl  p-8 md:p-12 lg:p-16 border-white/10 shadow-2xl">
+          {/* Logo */}
+          <div ref={logoRef} className="mb-8 md:mb-10">
+            <Image
+              src="/assets/images/logo-white.png"
+              alt="SkyView Logo"
+              width={200}
+              height={200}
+              className="w-32 md:w-40 lg:w-48 h-auto mx-auto drop-shadow-2xl"
+              priority
+            />
           </div>
-        </motion.div>
+
+          {/* Main Heading with Better Typography */}
+        <h1
+  ref={headingRef}
+  className="mb-6 md:mb-8 leading-tight tracking-wide"
+>
+  {/* Main Title */}
+  <span className="bg-gradient-to-r from-amber-400 via-yellow-500 to-amber-600 bg-clip-text text-transparent font-bold text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl">
+    The SkyView Rooftop
+  </span>
+
+  {/* Subtitle */}
+  <span className="block font-light text-white text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl mt-2">
+    Multicuisine Restaurant
+  </span>
+</h1>
+
+          {/* Subheading with FlipWords */}
+          <div
+            ref={subheadingRef}
+            className="text-lg md:text-xl lg:text-2xl text-white/90 mb-8 md:mb-10 max-w-3xl mx-auto leading-relaxed font-light"
+          >
+            <p className="mb-4">
+              Experience{" "}
+              <FlipWords
+                className="font-semibold text-amber-400 inline-block min-w-[200px]"
+                words={restaurantWords}
+              />{" "}
+              at new heights
+            </p>
+            <p className="text-white/80 text-base md:text-lg">
+              with breathtaking panoramic views of the city skyline.
+            </p>
+          </div>
+
+          {/* CTA Button with Enhanced Design */}
+          <a
+            ref={buttonRef}
+            href="#book"
+            className="inline-block px-8 py-4 md:px-10 md:py-5 text-lg md:text-xl font-semibold text-white bg-gradient-to-r from-amber-500 to-yellow-600 rounded-full shadow-2xl hover:shadow-amber-500/25 transition-shadow duration-300 border-2 border-amber-400/20"
+            onMouseEnter={() => handleButtonHover(true)}
+            onMouseLeave={() => handleButtonHover(false)}
+          >
+            Reserve Your Table
+          </a>
+        </div>
       </div>
 
-      {/* Mute toggle button - Mobile positioning */}
-      <motion.button
+      {/* Mute Toggle Button */}
+      <button
+        ref={muteButtonRef}
         onClick={toggleMute}
+        onMouseEnter={() => handleMuteButtonHover(true)}
+        onMouseLeave={() => handleMuteButtonHover(false)}
         aria-label={isMuted ? "Unmute video" : "Mute video"}
-        className="
-          absolute 
-          bottom-4
-          right-4
-          md:bottom-6
-          md:right-6 
-          z-50
-          p-2.5
-          md:p-3 
-          rounded-full 
-          bg-[#d4a76a]
-          border border-[#d4a76a]/50
-          text-white 
-          shadow-xl
-          hover:bg-[#ca8e24]
-        "
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.9 }}
+        className="absolute bottom-6 right-6 z-50 p-3 rounded-full bg-black/50 backdrop-blur-sm border border-white/20 text-white hover:bg-black/70 transition-colors shadow-xl"
       >
         {isMuted ? (
-          <VolumeX className="w-5 h-5 md:w-6 md:h-6" />
+          <VolumeX className="w-6 h-6" />
         ) : (
-          <Volume2 className="w-5 h-5 md:w-6 md:h-6" />
+          <Volume2 className="w-6 h-6" />
         )}
-      </motion.button>
+      </button>
 
-      {/* Animated Pointer - Mobile adjustments */}
-      {showPointer && (
-        <motion.div
-          initial={{ y: 0 }}
-          animate={{ y: [0, -15, 0] }}
-          transition={{ repeat: Infinity, duration: 1.8, ease: "easeInOut" }}
-          className="absolute bottom-16 md:bottom-10 left-1/2 transform -translate-x-1/2 z-30"
-        >
-          <div className="w-10 h-10 rounded-full bg-[#ca8e24]/20 backdrop-blur-sm border border-white/10 flex items-center justify-center">
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              className="text-[#d4a76a]"
-            >
-              <path
-                d="M12 5V19M12 5L6 11M12 5L18 11"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </div>
-        </motion.div>
-      )}
+      {/* Scroll Indicator */}
+      <div
+        ref={scrollIndicatorRef}
+        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-30 flex flex-col items-center text-white/70"
+      >
+        <span className="text-sm mb-2 font-light tracking-wide">
+          SCROLL DOWN
+        </span>
+        <ChevronDown className="w-6 h-6" />
+      </div>
     </section>
   );
 };

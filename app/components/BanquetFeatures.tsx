@@ -5,7 +5,7 @@ const BanquetFeatures = () => {
   const featuresData = [
     {
       space: "Grand Ballroom",
-      capacity: "300 guests",
+      capacity: "100 guests",
       features: "Stage, Dance Floor, LED Lighting",
       size: "2000 sq.ft.",
     },

@@ -1,11 +1,26 @@
 // components/BanquetSection.tsx
 "use client";
-import { motion } from "framer-motion";
 import Image from "next/image";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import BanquetFeatures from "../components/BanquetFeatures";
 
+// Register GSAP plugins
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
+
 const BanquetSection = () => {
+  // Refs for GSAP animations
+  const sectionRef = useRef<HTMLElement>(null);
+  const titleRef = useRef<HTMLHeadingElement>(null);
+  const imageRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
+  const decorativeRefs = useRef<HTMLDivElement[]>([]);
+  const featuresRef = useRef<HTMLDivElement[]>([]);
+  const countdownRef = useRef<HTMLDivElement>(null);
+
   // Countdown timer state
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
@@ -44,83 +59,340 @@ const BanquetSection = () => {
     return () => clearInterval(timer);
   }, []);
 
+  // GSAP Animations
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // Set initial states
+      gsap.set([titleRef.current, imageRef.current, contentRef.current], {
+        opacity: 0,
+        y: 60
+      });
+
+      gsap.set(decorativeRefs.current, {
+        opacity: 0,
+        scale: 0,
+        rotation: -180
+      });
+
+      gsap.set(featuresRef.current, {
+        opacity: 0,
+        x: -30
+      });
+
+      // Main timeline
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 80%",
+          end: "bottom 20%",
+          toggleActions: "play none none reverse"
+        }
+      });
+
+      // Title animation
+      tl.to(titleRef.current, {
+        opacity: 1,
+        y: 0,
+        duration: 1.2,
+        ease: "power3.out"
+      });
+
+      // Image and content parallel animation
+      tl.to([imageRef.current, contentRef.current], {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        stagger: 0.2,
+        ease: "power2.out"
+      }, "-=0.8");
+
+      // Decorative elements
+      tl.to(decorativeRefs.current, {
+        opacity: 1,
+        scale: 1,
+        rotation: 0,
+        duration: 0.8,
+        stagger: 0.1,
+        ease: "back.out(1.7)"
+      }, "-=0.5");
+
+      // Features staggered animation
+      tl.to(featuresRef.current, {
+        opacity: 1,
+        x: 0,
+        duration: 0.6,
+        stagger: 0.1,
+        ease: "power2.out"
+      }, "-=0.3");
+
+      // Floating animations for decorative elements
+      gsap.to(".floating-orb-1", {
+        y: -20,
+        duration: 3,
+        repeat: -1,
+        yoyo: true,
+        ease: "power2.inOut"
+      });
+
+      gsap.to(".floating-orb-2", {
+        y: -15,
+        x: 10,
+        duration: 4,
+        repeat: -1,
+        yoyo: true,
+        ease: "power2.inOut",
+        delay: 1
+      });
+
+      // Continuous rotation for decorative squares
+      gsap.to(".rotating-square", {
+        rotation: 360,
+        duration: 20,
+        repeat: -1,
+        ease: "none"
+      });
+
+      // Hover effects
+      if (imageRef.current) {
+        const imageContainer = imageRef.current.querySelector('.image-container');
+        if (imageContainer) {
+          imageContainer.addEventListener('mouseenter', () => {
+            gsap.to(imageContainer, {
+              scale: 1.05,
+              duration: 0.4,
+              ease: "power2.out"
+            });
+          });
+
+          imageContainer.addEventListener('mouseleave', () => {
+            gsap.to(imageContainer, {
+              scale: 1,
+              duration: 0.4,
+              ease: "power2.out"
+            });
+          });
+        }
+      }
+
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
+
+  // Add refs to arrays
+  const addToDecorative = (el: HTMLDivElement) => {
+    if (el && !decorativeRefs.current.includes(el)) {
+      decorativeRefs.current.push(el);
+    }
+  };
+
+  const addToFeatures = (el: HTMLDivElement) => {
+    if (el && !featuresRef.current.includes(el)) {
+      featuresRef.current.push(el);
+    }
+  };
+
   return (
     <section
+      ref={sectionRef}
       id="banquet"
-      className="relative py-24 overflow-hidden"
+      className="relative min-h-screen py-24 overflow-hidden"
       style={{
-        background: "linear-gradient(to bottom, #0a0a0a 0%, #1a1a1a 100%)",
+        background: `
+          radial-gradient(circle at 20% 20%, rgba(212, 167, 106, 0.15) 0%, transparent 50%),
+          radial-gradient(circle at 80% 80%, rgba(184, 134, 11, 0.1) 0%, transparent 50%),
+          linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0f0f0f 100%)
+        `,
       }}
     >
-      {/* Decorative elements */}
-      <div className="absolute top-20 right-10 w-16 h-16 rounded-full bg-[#b8860b]/20 backdrop-blur-sm border border-white/10 animate-float z-0"></div>
-      <div className="absolute bottom-40 left-12 w-12 h-12 rounded-full bg-[#d4a76a]/20 backdrop-blur-sm border border-white/10 animate-float-delay z-0"></div>
+      {/* Animated Background Elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        {/* Floating orbs */}
+        <div
+          ref={addToDecorative}
+          className="floating-orb-1 absolute top-20 right-10 w-20 h-20 rounded-full bg-gradient-to-br from-amber-400/20 to-yellow-600/10 backdrop-blur-lg border border-white/20 shadow-2xl"
+          style={{
+            background: `
+              radial-gradient(circle at 30% 30%, rgba(255, 215, 0, 0.3) 0%, rgba(212, 167, 106, 0.1) 70%, transparent 100%),
+              rgba(255, 255, 255, 0.05)
+            `,
+          }}
+        />
+        
+        <div
+          ref={addToDecorative}
+          className="floating-orb-2 absolute bottom-40 left-12 w-16 h-16 rounded-full bg-gradient-to-br from-yellow-500/20 to-amber-700/10 backdrop-blur-lg border border-white/15 shadow-xl"
+          style={{
+            background: `
+              radial-gradient(circle at 30% 30%, rgba(255, 193, 7, 0.25) 0%, rgba(184, 134, 11, 0.1) 70%, transparent 100%),
+              rgba(255, 255, 255, 0.03)
+            `,
+          }}
+        />
 
-      {/* Gold pattern overlay */}
-      <div className="absolute inset-0 opacity-5 bg-[url('/assets/svg/gold-pattern.svg')] bg-repeat z-0"></div>
+        {/* Rotating squares */}
+        <div
+          ref={addToDecorative}
+          className="rotating-square absolute top-1/3 left-8 w-8 h-8 border border-amber-400/30 backdrop-blur-sm"
+          style={{
+            background: "rgba(212, 167, 106, 0.05)",
+            transform: "rotate(45deg)",
+          }}
+        />
+        
+        <div
+          ref={addToDecorative}
+          className="rotating-square absolute bottom-1/4 right-16 w-12 h-12 border border-yellow-500/20 backdrop-blur-sm"
+          style={{
+            background: "rgba(255, 215, 0, 0.03)",
+            transform: "rotate(45deg)",
+          }}
+        />
 
-      <div className="container mx-auto px-4 relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-            <span className="text-[#d4a76a]">Premium Event Spaces</span> Coming
-            Soon
-          </h2>
-          <div className="h-1 w-24 bg-gradient-to-r from-[#d4a76a] to-[#b8860b] mx-auto rounded-full"></div>
-        </motion.div>
+        {/* Gradient mesh */}
+        <div className="absolute inset-0 opacity-30">
+          <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-transparent via-amber-500/5 to-transparent" />
+          <div className="absolute bottom-0 right-0 w-full h-full bg-gradient-to-tl from-transparent via-yellow-600/3 to-transparent" />
+        </div>
+      </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          {/* Image */}
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, type: "spring" }}
-            className="relative"
-          >
-            <div className="absolute -top-6 -left-6 w-24 h-24 bg-[#d4a76a]/10 backdrop-blur-sm rounded-3xl border border-white/20 z-0"></div>
-            <div className="absolute -bottom-6 -right-6 w-24 h-24 bg-[#b8860b]/10 backdrop-blur-sm rounded-3xl border border-white/20 z-0"></div>
+      <div className="container mx-auto px-6 relative z-10">
+        {/* Enhanced Title Section */}
+        <div ref={titleRef} className="text-center mb-20">
+          <div className="inline-block mb-6">
+            <div 
+              className="px-6 py-3 rounded-full border backdrop-blur-xl shadow-xl"
+              style={{
+                background: `
+                  linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%),
+                  rgba(212, 167, 106, 0.1)
+                `,
+                borderColor: "rgba(255, 255, 255, 0.2)",
+              }}
+            >
+              <span className="text-amber-300 font-semibold text-sm tracking-wider uppercase">
+                Coming Soon
+              </span>
+            </div>
+          </div>
+          
+          <h1 className="text-5xl md:text-7xl font-black text-white mb-6 tracking-tight">
+            <span 
+              className="bg-gradient-to-r from-amber-300 via-yellow-400 to-amber-500 bg-clip-text text-transparent"
+              style={{
+                fontFamily: "'Inter', 'SF Pro Display', system-ui, sans-serif",
+                fontWeight: "900",
+                letterSpacing: "-0.02em",
+              }}
+            >
+              Premium Event
+            </span>
+            <br />
+            <span className="text-white/90">Spaces</span>
+          </h1>
+          
+          <div className="flex justify-center">
+            <div className="h-1.5 w-32 bg-gradient-to-r from-amber-400 via-yellow-500 to-amber-600 rounded-full shadow-lg" />
+          </div>
+        </div>
 
-            <motion.div
-              whileHover={{ scale: 1.03 }}
-              className="relative aspect-square overflow-hidden rounded-3xl border-4 border-white/10 shadow-2xl"
+        <div className="grid grid-cols-1 xl:grid-cols-2 gap-20 items-center max-w-7xl mx-auto">
+          {/* Enhanced Image Section */}
+          <div ref={imageRef} className="relative">
+            {/* Decorative background elements */}
+            <div 
+              ref={addToDecorative}
+              className="absolute -top-8 -left-8 w-32 h-32 rounded-3xl border backdrop-blur-xl"
+              style={{
+                background: `
+                  linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.02) 100%),
+                  rgba(212, 167, 106, 0.05)
+                `,
+                borderColor: "rgba(255, 255, 255, 0.1)",
+              }}
+            />
+            
+            <div 
+              ref={addToDecorative}
+              className="absolute -bottom-8 -right-8 w-28 h-28 rounded-3xl border backdrop-blur-xl"
+              style={{
+                background: `
+                  linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%),
+                  rgba(184, 134, 11, 0.08)
+                `,
+                borderColor: "rgba(255, 255, 255, 0.15)",
+              }}
+            />
+
+            <div className="image-container relative aspect-square overflow-hidden rounded-3xl shadow-2xl border backdrop-blur-sm"
+              style={{
+                borderColor: "rgba(255, 255, 255, 0.2)",
+                boxShadow: `
+                  0 25px 50px -12px rgba(0, 0, 0, 0.5),
+                  0 0 0 1px rgba(255, 255, 255, 0.1),
+                  inset 0 1px 0 rgba(255, 255, 255, 0.1)
+                `,
+              }}
             >
               <Image
                 src="/assets/img/banquet/Banhall.jpg"
                 alt="SkyView Banquet Hall"
                 fill
-                className="object-cover"
+                className="object-cover transition-transform duration-700"
                 sizes="(max-width: 768px) 100vw, 50vw"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end p-6">
-                <span className="text-xl font-bold text-white">
+              
+              {/* Glass overlay */}
+              <div 
+                className="absolute inset-0"
+                style={{
+                  background: `
+                    linear-gradient(to bottom, 
+                      rgba(0, 0, 0, 0.1) 0%, 
+                      rgba(0, 0, 0, 0.3) 60%, 
+                      rgba(0, 0, 0, 0.8) 100%
+                    )
+                  `,
+                }}
+              />
+              
+              {/* Bottom text */}
+              <div className="absolute bottom-0 left-0 right-0 p-8">
+                <h3 
+                  className="text-2xl font-bold text-white mb-2"
+                  style={{
+                    fontFamily: "'Inter', system-ui, sans-serif",
+                    fontWeight: "700",
+                  }}
+                >
                   Grand Ballroom Preview
-                </span>
+                </h3>
+                <p className="text-white/80 text-sm">Elegant • Spacious • Unforgettable</p>
               </div>
-            </motion.div>
+            </div>
 
-            {/* Decorative badge */}
-            <motion.div
-              initial={{ scale: 0 }}
-              whileInView={{ scale: 1 }}
-              transition={{ delay: 0.5, type: "spring" }}
-              className="absolute -top-4 -right-4 bg-gradient-to-r from-[#d4a76a] to-[#b8860b] text-white px-6 py-2 rounded-full font-bold shadow-lg z-10"
+            {/* Floating badge */}
+            <div 
+              ref={addToDecorative}
+              className="absolute -top-6 -right-6 px-6 py-3 rounded-full font-bold shadow-2xl border text-white z-20"
+              style={{
+                background: `
+                  linear-gradient(135deg, rgba(255, 215, 0, 0.9) 0%, rgba(255, 193, 7, 0.8) 100%),
+                  rgba(212, 167, 106, 0.1)
+                `,
+                borderColor: "rgba(255, 255, 255, 0.3)",
+                backdropFilter: "blur(16px)",
+                boxShadow: "0 8px 32px rgba(255, 215, 0, 0.3)",
+              }}
             >
-              New
-            </motion.div>
-          </motion.div>
+              ✨ New
+            </div>
+          </div>
 
-          {/* Content */}
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-          >
+          {/* Enhanced Content Section */}
+          <div ref={contentRef} className="relative">
             <div className="relative rounded-3xl overflow-hidden">
-              {/* Background Image */}
+              {/* Background with glassmorphism */}
               <div className="absolute inset-0 z-0">
                 <Image
                   src="/assets/img/banquet/bqbg.jpg"
@@ -129,85 +401,160 @@ const BanquetSection = () => {
                   className="object-cover"
                   sizes="(max-width: 768px) 100vw, 50vw"
                 />
-                {/* Dark overlay for readability */}
-                <div className="absolute inset-0 bg-black/70 z-10"></div>
+                <div 
+                  className="absolute inset-0"
+                  style={{
+                    background: `
+                      linear-gradient(135deg, 
+                        rgba(0, 0, 0, 0.8) 0%, 
+                        rgba(0, 0, 0, 0.6) 50%, 
+                        rgba(0, 0, 0, 0.9) 100%
+                      )
+                    `,
+                    backdropFilter: "blur(8px)",
+                  }}
+                />
               </div>
 
-              {/* Content Card */}
-              <div className="relative bg-white/5 backdrop-blur-lg border border-white/10 rounded-3xl p-8 shadow-xl z-20">
-                <div className="inline-block bg-[#d4a76a]/10 backdrop-blur-sm text-[#d4a76a] text-sm font-medium px-4 py-2 rounded-full mb-6">
-                  Opening Soon
+              {/* Glass content card */}
+              <div 
+                className="relative border rounded-3xl p-10 shadow-2xl z-20"
+                style={{
+                  background: `
+                    linear-gradient(135deg, 
+                      rgba(255, 255, 255, 0.15) 0%, 
+                      rgba(255, 255, 255, 0.05) 50%, 
+                      rgba(255, 255, 255, 0.1) 100%
+                    ),
+                    rgba(0, 0, 0, 0.2)
+                  `,
+                  borderColor: "rgba(255, 255, 255, 0.2)",
+                  backdropFilter: "blur(24px)",
+                  boxShadow: `
+                    0 8px 32px rgba(0, 0, 0, 0.3),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+                    0 0 0 1px rgba(255, 255, 255, 0.1)
+                  `,
+                }}
+              >
+                <div 
+                  className="inline-block px-5 py-2 rounded-full mb-8 border backdrop-blur-xl"
+                  style={{
+                    background: `
+                      linear-gradient(135deg, rgba(255, 215, 0, 0.2) 0%, rgba(255, 193, 7, 0.1) 100%),
+                      rgba(255, 255, 255, 0.05)
+                    `,
+                    borderColor: "rgba(255, 215, 0, 0.3)",
+                  }}
+                >
+                  <span 
+                    className="text-amber-300 font-semibold text-sm tracking-wider"
+                    style={{ fontFamily: "'Inter', system-ui, sans-serif" }}
+                  >
+                    ⏰ OPENING SOON
+                  </span>
                 </div>
 
-                <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+                <h2 
+                  className="text-4xl md:text-5xl font-black text-white mb-8 leading-tight"
+                  style={{
+                    fontFamily: "'Inter', 'SF Pro Display', system-ui, sans-serif",
+                    letterSpacing: "-0.01em",
+                  }}
+                >
                   The{" "}
-                  <span className="text-[#d4a76a]">SkyView Banquet Hall</span>
+                  <span className="bg-gradient-to-r from-amber-300 via-yellow-400 to-amber-500 bg-clip-text text-transparent">
+                    SkyView
+                  </span>
+                  <br />
+                  <span className="text-white/90">Banquet Hall</span>
                 </h2>
 
-                <p className="text-white/80 mb-8 text-lg leading-relaxed">
-                  Elevate your special events in our luxurious new banquet
-                  space. Featuring panoramic city views, premium amenities, and
-                  customizable event packages designed for unforgettable
-                  celebrations.
+                <p 
+                  className="text-white/90 mb-10 text-lg leading-relaxed"
+                  style={{
+                    fontFamily: "'Inter', system-ui, sans-serif",
+                    fontWeight: "400",
+                  }}
+                >
+                  Elevate your special events in our luxurious new banquet space. 
+                  Featuring panoramic city views, premium amenities, and customizable 
+                  event packages designed for unforgettable celebrations.
                 </p>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
+                {/* Enhanced Features Grid */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-12">
                   {[
-                    { icon: "👰", text: "Weddings & Receptions" },
-                    { icon: "💼", text: "Corporate Events" },
-                    { icon: "🎂", text: "Birthday Celebrations" },
-                    { icon: "🎓", text: "Graduation Parties" },
+                    { icon: "💍", text: "Weddings & Receptions", color: "from-pink-400/20 to-rose-500/10" },
+                    { icon: "🏢", text: "Corporate Events", color: "from-blue-400/20 to-indigo-500/10" },
+                    { icon: "🎂", text: "Birthday Celebrations", color: "from-purple-400/20 to-violet-500/10" },
+                    { icon: "🎓", text: "Graduation Parties", color: "from-green-400/20 to-emerald-500/10" },
                   ].map((item, idx) => (
-                    <motion.div
+                    <div
                       key={idx}
-                      whileHover={{ y: -5 }}
-                      className="bg-white/5 backdrop-blur-sm rounded-full p-4 border border-white/10"
+                      ref={addToFeatures}
+                      className="group rounded-3xl p-4 border backdrop-blur-xl transition-all duration-300 hover:scale-105 cursor-pointer"
+                      style={{
+                        background: `
+                          linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.03) 100%),
+                          linear-gradient(135deg, ${item.color})
+                        `,
+                        borderColor: "rgba(255, 255, 255, 0.15)",
+                        boxShadow: "0 4px 16px rgba(0, 0, 0, 0.1)",
+                      }}
                     >
-                      <div className="flex items-center gap-3">
-                        <span className="text-2xl text-[#d4a76a]">
+                      <div className="flex items-center gap-4">
+                        <span className="text-3xl group-hover:scale-110 transition-transform duration-300">
                           {item.icon}
                         </span>
-                        <span className="text-white/90">{item.text}</span>
+                        <span 
+                          className="text-white/95 font-medium"
+                          style={{ fontFamily: "'Inter', system-ui, sans-serif" }}
+                        >
+                          {item.text}
+                        </span>
                       </div>
-                    </motion.div>
+                    </div>
                   ))}
                 </div>
 
-                {/* Features Table */}
-                <div className="my-10">
-                  <h3 className="text-2xl font-bold text-white mb-6 flex items-center gap-3">
-                    <div className="w-8 h-1 bg-[#d4a76a] rounded-full"></div>
-                    Venue Specifications
-                  </h3>
-                  <BanquetFeatures />
-                </div>
-
-                {/* CTA Buttons */}
-                <div className="flex flex-col sm:flex-row gap-4 mt-10">
-                  <motion.button
-                    whileHover={{
-                      scale: 1.02,
-                      background: "linear-gradient(to right, #e0b88a, #c69a2b)",
-                    }}
-                    whileTap={{ scale: 0.95 }}
-                    className="flex-1 px-8 py-4 bg-gradient-to-r from-[#d4a76a] to-[#b8860b] text-white font-bold rounded-full hover:shadow-lg transition-all text-center shadow-md shadow-[#b8860b]/30"
-                  >
-                    Request Brochure
-                  </motion.button>
-                  <motion.button
-                    whileHover={{
-                      scale: 1.02,
-                      backgroundColor: "rgba(255, 255, 255, 0.2)",
-                    }}
-                    whileTap={{ scale: 0.95 }}
-                    className="flex-1 px-8 py-4 bg-white/10 backdrop-blur-sm border border-white/20 text-white rounded-full hover:shadow-lg transition-all text-center shadow-md shadow-white/10"
-                  >
-                    View Floor Plans
-                  </motion.button>
+                {/* Countdown Timer */}
+                <div 
+                  ref={countdownRef}
+                  className="grid grid-cols-4 gap-4 p-6 rounded-3xl border backdrop-blur-xl"
+                  style={{
+                    background: `
+                      linear-gradient(135deg, rgba(255, 215, 0, 0.1) 0%, rgba(255, 193, 7, 0.05) 100%),
+                      rgba(0, 0, 0, 0.2)
+                    `,
+                    borderColor: "rgba(255, 215, 0, 0.2)",
+                  }}
+                >
+                  {[
+                    { label: "Days", value: timeLeft.days },
+                    { label: "Hours", value: timeLeft.hours },
+                    { label: "Minutes", value: timeLeft.minutes },
+                    { label: "Seconds", value: timeLeft.seconds },
+                  ].map((item, idx) => (
+                    <div key={idx} className="text-center">
+                      <div 
+                        className="text-2xl md:text-3xl font-black text-amber-300 mb-1"
+                        style={{ fontFamily: "'Inter', system-ui, sans-serif" }}
+                      >
+                        {item.value.toString().padStart(2, '0')}
+                      </div>
+                      <div 
+                        className="text-xs text-white/70 uppercase tracking-wider font-medium"
+                        style={{ fontFamily: "'Inter', system-ui, sans-serif" }}
+                      >
+                        {item.label}
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>
