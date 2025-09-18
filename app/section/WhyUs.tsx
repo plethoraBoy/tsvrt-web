@@ -414,7 +414,7 @@ const WhyUsSection: React.FC = () => {
                 <div className="relative p-8 h-full flex flex-col">
                   {/* Number Badge */}
                   <div 
-                    className="number-badge absolute -top-4 -right-4 w-12 h-12 rounded-full flex items-center justify-center font-black text-white text-sm border backdrop-blur-xl z-10"
+                    className="number-badge absolute -top-1 -right-1 w-12 h-12 rounded-full flex items-center justify-center font-black text-white text-sm border backdrop-blur-xl z-10"
                     style={{
                       background: `linear-gradient(135deg, ${feature.hoverGradient.replace('from-', '').replace(' to-', ', ')})`,
                       borderColor: "rgba(255, 255, 255, 0.2)",

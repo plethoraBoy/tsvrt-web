@@ -60,7 +60,7 @@ const HoverImage = ({ heading, imgSrc, subheading, href }: LinkProps) => {
             staggerChildren: 0.000075,
             delayChildren: 0.25,
           }}
-          className="relative z-10 block text-4xl font-bold text-neutral-500 transition-colors duration-500 group-hover:text-neutral-50 md:text-6xl"
+          className="relative z-10 block text-4xl font-bold text-neutral-500 transition-colors duration-500 group-hover:text-neutral-50 md:text-5xl"
         >
           {heading.split("").map((l, i) => (
             <motion.span

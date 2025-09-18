@@ -270,9 +270,7 @@ const BanquetSection = () => {
                 borderColor: "rgba(255, 255, 255, 0.2)",
               }}
             >
-              <span className="text-amber-300 font-semibold text-sm tracking-wider uppercase">
-                Coming Soon
-              </span>
+              <span className="text-amber-300 font-semibold text-sm tracking-wider uppercase">SKYCLUSIVE      </span>
             </div>
           </div>
           
@@ -437,7 +435,7 @@ const BanquetSection = () => {
                   `,
                 }}
               >
-                <div 
+                {/* <div 
                   className="inline-block px-5 py-2 rounded-full mb-8 border backdrop-blur-xl"
                   style={{
                     background: `
@@ -453,7 +451,7 @@ const BanquetSection = () => {
                   >
                     ⏰ OPENING SOON
                   </span>
-                </div>
+                </div> */}
 
                 <h2 
                   className="text-4xl md:text-5xl font-black text-white mb-8 leading-tight"
@@ -485,10 +483,10 @@ const BanquetSection = () => {
                 {/* Enhanced Features Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-12">
                   {[
-                    { icon: "💍", text: "Weddings & Receptions", color: "from-pink-400/20 to-rose-500/10" },
+    { icon: "👶", text: "Baby Showers", color: "from-pink-300/20 to-fuchsia-500/10" },
                     { icon: "🏢", text: "Corporate Events", color: "from-blue-400/20 to-indigo-500/10" },
                     { icon: "🎂", text: "Birthday Celebrations", color: "from-purple-400/20 to-violet-500/10" },
-                    { icon: "🎓", text: "Graduation Parties", color: "from-green-400/20 to-emerald-500/10" },
+                    { icon: "🎉", text: "All Parties Events", color: "from-green-400/20 to-emerald-500/10" },
                   ].map((item, idx) => (
                     <div
                       key={idx}
@@ -518,40 +516,7 @@ const BanquetSection = () => {
                   ))}
                 </div>
 
-                {/* Countdown Timer */}
-                <div 
-                  ref={countdownRef}
-                  className="grid grid-cols-4 gap-4 p-6 rounded-3xl border backdrop-blur-xl"
-                  style={{
-                    background: `
-                      linear-gradient(135deg, rgba(255, 215, 0, 0.1) 0%, rgba(255, 193, 7, 0.05) 100%),
-                      rgba(0, 0, 0, 0.2)
-                    `,
-                    borderColor: "rgba(255, 215, 0, 0.2)",
-                  }}
-                >
-                  {[
-                    { label: "Days", value: timeLeft.days },
-                    { label: "Hours", value: timeLeft.hours },
-                    { label: "Minutes", value: timeLeft.minutes },
-                    { label: "Seconds", value: timeLeft.seconds },
-                  ].map((item, idx) => (
-                    <div key={idx} className="text-center">
-                      <div 
-                        className="text-2xl md:text-3xl font-black text-amber-300 mb-1"
-                        style={{ fontFamily: "'Inter', system-ui, sans-serif" }}
-                      >
-                        {item.value.toString().padStart(2, '0')}
-                      </div>
-                      <div 
-                        className="text-xs text-white/70 uppercase tracking-wider font-medium"
-                        style={{ fontFamily: "'Inter', system-ui, sans-serif" }}
-                      >
-                        {item.label}
-                      </div>
-                    </div>
-                  ))}
-                </div>
+               
               </div>
             </div>
           </div>

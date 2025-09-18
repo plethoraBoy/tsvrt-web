@@ -19,23 +19,24 @@ const Footer = () => {
   const socialIconsRef = useRef<HTMLAnchorElement[]>([]);
   const taglineRef = useRef<HTMLDivElement>(null);
   const copyrightRef = useRef<HTMLDivElement>(null);
+  const backgroundRef = useRef<HTMLDivElement>(null);
 
   const currentYear = new Date().getFullYear();
 
   // Add elements to refs arrays
-  const addToFloating = (el: HTMLDivElement) => {
+  const addToFloating = (el: HTMLDivElement | null) => {
     if (el && !floatingElementsRef.current.includes(el)) {
       floatingElementsRef.current.push(el);
     }
   };
 
-  const addToSections = (el: HTMLDivElement) => {
+  const addToSections = (el: HTMLDivElement | null) => {
     if (el && !sectionRefs.current.includes(el)) {
       sectionRefs.current.push(el);
     }
   };
 
-  const addToSocialIcons = (el: HTMLAnchorElement) => {
+  const addToSocialIcons = (el: HTMLAnchorElement | null) => {
     if (el && !socialIconsRef.current.includes(el)) {
       socialIconsRef.current.push(el);
     }
@@ -43,125 +44,192 @@ const Footer = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Set initial states
+      // Enhanced background animations
+      gsap.to(backgroundRef.current, {
+        backgroundPosition: "100% 100%",
+        duration: 20,
+        repeat: -1,
+        yoyo: true,
+        ease: "none"
+      });
+
+      // Set initial states with improved timing
       gsap.set(mainCardRef.current, {
         opacity: 0,
-        y: 100,
-        scale: 0.9
+        y: 120,
+        scale: 0.85,
+        rotationX: 15
       });
 
       gsap.set(sectionRefs.current, {
         opacity: 0,
-        y: 50
+        y: 60,
+        x: -20
       });
 
       gsap.set(socialIconsRef.current, {
         opacity: 0,
         scale: 0,
-        rotation: -180
+        rotation: -270
       });
 
       gsap.set([taglineRef.current, copyrightRef.current], {
         opacity: 0,
-        y: 30
+        y: 40
       });
 
-      // Floating elements continuous animations
+      // Enhanced floating elements animations
       floatingElementsRef.current.forEach((el, index) => {
+        // Primary floating animation
         gsap.to(el, {
-          y: -20 - (index * 5),
-          rotation: index % 2 === 0 ? 10 : -8,
-          duration: 8 + (index * 2),
+          y: -30 - (index * 8),
+          x: Math.sin(index) * 15,
+          rotation: index % 2 === 0 ? 15 : -12,
+          duration: 10 + (index * 3),
           repeat: -1,
           yoyo: true,
           ease: "power2.inOut",
-          delay: index * 0.5
+          delay: index * 0.7
         });
 
+        // Scale and opacity pulse
         gsap.to(el, {
-          scale: 1.1,
-          opacity: 0.8,
-          duration: 4 + index,
+          scale: 1.2 + (index * 0.1),
+          opacity: 0.9,
+          duration: 6 + index * 1.5,
           repeat: -1,
           yoyo: true,
           ease: "power2.inOut",
-          delay: index * 0.3
+          delay: index * 0.4
+        });
+
+        // Additional rotation animation
+        gsap.to(el, {
+          rotation: `+=${index % 2 === 0 ? 360 : -360}`,
+          duration: 25 + index * 5,
+          repeat: -1,
+          ease: "none"
         });
       });
 
-      // Main timeline
+      // Enhanced main timeline
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: footerRef.current,
-          start: "top 80%",
-          end: "bottom 20%",
-          toggleActions: "play none none reverse"
+          start: "top 85%",
+          end: "bottom 15%",
+          toggleActions: "play none none reverse",
+          scrub: false
         }
       });
 
-      // Main card animation
+      // Main card entrance with 3D effect
       tl.to(mainCardRef.current, {
         opacity: 1,
         y: 0,
         scale: 1,
-        duration: 1.2,
-        ease: "back.out(1.4)"
+        rotationX: 0,
+        duration: 1.6,
+        ease: "back.out(1.2)"
       });
 
-      // Sections staggered animation
+      // Sections with enhanced stagger
       tl.to(sectionRefs.current, {
         opacity: 1,
         y: 0,
-        duration: 0.8,
-        stagger: 0.1,
-        ease: "power2.out"
-      }, "-=0.8");
+        x: 0,
+        duration: 1,
+        stagger: {
+          amount: 0.8,
+          from: "start",
+          ease: "power2.out"
+        },
+        ease: "power3.out"
+      }, "-=1.2");
 
-      // Social icons animation
+      // Social icons with bounce effect
       tl.to(socialIconsRef.current, {
         opacity: 1,
         scale: 1,
         rotation: 0,
-        duration: 0.6,
-        stagger: 0.1,
-        ease: "back.out(1.7)"
-      }, "-=0.5");
+        duration: 0.8,
+        stagger: {
+          amount: 0.6,
+          from: "center",
+          ease: "back.out(2)"
+        },
+        ease: "elastic.out(1, 0.5)"
+      }, "-=0.8");
 
-      // Final elements
+      // Final elements with overlap
       tl.to(taglineRef.current, {
         opacity: 1,
         y: 0,
-        duration: 0.8,
-        ease: "power2.out"
-      }, "-=0.3")
+        duration: 1.2,
+        ease: "power3.out"
+      }, "-=0.5")
       .to(copyrightRef.current, {
         opacity: 1,
         y: 0,
-        duration: 0.8,
-        ease: "power2.out"
-      }, "-=0.6");
+        duration: 1,
+        ease: "power3.out"
+      }, "-=0.8");
 
-      // Social icons hover effects
-      socialIconsRef.current.forEach((icon) => {
+      // Enhanced social icons hover effects
+      socialIconsRef.current.forEach((icon, index) => {
         if (icon) {
-          icon.addEventListener('mouseenter', () => {
+          const handleMouseEnter = () => {
             gsap.to(icon, {
-              y: -8,
-              scale: 1.2,
-              duration: 0.3,
-              ease: "back.out(1.7)"
+              y: -12,
+              scale: 1.3,
+              rotation: index % 2 === 0 ? 5 : -5,
+              duration: 0.4,
+              ease: "back.out(2)"
             });
-          });
-
-          icon.addEventListener('mouseleave', () => {
+            
+            // Add glow effect
             gsap.to(icon, {
-              y: 0,
-              scale: 1,
+              boxShadow: "0 8px 32px rgba(251, 191, 36, 0.4)",
               duration: 0.3,
               ease: "power2.out"
             });
-          });
+          };
+
+          const handleMouseLeave = () => {
+            gsap.to(icon, {
+              y: 0,
+              scale: 1,
+              rotation: 0,
+              duration: 0.4,
+              ease: "power2.out"
+            });
+            
+            gsap.to(icon, {
+              boxShadow: "0 4px 16px rgba(0, 0, 0, 0.1)",
+              duration: 0.3,
+              ease: "power2.out"
+            });
+          };
+
+          icon.addEventListener('mouseenter', handleMouseEnter);
+          icon.addEventListener('mouseleave', handleMouseLeave);
+          
+          // Cleanup function will be handled by context revert
         }
+      });
+
+      // Add scroll-based parallax for floating elements
+      floatingElementsRef.current.forEach((el, index) => {
+        gsap.to(el, {
+          y: (i, target) => -ScrollTrigger.maxScroll(window) * (0.1 + index * 0.05),
+          ease: "none",
+          scrollTrigger: {
+            trigger: footerRef.current,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: 1
+          }
+        });
       });
 
     }, footerRef);
@@ -172,174 +240,214 @@ const Footer = () => {
   return (
     <footer 
       ref={footerRef}
-      className="relative py-20 overflow-hidden"
-      style={{
-        background: `
-          radial-gradient(circle at 20% 20%, rgba(251, 191, 36, 0.08) 0%, transparent 40%),
-          radial-gradient(circle at 80% 80%, rgba(168, 85, 247, 0.06) 0%, transparent 40%),
-          linear-gradient(135deg, #0a0a0a 0%, #000 50%, #000 100%)
-        `,
-      }}
+      className="relative py-24 overflow-hidden"
     >
-      {/* Enhanced Background Elements */}
+      {/* Enhanced Dynamic Background */}
+      <div 
+        ref={backgroundRef}
+        className="absolute inset-0 z-0"
+        style={{
+          background: `
+            radial-gradient(circle at 25% 25%, rgba(251, 191, 36, 0.12) 0%, transparent 50%),
+            radial-gradient(circle at 75% 75%, rgba(168, 85, 247, 0.08) 0%, transparent 50%),
+            radial-gradient(circle at 50% 0%, rgba(34, 197, 94, 0.06) 0%, transparent 50%),
+            linear-gradient(135deg, #0a0a0a 0%, #000 30%, #111 70%, #000 100%)
+          `,
+          backgroundSize: "150% 150%",
+        }}
+      />
+
+      {/* Enhanced Background Elements with More Variety */}
       <div className="absolute inset-0 z-0">
+        {/* Primary floating elements */}
         <div 
           ref={addToFloating}
-          className="absolute top-20 left-1/4 w-16 h-16 rounded-full border backdrop-blur-lg"
+          className="absolute top-20 left-1/4 w-20 h-20 rounded-full border backdrop-blur-xl"
           style={{
             background: `
-              radial-gradient(circle at 30% 30%, rgba(251, 191, 36, 0.4) 0%, rgba(251, 191, 36, 0.1) 70%, transparent 100%),
+              conic-gradient(from 0deg, rgba(251, 191, 36, 0.4), rgba(251, 191, 36, 0.1), rgba(251, 191, 36, 0.4)),
               rgba(255, 255, 255, 0.05)
             `,
-            borderColor: "rgba(251, 191, 36, 0.2)",
-            boxShadow: "0 4px 20px rgba(251, 191, 36, 0.2)"
+            borderColor: "rgba(251, 191, 36, 0.3)",
+            boxShadow: "0 8px 32px rgba(251, 191, 36, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2)"
           }}
         />
 
         <div 
           ref={addToFloating}
-          className="absolute bottom-40 right-1/4 w-14 h-14 rounded-full border backdrop-blur-lg"
+          className="absolute bottom-32 right-1/5 w-16 h-16 rounded-full border backdrop-blur-xl"
           style={{
             background: `
-              radial-gradient(circle at 30% 30%, rgba(34, 197, 94, 0.3) 0%, rgba(34, 197, 94, 0.08) 70%, transparent 100%),
+              radial-gradient(circle at 20% 20%, rgba(34, 197, 94, 0.5) 0%, rgba(34, 197, 94, 0.1) 60%, transparent 100%),
               rgba(255, 255, 255, 0.03)
             `,
-            borderColor: "rgba(34, 197, 94, 0.2)",
-            boxShadow: "0 4px 16px rgba(34, 197, 94, 0.15)"
+            borderColor: "rgba(34, 197, 94, 0.3)",
+            boxShadow: "0 6px 24px rgba(34, 197, 94, 0.25)"
           }}
         />
 
         <div 
           ref={addToFloating}
-          className="absolute top-1/3 right-1/3 w-20 h-20 rounded-full border backdrop-blur-lg"
+          className="absolute top-1/2 right-1/6 w-24 h-24 rounded-full border backdrop-blur-xl"
           style={{
             background: `
-              radial-gradient(circle at 30% 30%, rgba(251, 113, 133, 0.3) 0%, rgba(251, 113, 133, 0.08) 70%, transparent 100%),
+              linear-gradient(45deg, rgba(251, 113, 133, 0.3) 0%, rgba(251, 113, 133, 0.05) 100%),
               rgba(255, 255, 255, 0.03)
             `,
-            borderColor: "rgba(251, 113, 133, 0.2)",
-            boxShadow: "0 4px 18px rgba(251, 113, 133, 0.15)"
+            borderColor: "rgba(251, 113, 133, 0.3)",
+            boxShadow: "0 8px 28px rgba(251, 113, 133, 0.2)"
           }}
         />
 
-        {/* Gradient mesh overlay */}
-        <div className="absolute inset-0 opacity-30">
-          <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-transparent via-amber-500/3 to-transparent" />
-          <div className="absolute bottom-0 right-0 w-full h-full bg-gradient-to-tl from-transparent via-purple-600/2 to-transparent" />
+        <div 
+          ref={addToFloating}
+          className="absolute top-40 right-1/3 w-12 h-12 rounded-full border backdrop-blur-xl"
+          style={{
+            background: `
+              radial-gradient(circle at 30% 30%, rgba(168, 85, 247, 0.4) 0%, rgba(168, 85, 247, 0.1) 70%, transparent 100%),
+              rgba(255, 255, 255, 0.04)
+            `,
+            borderColor: "rgba(168, 85, 247, 0.3)",
+            boxShadow: "0 6px 20px rgba(168, 85, 247, 0.2)"
+          }}
+        />
+
+        <div 
+          ref={addToFloating}
+          className="absolute bottom-48 left-1/6 w-18 h-18 rounded-full border backdrop-blur-xl"
+          style={{
+            background: `
+              conic-gradient(from 45deg, rgba(59, 130, 246, 0.3), rgba(59, 130, 246, 0.1), rgba(59, 130, 246, 0.3)),
+              rgba(255, 255, 255, 0.03)
+            `,
+            borderColor: "rgba(59, 130, 246, 0.3)",
+            boxShadow: "0 6px 24px rgba(59, 130, 246, 0.2)"
+          }}
+        />
+
+        {/* Animated gradient overlays */}
+        <div className="absolute inset-0 opacity-40">
+          <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-transparent via-amber-500/4 to-transparent animate-pulse" />
+          <div className="absolute bottom-0 right-0 w-full h-full bg-gradient-to-tl from-transparent via-purple-600/3 to-transparent" />
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-full bg-gradient-radial from-transparent via-green-500/2 to-transparent" />
         </div>
       </div>
 
       <div className="container relative z-10 mx-auto px-6 lg:px-8">
         <div 
           ref={mainCardRef}
-          className="rounded-3xl border backdrop-blur-2xl overflow-hidden shadow-2xl"
+          className="rounded-3xl border backdrop-blur-3xl overflow-hidden shadow-2xl"
           style={{
             background: `
               linear-gradient(135deg, 
-                rgba(255, 255, 255, 0.12) 0%, 
-                rgba(255, 255, 255, 0.04) 50%, 
-                rgba(255, 255, 255, 0.08) 100%
+                rgba(255, 255, 255, 0.15) 0%, 
+                rgba(255, 255, 255, 0.05) 30%, 
+                rgba(255, 255, 255, 0.08) 60%,
+                rgba(255, 255, 255, 0.12) 100%
               ),
-              rgba(0, 0, 0, 0.3)
+              rgba(0, 0, 0, 0.4)
             `,
-            borderColor: "rgba(255, 255, 255, 0.15)",
+            borderColor: "rgba(255, 255, 255, 0.2)",
             boxShadow: `
-              0 25px 50px -12px rgba(0, 0, 0, 0.5),
-              inset 0 1px 0 rgba(255, 255, 255, 0.2),
-              0 0 0 1px rgba(255, 255, 255, 0.05)
+              0 32px 64px -12px rgba(0, 0, 0, 0.6),
+              inset 0 1px 0 rgba(255, 255, 255, 0.3),
+              0 0 0 1px rgba(255, 255, 255, 0.08),
+              0 8px 32px rgba(251, 191, 36, 0.1)
             `,
           }}
         >
-          {/* Top section - Restaurant info */}
-          <div className="p-10 border-b border-white/15">
-            <div className="flex flex-col md:flex-row justify-between items-center gap-8">
-              <div ref={addToSections} className="mb-4 md:mb-0">
+          {/* Enhanced Top section - Restaurant info */}
+          <div className="p-12 border-b border-white/20">
+            <div className="flex flex-col lg:flex-row justify-between items-center gap-10">
+              <div ref={addToSections} className="mb-4 lg:mb-0 text-center lg:text-left">
                 <h3 
-                  className="text-4xl font-black mb-4 bg-clip-text text-transparent leading-tight"
+                  className="text-5xl lg:text-6xl font-black mb-6 bg-clip-text text-transparent leading-tight"
                   style={{
                     fontFamily: "'Inter', 'SF Pro Display', system-ui, sans-serif",
                     background: `
                       linear-gradient(135deg, 
                         #fbbf24 0%, 
-                        #f59e0b 25%, 
-                        #d97706 50%, 
-                        #92400e 75%, 
-                        #fbbf24 100%
+                        #f59e0b 20%, 
+                        #d97706 40%, 
+                        #92400e 60%, 
+                        #fbbf24 80%,
+                        #f59e0b 100%
                       )
                     `,
                     WebkitBackgroundClip: "text",
                     WebkitTextFillColor: "transparent",
                     backgroundClip: "text",
-                    letterSpacing: "-0.01em",
+                    letterSpacing: "-0.02em",
+                    textShadow: "0 0 40px rgba(251, 191, 36, 0.3)"
                   }}
                 >
                   The SkyView Rooftop Restaurant
                 </h3>
                 <p 
-                  className="text-white/85 max-w-md text-lg leading-relaxed"
+                  className="text-white/90 max-w-xl text-xl leading-relaxed font-light"
                   style={{
                     fontFamily: "'Inter', system-ui, sans-serif",
-                    fontWeight: "400",
                   }}
                 >
                   Where exceptional cuisine meets breathtaking views. Experience
-                  fine dining under the stars with unforgettable moments.
+                  fine dining under the stars with unforgettable moments that elevate your senses.
                 </p>
               </div>
 
-              <div ref={addToSections} className="flex space-x-6">
+              <div ref={addToSections} className="flex space-x-4">
                 <SocialIcon
                   ref={addToSocialIcons}
                   icon={<FaSquareXTwitter />}
                   href="#"
-                  label="Twitter"
+                  label="Follow us on Twitter"
                   color="rgba(29, 161, 242, 0.2)"
                 />
                 <SocialIcon
                   ref={addToSocialIcons}
                   icon={<FaSquareFacebook />}
                   href="#"
-                  label="Facebook"
+                  label="Like us on Facebook"
                   color="rgba(66, 103, 178, 0.2)"
                 />
                 <SocialIcon
                   ref={addToSocialIcons}
                   icon={<AiFillInstagram />}
                   href="#"
-                  label="Instagram"
+                  label="Follow us on Instagram"
                   color="rgba(225, 48, 108, 0.2)"
                 />
                 <SocialIcon
                   ref={addToSocialIcons}
                   icon={<IoLogoLinkedin />}
                   href="#"
-                  label="LinkedIn"
+                  label="Connect on LinkedIn"
                   color="rgba(0, 119, 181, 0.2)"
                 />
               </div>
             </div>
           </div>
 
-          {/* Middle section - Contact info */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 p-10">
+          {/* Enhanced Middle section - Contact info */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 p-12">
             <div ref={addToSections}>
               <h4 
-                className="text-xl font-bold mb-6 flex items-center"
+                className="text-2xl font-bold mb-8 flex items-center justify-center lg:justify-start"
                 style={{
                   fontFamily: "'Inter', system-ui, sans-serif",
                   color: "#fbbf24",
                 }}
               >
                 <span 
-                  className="mr-4 p-2 rounded-3xl backdrop-blur-xl border"
+                  className="mr-4 p-3 rounded-full backdrop-blur-xl border group-hover:scale-110 transition-transform duration-300"
                   style={{
-                    background: "rgba(251, 191, 36, 0.1)",
-                    borderColor: "rgba(251, 191, 36, 0.2)",
+                    background: "linear-gradient(135deg, rgba(251, 191, 36, 0.15), rgba(251, 191, 36, 0.05))",
+                    borderColor: "rgba(251, 191, 36, 0.3)",
+                    boxShadow: "0 4px 16px rgba(251, 191, 36, 0.2)"
                   }}
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="h-6 w-6"
+                    className="h-7 w-7"
                     viewBox="0 0 20 20"
                     fill="currentColor"
                   >
@@ -353,9 +461,13 @@ const Footer = () => {
                 Location
               </h4>
               <address 
-                className="text-white/80 not-italic leading-relaxed"
-                style={{ fontFamily: "'Inter', system-ui, sans-serif" }}
+                className="text-white/85 not-italic leading-relaxed text-center lg:text-left p-6 rounded-3xl backdrop-blur-sm border border-white/10"
+                style={{ 
+                  fontFamily: "'Inter', system-ui, sans-serif",
+                  background: "rgba(255, 255, 255, 0.03)"
+                }}
               >
+                <span className="block font-semibold text-amber-200 mb-2">Visit Us</span>
                 No.22, 3rd Floor, Ambattur Red Hills Rd,
                 <br />
                 Ambattur, Chennai,
@@ -366,22 +478,23 @@ const Footer = () => {
 
             <div ref={addToSections}>
               <h4 
-                className="text-xl font-bold mb-6 flex items-center"
+                className="text-2xl font-bold mb-8 flex items-center justify-center lg:justify-start"
                 style={{
                   fontFamily: "'Inter', system-ui, sans-serif",
                   color: "#fbbf24",
                 }}
               >
                 <span 
-                  className="mr-4 p-2 rounded-3xl backdrop-blur-xl border"
+                  className="mr-4 p-3 rounded-full backdrop-blur-xl border"
                   style={{
-                    background: "rgba(251, 191, 36, 0.1)",
-                    borderColor: "rgba(251, 191, 36, 0.2)",
+                    background: "linear-gradient(135deg, rgba(251, 191, 36, 0.15), rgba(251, 191, 36, 0.05))",
+                    borderColor: "rgba(251, 191, 36, 0.3)",
+                    boxShadow: "0 4px 16px rgba(251, 191, 36, 0.2)"
                   }}
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="h-6 w-6"
+                    className="h-7 w-7"
                     viewBox="0 0 20 20"
                     fill="currentColor"
                   >
@@ -395,42 +508,41 @@ const Footer = () => {
                 Opening Hours
               </h4>
               <div 
-                className="text-white/80"
+                className="text-white/85"
                 style={{ fontFamily: "'Inter', system-ui, sans-serif" }}
               >
-                <div className="mb-3 p-3 rounded-3xl backdrop-blur-sm border border-white/10">
-                  <span className="block text-sm text-white/70 mb-1">Monday - Thursday</span>
-                  <span className="font-semibold text-amber-300">
-                    6:00 PM - 12:00 AM
-                  </span>
-                </div>
-                <div className="p-3 rounded-3xl backdrop-blur-sm border border-white/10">
-                  <span className="block text-sm text-white/70 mb-1">Friday - Sunday</span>
-                  <span className="font-semibold text-amber-300">
+                <div className="p-6 rounded-3xl backdrop-blur-sm border border-white/15 text-center lg:text-left"
+                     style={{ background: "rgba(255, 255, 255, 0.03)" }}>
+                  <span className="block text-sm text-white/70 mb-2">Every Day of the Week</span>
+                  <span className="font-bold text-2xl text-amber-300 block">
                     6:00 PM - 2:00 AM
                   </span>
+                  {/* <span className="text-xs text-white/60 mt-2 block">
+                    Reservations recommended
+                  </span> */}
                 </div>
               </div>
             </div>
 
             <div ref={addToSections}>
               <h4 
-                className="text-xl font-bold mb-6 flex items-center"
+                className="text-2xl font-bold mb-8 flex items-center justify-center lg:justify-start"
                 style={{
                   fontFamily: "'Inter', system-ui, sans-serif",
                   color: "#fbbf24",
                 }}
               >
                 <span 
-                  className="mr-4 p-2 rounded-3xl backdrop-blur-xl border"
+                  className="mr-4 p-3 rounded-full backdrop-blur-xl border"
                   style={{
-                    background: "rgba(251, 191, 36, 0.1)",
-                    borderColor: "rgba(251, 191, 36, 0.2)",
+                    background: "linear-gradient(135deg, rgba(251, 191, 36, 0.15), rgba(251, 191, 36, 0.05))",
+                    borderColor: "rgba(251, 191, 36, 0.3)",
+                    boxShadow: "0 4px 16px rgba(251, 191, 36, 0.2)"
                   }}
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="h-6 w-6"
+                    className="h-7 w-7"
                     viewBox="0 0 20 20"
                     fill="currentColor"
                   >
@@ -443,13 +555,16 @@ const Footer = () => {
               <div className="space-y-4">
                 <a
                   href="mailto:info@skyviewrestaurant.com"
-                  className="flex items-start text-white/80 hover:text-amber-300 transition-all duration-300 p-3 rounded-3xl backdrop-blur-sm border border-white/10 hover:border-amber-300/20 group"
-                  style={{ fontFamily: "'Inter', system-ui, sans-serif" }}
+                  className="flex items-center text-white/85 hover:text-amber-300 transition-all duration-500 p-4 rounded-3xl backdrop-blur-sm border border-white/15 hover:border-amber-300/30 group transform hover:scale-105"
+                  style={{ 
+                    fontFamily: "'Inter', system-ui, sans-serif",
+                    background: "rgba(255, 255, 255, 0.03)"
+                  }}
                 >
-                  <span className="mt-1 mr-3 group-hover:scale-110 transition-transform duration-300">
+                  <span className="mr-4 p-2 rounded-full bg-amber-500/20 group-hover:bg-amber-500/30 group-hover:scale-110 transition-all duration-300">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      className="h-5 w-5"
+                      className="h-5 w-5 text-amber-400"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -462,17 +577,23 @@ const Footer = () => {
                       />
                     </svg>
                   </span>
-                  info@skyviewrestaurant.com
+                  <div>
+                    <div className="font-semibold">Email Us</div>
+                    <div className="text-sm opacity-80">info@skyviewrestaurant.com</div>
+                  </div>
                 </a>
                 <a
                   href="tel:+919080226632"
-                  className="flex items-start text-white/80 hover:text-amber-300 transition-all duration-300 p-3 rounded-3xl backdrop-blur-sm border border-white/10 hover:border-amber-300/20 group"
-                  style={{ fontFamily: "'Inter', system-ui, sans-serif" }}
+                  className="flex items-center text-white/85 hover:text-amber-300 transition-all duration-500 p-4 rounded-3xl backdrop-blur-sm border border-white/15 hover:border-amber-300/30 group transform hover:scale-105"
+                  style={{ 
+                    fontFamily: "'Inter', system-ui, sans-serif",
+                    background: "rgba(255, 255, 255, 0.03)"
+                  }}
                 >
-                  <span className="mt-1 mr-3 group-hover:scale-110 transition-transform duration-300">
+                  <span className="mr-4 p-2 rounded-full bg-amber-500/20 group-hover:bg-amber-500/30 group-hover:scale-110 transition-all duration-300">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      className="h-5 w-5"
+                      className="h-5 w-5 text-amber-400"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -485,43 +606,48 @@ const Footer = () => {
                       />
                     </svg>
                   </span>
-                  +91 9080 226 632
+                  <div>
+                    <div className="font-semibold">Call Us</div>
+                    <div className="text-sm opacity-80">+91 9080 226 632</div>
+                  </div>
                 </a>
               </div>
             </div>
           </div>
 
-          {/* Bottom section - Copyright */}
-          <div className="px-10 py-8 border-t border-white/15">
+          {/* Enhanced Bottom section - Links & Copyright */}
+          <div className="px-12 py-10 border-t border-white/20">
             <div 
               ref={addToSections}
-              className="flex flex-col md:flex-row justify-between items-center text-center md:text-left gap-6"
+              className="flex flex-col lg:flex-row justify-between items-center text-center lg:text-left gap-8"
             >
-              <p 
-                className="text-white/60"
-                style={{ fontFamily: "'Inter', system-ui, sans-serif" }}
-              >
-                &copy; {currentYear} The SkyView Rooftop Multicuisine
-                Restaurant. All rights reserved.
-              </p>
-              <div className="flex flex-wrap justify-center md:justify-end gap-6">
+              <div className="flex flex-col lg:flex-row items-center gap-6">
+                <p 
+                  className="text-white/70 text-lg"
+                  style={{ fontFamily: "'Inter', system-ui, sans-serif" }}
+                >
+                  &copy; {currentYear} The SkyView Rooftop Multicuisine Restaurant.
+                </p>
+                <span className="text-white/50">All rights reserved.</span>
+              </div>
+              <div className="flex flex-wrap justify-center lg:justify-end gap-8">
                 <a
-                  href="#"
-                  className="text-white/60 hover:text-amber-300 transition-colors duration-300 font-medium"
+                  href="#privacy"
+                  className="text-white/70 hover:text-amber-300 transition-all duration-300 font-medium px-4 py-2 rounded-full hover:bg-white/5"
                   style={{ fontFamily: "'Inter', system-ui, sans-serif" }}
                 >
                   Privacy Policy
                 </a>
                 <a
-                  href="#"
-                  className="text-white/60 hover:text-amber-300 transition-colors duration-300 font-medium"
+                  href="#terms"
+                  className="text-white/70 hover:text-amber-300 transition-all duration-300 font-medium px-4 py-2 rounded-full hover:bg-white/5"
                   style={{ fontFamily: "'Inter', system-ui, sans-serif" }}
                 >
                   Terms of Service
                 </a>
                 <a
-                  href="#"
-                  className="text-white/60 hover:text-amber-300 transition-colors duration-300 font-medium"
+                  href="#cookies"
+                  className="text-white/70 hover:text-amber-300 transition-all duration-300 font-medium px-4 py-2 rounded-full hover:bg-white/5"
                   style={{ fontFamily: "'Inter', system-ui, sans-serif" }}
                 >
                   Cookie Policy
@@ -531,43 +657,56 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Designer Credit */}
-        <div 
-          ref={copyrightRef}
-          className="mt-6 text-center"
-        >
-          <p 
-            className="text-amber-400/80 text-xs font-light"
-            style={{ fontFamily: "'Inter', system-ui, sans-serif" }}
-          >
-            Design by Rocky
-          </p>
-        </div>
-
-        {/* Restaurant tagline */}
+        {/* Enhanced Restaurant tagline */}
         <div 
           ref={taglineRef}
-          className="mt-8 text-center"
+          className="mt-10 text-center"
         >
           <p 
-            className="text-amber-300 font-semibold text-xl"
+            className="text-amber-300 font-bold text-2xl lg:text-3xl mb-2"
             style={{
               fontFamily: "'Inter', system-ui, sans-serif",
-              background: "linear-gradient(135deg, #fbbf24, #f59e0b, #d97706)",
+              background: "linear-gradient(135deg, #fbbf24, #f59e0b, #d97706, #92400e)",
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
               backgroundClip: "text",
+              textShadow: "0 0 30px rgba(251, 191, 36, 0.5)",
+              letterSpacing: "-0.01em"
             }}
           >
             Elevating dining experiences above the ordinary
           </p>
+          <p 
+            className="text-white/60 text-sm mt-2"
+            style={{ fontFamily: "'Inter', system-ui, sans-serif" }}
+          >
+            Creating memories that last a lifetime
+          </p>
+        </div>
+
+        {/* Enhanced Designer Credit */}
+        <div 
+          ref={copyrightRef}
+          className="mt-8 text-center"
+        >
+          <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full backdrop-blur-sm border border-white/10"
+               style={{ background: "rgba(255, 255, 255, 0.03)" }}>
+            <span className="w-2 h-2 bg-amber-400 rounded-full animate-pulse"></span>
+            <p 
+              className="text-amber-400/90 text-sm font-medium"
+              style={{ fontFamily: "'Inter', system-ui, sans-serif" }}
+            >
+              Crafted with passion by Rocky
+            </p>
+            <span className="w-2 h-2 bg-amber-400 rounded-full animate-pulse"></span>
+          </div>
         </div>
       </div>
     </footer>
   );
 };
 
-// Enhanced Social icon component
+// Enhanced Social icon component with better animations
 const SocialIcon = React.forwardRef<
   HTMLAnchorElement,
   {
@@ -581,14 +720,22 @@ const SocialIcon = React.forwardRef<
     ref={ref}
     href={href}
     aria-label={label}
-    className="text-white/80 hover:text-white transition-colors duration-300 p-3 rounded-3xl backdrop-blur-xl border border-white/10 hover:border-white/30"
+    className="text-white/80 hover:text-white transition-all duration-500 p-4 rounded-3xl backdrop-blur-xl border border-white/15 hover:border-white/40 group relative overflow-hidden"
     style={{
-      background: `rgba(255, 255, 255, 0.05)`,
-      boxShadow: "0 4px 16px rgba(0, 0, 0, 0.1)"
+      background: `
+        linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.03) 100%),
+        ${color}
+      `,
+      boxShadow: "0 4px 20px rgba(0, 0, 0, 0.15)"
     }}
   >
+    {/* Hover overlay effect */}
+    <div 
+      className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out"
+    />
+    
     {React.cloneElement(icon as React.ReactElement, {
-      className: "text-2xl transition-transform duration-300",
+      className: "text-2xl transition-all duration-500 relative z-10 group-hover:scale-110",
     })}
   </a>
 ));

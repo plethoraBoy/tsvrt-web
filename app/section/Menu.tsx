@@ -39,7 +39,7 @@ const MenuSection = () => {
       href: "#",
     },
     {
-      heading: "Vegetarian",
+      heading: "Indian",
       subheading: "Delight in our diverse and delicious vegetarian options",
       imgSrc:
         "assets/img/menu/ROASTED CHICKEN STEAK WITH MUSHROOM ONION SAUCE.png",
@@ -57,33 +57,35 @@ const MenuSection = () => {
         backgroundPosition: "center",
       }}
     >
-      {/* Background overlay */}
+      {/* Overlay */}
       <div className="absolute inset-0 bg-black/70 z-0"></div>
 
-      {/* Floating food elements */}
-      <div className="absolute top-20 right-10 z-0">
-        <div className="w-16 h-16 rounded-full bg-#ca8e24/20 backdrop-blur-sm border border-white/10"></div>
+      {/* Floating elements */}
+      <div className="absolute top-20 right-5 sm:right-10 z-0">
+        <div className="w-12 sm:w-16 h-12 sm:h-16 rounded-full bg-yellow-600/20 backdrop-blur-sm border border-white/10"></div>
       </div>
-      <div className="absolute bottom-40 left-12 z-0">
-        <div className="w-12 h-12 rounded-full bg-green-500/20 backdrop-blur-sm border border-white/10"></div>
+      <div className="absolute bottom-32 left-5 sm:left-12 z-0">
+        <div className="w-10 sm:w-12 h-10 sm:h-12 rounded-full bg-green-500/20 backdrop-blur-sm border border-white/10"></div>
       </div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2 mb-6">
-            <span className="text-#ca8e24 text-sm font-medium">
-              Culinary Excellence
-            </span>
-          </div>
-          <h2 className="text-4xl sm:text-5xl font-bold text-white mb-4">
-            Our Menu
-          </h2>
-          <p className="text-white/80 text-lg max-w-2xl mx-auto">
-            Choose your taste from our diverse culinary offerings
-          </p>
-        </div>
+        {/* Section Badge */}
+        <motion.div
+          className="text-center mb-8 sm:mb-12"
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+        >
+          <span className="inline-block mb-4 px-4 py-2 sm:px-6 sm:py-3 bg-gradient-to-r from-amber-500/20 to-yellow-500/20 backdrop-blur-md border border-amber-400/30 rounded-full text-amber-400 font-medium tracking-wider uppercase text-xs sm:text-sm">
+            SKYCLUSIVE
+          </span>
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black leading-tight bg-gradient-to-r from-white via-amber-100 to-yellow-500 bg-clip-text text-transparent">
+            OUR MENU
+          </h1>
+        </motion.div>
 
-        <div className="max-w-5xl mx-auto grid grid-cols-1 gap-8">
+        {/* Menu Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 max-w-6xl mx-auto">
           {imageList.map((item, index) => (
             <motion.div
               key={index}
@@ -91,7 +93,7 @@ const MenuSection = () => {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, amount: 0.3 }}
-              className="bg-white/10 backdrop-blur-lg border border-white/20 rounded-3xl overflow-hidden shadow-xl"
+  className="relative bg-white/10 backdrop-blur-lg border border-white/20 rounded-3xl overflow-hidden shadow-xl group"
             >
               <HoverImage
                 heading={item.heading}
@@ -99,29 +101,15 @@ const MenuSection = () => {
                 imgSrc={item.imgSrc}
                 href={item.href}
               />
-              <div className="absolute bottom-0 left-0 w-full p-6 bg-gradient-to-t from-black/80 to-transparent">
-                <div className="flex justify-between items-end">
-                  <div>
-                    {/* <h3 className="text-xl font-bold text-white">
-                      {item.heading}
-                    </h3>
-                    <p className="text-white/80 text-sm mt-1">
-                      {item.subheading}
-                    </p> */}
-                  </div>
-                  <button className="px-4 py-2 bg-[#ca8e24] hover:bg-#ca8e24 text-white rounded-full text-sm font-medium transition-colors">
+              <div className="absolute bottom-0 left-0 w-full p-4 sm:p-6 bg-gradient-to-t from-black/80 to-transparent">
+                <div className="flex justify-end">
+                  <button className="px-4 py-2 bg-amber-600 hover:bg-amber-500 text-white rounded-full text-sm sm:text-base font-medium transition-colors">
                     View Menu
                   </button>
                 </div>
               </div>
             </motion.div>
           ))}
-        </div>
-
-        <div className="mt-12 text-center">
-          <button className="px-8 py-3 bg-white/10 backdrop-blur-lg border border-white/20 text-white rounded-full hover:bg-white/20 transition-all">
-            View Full Menu
-          </button>
         </div>
       </div>
     </section>
