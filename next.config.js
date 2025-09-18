@@ -4,15 +4,15 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
-  /* ...Your other config rules */
-};
-
-// next.config.js
-module.exports = {
   images: {
-    domains: ["pbs.twimg.com"],
-    domains: ["raw.githubusercontent.com"],
-    domains: ["img.freepik.com"],
-    domains: ["avatar.vercel.sh"],
+    domains: [
+      "images.unsplash.com",
+      "pbs.twimg.com",
+      "raw.githubusercontent.com",
+      "img.freepik.com",
+      "avatar.vercel.sh",
+    ],
   },
 };
+
+module.exports = nextConfig;
